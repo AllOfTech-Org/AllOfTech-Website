@@ -16,5 +16,8 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "alloftech-website"
     }
-  ]
+  ],
+  "images": {
+    "binding": "IMAGES"
+  }
 }
