@@ -47,13 +47,11 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
+    // Do not redirect apex ↔ www here. Both hostnames hit the same
+    // Cloudflare Worker, and OpenNext does not apply `has: host` reliably,
+    // which causes ERR_TOO_MANY_REDIRECTS. Canonicalize at the zone with a
+    // Cloudflare Redirect Rule (hostname equals alloftech.site → www).
     return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "alloftech.site" }],
-        destination: "https://www.alloftech.site/:path*",
-        permanent: true,
-      },
       {
         source: "/index.html",
         destination: "/",
