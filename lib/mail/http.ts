@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-export const MAIL_RUNTIME = "nodejs" as const;
-
 export function mailJson(status: number, error?: string) {
   if (error) {
     return NextResponse.json({ ok: false, error }, { status });

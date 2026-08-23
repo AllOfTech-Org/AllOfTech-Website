@@ -1,9 +1,9 @@
-import { MAIL_RUNTIME, mailJson } from "@/lib/mail/http";
+import { mailJson } from "@/lib/mail/http";
 import { checkRateLimit, getClientIp, recordSubmission, submissionFingerprint } from "@/lib/mail/rate-limit";
 import { sendContactMails } from "@/lib/mail/send";
 import { validateContactPayload } from "@/lib/mail/validate";
 
-export const runtime = MAIL_RUNTIME;
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   let payload: unknown;

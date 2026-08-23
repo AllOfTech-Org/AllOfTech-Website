@@ -47,10 +47,14 @@ export default function AotCursor() {
   const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const root = rootRef.current;
-    const pointerEl = pointerRef.current;
-    const followerEl = followerRef.current;
-    if (!root || !pointerEl || !followerEl) return;
+    const rootEl = rootRef.current;
+    const pointerNode = pointerRef.current;
+    const followerNode = followerRef.current;
+    if (!rootEl || !pointerNode || !followerNode) return;
+
+    const root: HTMLDivElement = rootEl;
+    const pointerEl: HTMLDivElement = pointerNode;
+    const followerEl: HTMLDivElement = followerNode;
 
     const html = document.documentElement;
     const fineMq = window.matchMedia(FINE_MQ);
