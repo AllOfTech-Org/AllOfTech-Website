@@ -100,15 +100,9 @@ export function serviceAsset(filename: string) {
   return `/images/Service/${encodeURIComponent(filename)}`;
 }
 
-const COMING_DEMO: Pick<
-  ServiceShowcase,
-  "comingSoon" | "comingSoonLabel" | "category" | "meta" | "imageAlt"
-> = {
+const COMING_DEMO: Pick<ServiceShowcase, "comingSoon" | "comingSoonLabel"> = {
   comingSoon: true,
   comingSoonLabel: "Coming soon",
-  category: "Case study",
-  meta: "In production",
-  imageAlt: "Upcoming case study from this service",
 };
 
 export const SERVICES_INDEX = {
