@@ -1,18 +1,44 @@
-/** Reuse the old intro key so returning visitors stay immediate. */
-export const FIRST_ENTER_STORAGE_KEY = "aot.intro.seen";
-export const FIRST_ENTER_STORAGE_VALUE = "1";
+/** Full document load / reload only. Client navigations never re-add this class. */
+export const FIRST_ENTER_MS = 1500;
 
-/** Must stay in sync with `--aot-reveal-duration` / first-enter CSS. */
-export const FIRST_ENTER_MS = 900;
+export const FIRST_ENTER_BOOT_SCRIPT = `(function(){try{if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;var r=document.documentElement;r.classList.add("aot-first-enter");r.setAttribute("aria-busy","true");setTimeout(function(){r.classList.remove("aot-first-enter","aot-first-enter-reduce");if(r.getAttribute("aria-busy")==="true")r.removeAttribute("aria-busy");},${FIRST_ENTER_MS});}catch(e){}})();`;
 
-export const FIRST_ENTER_BOOT_SCRIPT = `(function(){try{var k=${JSON.stringify(FIRST_ENTER_STORAGE_KEY)};var v=${JSON.stringify(FIRST_ENTER_STORAGE_VALUE)};if(localStorage.getItem(k)===v)return;localStorage.setItem(k,v);if(window.matchMedia&&(window.matchMedia("(max-width:768px)").matches||window.matchMedia("(hover:none),(pointer:coarse)").matches))return;var r=document.documentElement;r.classList.add("aot-first-enter");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)r.classList.add("aot-first-enter-reduce");}catch(e){}})();`;
-
-export const FIRST_ENTER_CRITICAL_CSS =
-  "html.aot-first-enter .aot-page-clone,html.aot-first-enter .aot-services,html.aot-first-enter .aot-footer-16{opacity:0}html.aot-first-enter-reduce .aot-page-clone,html.aot-first-enter-reduce .aot-services,html.aot-first-enter-reduce .aot-footer-16{opacity:1;filter:none}@media (max-width:768px),(hover:none),(pointer:coarse){html.aot-first-enter .aot-page-clone,html.aot-first-enter .aot-services,html.aot-first-enter .aot-footer-16{opacity:1;filter:none;animation:none}}";
+export const FIRST_ENTER_CRITICAL_CSS = `
+html.aot-first-enter body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:2147482990;
+  pointer-events:auto;
+  background:rgba(5,5,16,.2);
+  backdrop-filter:blur(24px) saturate(1.18);
+  -webkit-backdrop-filter:blur(24px) saturate(1.18);
+  will-change:opacity;
+  animation:aotBlurLoader ${FIRST_ENTER_MS}ms cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes aotBlurLoader{
+  0%,60%{opacity:1}
+  100%{opacity:0}
+}
+@media (max-width:768px){
+  html.aot-first-enter body::after{
+    background:rgba(5,5,16,.28);
+    backdrop-filter:blur(16px) saturate(1.1);
+    -webkit-backdrop-filter:blur(16px) saturate(1.1);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html.aot-first-enter body::after{content:none;display:none}
+}
+`.replace(/\n/g, "");
 
 export function clearFirstEnter() {
   try {
-    document.documentElement.classList.remove("aot-first-enter", "aot-first-enter-reduce");
+    const root = document.documentElement;
+    root.classList.remove("aot-first-enter", "aot-first-enter-reduce");
+    if (root.getAttribute("aria-busy") === "true") {
+      root.removeAttribute("aria-busy");
+    }
   } catch {
     // First-enter CSS is gone once the class is off; ignore DOM failures.
   }

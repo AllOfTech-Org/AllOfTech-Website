@@ -104,6 +104,8 @@
 
 .hero-object {
     --hero-3d-scale: 1.4;
+    /* < 1 speeds the mesh without changing geometry, colors, or relative phase. */
+    --hero-3d-time: 0.3;
     min-width: 0;
     justify-self: center;
     width: 100%;
@@ -146,7 +148,7 @@
         radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.12), transparent 62%);
     filter: blur(30px);
     transform: translateZ(-150px);
-    animation: heroHaloBreathe 7s ease-in-out infinite;
+    animation: heroHaloBreathe calc(7s * var(--hero-3d-time, 1)) ease-in-out infinite;
 }
 
 /* Original ring system. a/b/c are the built-in orbits; d/e complete the set
@@ -164,7 +166,7 @@
     --orbit-x: 74deg;
     --orbit-y: 0deg;
     inset: 2%;
-    animation: heroRingSpinA 26s linear infinite;
+    animation: heroRingSpinA calc(26s * var(--hero-3d-time, 1)) linear infinite;
 }
 
 .hero-core__ring--b {
@@ -175,8 +177,8 @@
     box-shadow:
         0 0 22px rgba(255, 0, 255, 0.18),
         inset 0 0 12px rgba(255, 0, 255, 0.16);
-    animation: heroRingSpinB 34s linear infinite;
-    animation-delay: -11s;
+    animation: heroRingSpinB calc(34s * var(--hero-3d-time, 1)) linear infinite;
+    animation-delay: calc(-11s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--c {
@@ -187,8 +189,8 @@
     box-shadow:
         0 0 22px rgba(124, 58, 237, 0.2),
         inset 0 0 12px rgba(124, 58, 237, 0.18);
-    animation: heroRingSpinC 20s linear infinite reverse;
-    animation-delay: -6s;
+    animation: heroRingSpinC calc(20s * var(--hero-3d-time, 1)) linear infinite reverse;
+    animation-delay: calc(-6s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--d {
@@ -199,8 +201,8 @@
     box-shadow:
         0 0 18px rgba(34, 211, 238, 0.16),
         inset 0 0 10px rgba(34, 211, 238, 0.12);
-    animation: heroRingSpinD 37s linear infinite reverse;
-    animation-delay: -19s;
+    animation: heroRingSpinD calc(37s * var(--hero-3d-time, 1)) linear infinite reverse;
+    animation-delay: calc(-19s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--e {
@@ -211,8 +213,8 @@
     box-shadow:
         0 0 16px rgba(251, 191, 36, 0.14),
         inset 0 0 10px rgba(251, 191, 36, 0.1);
-    animation: heroRingSpinE 17s linear infinite;
-    animation-delay: -3.5s;
+    animation: heroRingSpinE calc(17s * var(--hero-3d-time, 1)) linear infinite;
+    animation-delay: calc(-3.5s * var(--hero-3d-time, 1));
 }
 
 .hero-core__shell {
@@ -250,7 +252,7 @@
         rotateY(calc(var(--hero-look-x, 0deg) * -1))
         rotateX(calc(var(--hero-look-y, 0deg) * -1))
         translateZ(46px);
-    animation: heroNucleusPulse 4.5s ease-in-out infinite;
+    animation: heroNucleusPulse calc(4.5s * var(--hero-3d-time, 1)) ease-in-out infinite;
 }
 
 .hero-core__nucleus::before {
@@ -280,7 +282,7 @@
     border-radius: 50%;
     background: var(--primary-cyan);
     box-shadow: 0 0 12px var(--primary-cyan);
-    animation: heroSparkFloat 6s ease-in-out infinite;
+    animation: heroSparkFloat calc(6s * var(--hero-3d-time, 1)) ease-in-out infinite;
 }
 
 .hero-core__spark--a {
@@ -295,7 +297,7 @@
     background: var(--primary-pink);
     box-shadow: 0 0 12px var(--primary-pink);
     transform: translate3d(calc(var(--hero-look-nx, 0) * 14px), calc(var(--hero-look-ny, 0) * 10px), 64px);
-    animation-delay: -1.6s;
+    animation-delay: calc(-1.6s * var(--hero-3d-time, 1));
 }
 
 .hero-core__spark--c {
@@ -306,7 +308,7 @@
     background: var(--secondary-amber);
     box-shadow: 0 0 10px var(--secondary-amber);
     transform: translate3d(calc(var(--hero-look-nx, 0) * 22px), calc(var(--hero-look-ny, 0) * 16px), 110px);
-    animation-delay: -3.1s;
+    animation-delay: calc(-3.1s * var(--hero-3d-time, 1));
 }
 
 .hero-core__spark--d {
@@ -315,7 +317,7 @@
     width: calc(5px * var(--hero-3d-scale, 1));
     height: calc(5px * var(--hero-3d-scale, 1));
     transform: translate3d(calc(var(--hero-look-nx, 0) * 12px), calc(var(--hero-look-ny, 0) * 9px), 78px);
-    animation-delay: -4.4s;
+    animation-delay: calc(-4.4s * var(--hero-3d-time, 1));
 }
 
 .hero-core__glass {
@@ -437,34 +439,34 @@
 }
 
 .hero-core__ring--a .hero-sat {
-    animation: heroSatUprightA 26s linear infinite;
+    animation: heroSatUprightA calc(26s * var(--hero-3d-time, 1)) linear infinite;
 }
 
 .hero-core__ring--b .hero-sat {
-    animation: heroSatUprightB 34s linear infinite;
-    animation-delay: -11s;
+    animation: heroSatUprightB calc(34s * var(--hero-3d-time, 1)) linear infinite;
+    animation-delay: calc(-11s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--c .hero-sat {
-    animation: heroSatUprightC 20s linear infinite reverse;
-    animation-delay: -6s;
+    animation: heroSatUprightC calc(20s * var(--hero-3d-time, 1)) linear infinite reverse;
+    animation-delay: calc(-6s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--d .hero-sat {
-    animation: heroSatUprightD 37s linear infinite reverse;
-    animation-delay: -19s;
+    animation: heroSatUprightD calc(37s * var(--hero-3d-time, 1)) linear infinite reverse;
+    animation-delay: calc(-19s * var(--hero-3d-time, 1));
 }
 
 .hero-core__ring--e .hero-sat {
-    animation: heroSatUprightE 17s linear infinite;
-    animation-delay: -3.5s;
+    animation: heroSatUprightE calc(17s * var(--hero-3d-time, 1)) linear infinite;
+    animation-delay: calc(-3.5s * var(--hero-3d-time, 1));
 }
 
 .hero-sat__body {
     position: absolute;
     inset: 0;
     transform-style: preserve-3d;
-    animation: heroSatTumble 9s linear infinite;
+    animation: heroSatTumble calc(9s * var(--hero-3d-time, 1)) linear infinite;
 }
 
 .hero-sat__face {
@@ -536,7 +538,7 @@
 }
 
 .hero-sat--ai .hero-sat__body {
-    animation-duration: 9s;
+    animation-duration: calc(9s * var(--hero-3d-time, 1));
 }
 
 .hero-sat--ai .hero-sat__face--front::after,
@@ -559,7 +561,7 @@
 }
 
 .hero-sat--web .hero-sat__body {
-    animation-duration: 14s;
+    animation-duration: calc(14s * var(--hero-3d-time, 1));
 }
 
 .hero-sat__sphere {
@@ -606,7 +608,7 @@
 }
 
 .hero-sat--animation .hero-sat__body {
-    animation-duration: 7s;
+    animation-duration: calc(7s * var(--hero-3d-time, 1));
 }
 
 .hero-sat--animation .hero-sat__face--front::after {
@@ -626,7 +628,7 @@
 }
 
 .hero-sat--mobile .hero-sat__body {
-    animation-duration: 11s;
+    animation-duration: calc(11s * var(--hero-3d-time, 1));
 }
 
 .hero-sat--mobile .hero-sat__face--front {
@@ -650,7 +652,7 @@
 }
 
 .hero-sat--brand .hero-sat__body {
-    animation: heroSatGem 10s linear infinite;
+    animation: heroSatGem calc(10s * var(--hero-3d-time, 1)) linear infinite;
 }
 
 @keyframes heroSatTumble {

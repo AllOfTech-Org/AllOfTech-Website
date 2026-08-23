@@ -208,50 +208,8 @@ html.aot-motion .related-links a:hover {
 }
 
 /* ----------------------------------------------------- First enter
-   Same fade-from-blur as section reveals. No splash, no extra motion.
-   Later visits never get this class. */
-
-html.aot-first-enter .aot-page-clone,
-html.aot-first-enter .aot-services,
-html.aot-first-enter .aot-footer-16 {
-    animation: aotFirstFade var(--aot-reveal-duration) var(--aot-soft) both;
-}
-
-@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-    html.aot-first-enter .aot-page-clone,
-    html.aot-first-enter .aot-services,
-    html.aot-first-enter .aot-footer-16 {
-        animation-name: aotFirstClear;
-    }
-}
-
-html.aot-first-enter-reduce .aot-page-clone,
-html.aot-first-enter-reduce .aot-services,
-html.aot-first-enter-reduce .aot-footer-16 {
-    animation: none;
-    opacity: 1;
-    filter: none;
-}
-
-@keyframes aotFirstFade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes aotFirstClear {
-    from {
-        opacity: 0;
-        filter: blur(6px);
-    }
-    to {
-        opacity: 1;
-        filter: none;
-    }
-}
+   Frost overlay + hold/dissolve live in first-enter critical CSS so the
+   page never flashes sharp on enter or reload. */
 
 /* ------------------------------------------------------------- Calm navbar
    The nav sits outside the motion language on purpose: no reveal, no
@@ -311,12 +269,9 @@ html.aot-page-hidden .hero-ticker__track,
         display: none;
     }
 
-    html.aot-first-enter .aot-page-clone,
-    html.aot-first-enter .aot-services,
-    html.aot-first-enter .aot-footer-16 {
-        animation: none;
-        opacity: 1;
-        filter: none;
+    html.aot-first-enter body::after {
+        content: none;
+        display: none;
     }
 
     html.aot-motion .grid-overlay {
