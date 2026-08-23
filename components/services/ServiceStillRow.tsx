@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 import ServiceLoopVideo from "@/components/services/ServiceLoopVideo";
 import { servicesItem } from "@/components/services/motion";
+import { IMAGE_SIZES } from "@/lib/image";
 import { cn } from "@/lib/utils";
 
 type ServiceStillRowProps = {
@@ -57,7 +58,7 @@ export default function ServiceStillRow({
                 src={imageSrc}
                 alt={imageAlt}
                 fill
-                sizes="(max-width: 840px) 100vw, 50vw"
+                sizes={IMAGE_SIZES.serviceStill}
                 className="aot-services-still__img"
               />
             ) : (

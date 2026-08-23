@@ -16,7 +16,7 @@ export const SEO_VIDEOS: SeoVideo[] = [
     name: "AllOfTech custom 3D animation",
     description:
       "Product and environment in 3D — scenes you can show, explain, and sell, kept in a professional register.",
-    thumbnailPath: "/images/Service/Animation%201.png",
+    thumbnailPath: "/images/Service/Animation%201.webp",
   },
   {
     pagePath: "/services/animation",
@@ -24,7 +24,7 @@ export const SEO_VIDEOS: SeoVideo[] = [
     name: "AllOfTech animation reel",
     description:
       "Studio reel of AllOfTech 3D product visualization and environment motion — a silent loop that shows how the work sells.",
-    thumbnailPath: "/images/Service/Animation%20Banner%20.png",
+    thumbnailPath: "/images/Service/Animation%20Banner%20.webp",
   },
   {
     pagePath: "/case-studies",
@@ -32,7 +32,7 @@ export const SEO_VIDEOS: SeoVideo[] = [
     name: "AllOfTech 3D animation reel",
     description:
       "Cinematic 3D reel with lighting, camera, and environment that loops so the work sells without a pitch.",
-    thumbnailPath: "/images/Service/Animation%20Banner%20.png",
+    thumbnailPath: "/images/Service/Animation%20Banner%20.webp",
   },
 ];
 

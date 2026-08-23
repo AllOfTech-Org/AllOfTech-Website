@@ -18,6 +18,7 @@ import {
 import { Card, CardContent } from "@/components/base-ui/card";
 import ServiceLoopVideo from "@/components/services/ServiceLoopVideo";
 import { servicesItem } from "@/components/services/motion";
+import { IMAGE_SIZES } from "@/lib/image";
 import { cn } from "@/lib/utils";
 import type { ServiceAccent, ServiceIconName } from "@/lib/services";
 
@@ -92,7 +93,7 @@ export default function ServiceMediaCard({
               src={imageSrc}
               alt={imageAlt}
               fill
-              sizes="(max-width: 760px) 100vw, 50vw"
+              sizes={IMAGE_SIZES.serviceCard}
               className="aot-services-card__img size-full object-cover"
               priority={priority}
             />

@@ -1,7 +1,8 @@
 import type { TeamMember } from "@/components/ui/team-1";
 
 function teamImage(file: string) {
-  return encodeURI(`/images/Team/${file}`);
+  const optimized = file.replace(/\.(png|jpe?g)$/i, ".webp");
+  return encodeURI(`/images/Team/${optimized}`);
 }
 
 export const TEAM_PHOTOS = {

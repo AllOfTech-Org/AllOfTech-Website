@@ -117,10 +117,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${merriweather.variable} ${merriweather.className}`} suppressHydrationWarning>
       <head>
+        <link rel="preload" as="image" href="/images/new-Logo_tab.png" fetchPriority="high" />
         <style dangerouslySetInnerHTML={{ __html: FIRST_ENTER_CRITICAL_CSS }} />
         <script dangerouslySetInnerHTML={{ __html: FIRST_ENTER_BOOT_SCRIPT }} />
       </head>
       <body id="top" className="aot-float-header">
+        <Script
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+          strategy="afterInteractive"
+        />
         <Script id="gtm" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

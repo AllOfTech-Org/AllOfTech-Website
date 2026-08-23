@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Brain,
   Clapperboard,
@@ -28,6 +29,8 @@ const ICONS: Record<ServiceIconName, LucideIcon> = {
 const BLOG_ACCENTS = ["violet", "green", "blue"] as const;
 
 export default function HomeServices() {
+  const path = usePathname();
+  const atServices = path === "/services";
   const articles: Blog5Article[] = SERVICES.map((service, index) => ({
     category: service.eyebrow,
     readTime: service.listingMeta,
@@ -41,6 +44,8 @@ export default function HomeServices() {
     comingSoonLabel: "Coming soon",
     icon: ICONS[service.icon],
     ctaLabel: "View service",
+    priority: atServices && index < 2,
+    eager: atServices && index < 2,
   }));
 
   const data: Blog4Data = {
@@ -67,7 +72,7 @@ export default function HomeServices() {
         renderArticleLink={({ href, children }) => (
           <Link
             href={href}
-            className="focus-visible:ring-ring block h-full rounded-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="focus-visible:ring-ring block h-full min-w-0 rounded-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             {children}
           </Link>

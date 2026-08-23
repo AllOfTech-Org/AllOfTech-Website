@@ -1,6 +1,5 @@
 const HOME_SCRIPTS = [
   "https://cdn.jsdelivr.net/npm/marked/marked.min.js",
-  "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js",
   "/js/templatemo-nexus-scripts.js",
   "/js/motion-system.js",
   "/js/button-motion.js",

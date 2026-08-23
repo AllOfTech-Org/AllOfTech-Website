@@ -235,7 +235,9 @@ export function Footer16({
                     className="aot-footer-16__logo"
                     width={32}
                     height={32}
+                    loading="lazy"
                     decoding="async"
+                    fetchPriority="low"
                   />
                   <span className="aot-footer-16__brand-name">{brandName}</span>
                 </a>

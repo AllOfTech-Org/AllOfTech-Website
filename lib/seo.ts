@@ -418,7 +418,7 @@ export const CASE_STUDY_WORKS = [
     name: "Studio reel — motion with a job",
     description: "3D product visualization and environment motion reel.",
     url: `${SITE_URL}/case-studies#case-study-5`,
-    image: absoluteAsset("/images/Service/Animation%20Banner%20.png"),
+    image: absoluteAsset("/images/Service/Animation%20Banner%20.webp"),
   },
 ] as const;
 

@@ -99,6 +99,7 @@ export default function ExpandableProfileCard({
               width={imageWidth}
               height={imageHeight}
               className={cn("h-full w-full object-cover", imageClassName)}
+              decoding="async"
             />
             <div className="aot-epc-photo-wash" />
           </div>
@@ -153,6 +154,8 @@ export default function ExpandableProfileCard({
             "absolute inset-0 h-full w-full object-cover",
             imageClassName,
           )}
+          loading="lazy"
+          decoding="async"
           draggable={false}
         />
         <div className="aot-team1__wash absolute inset-0 opacity-80" />

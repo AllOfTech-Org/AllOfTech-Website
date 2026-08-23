@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import ServiceMediaCard from "@/components/services/ServiceMediaCard";
 import ServiceStillRow from "@/components/services/ServiceStillRow";
 import { servicesItem, servicesRise } from "@/components/services/motion";
+import { IMAGE_SIZES } from "@/lib/image";
 import { getRelatedServices, type ServicePageContent } from "@/lib/services";
 import { BOOK_A_CALL_URL } from "@/lib/site";
 
@@ -34,7 +35,7 @@ export default function ServicePage({ service }: { service: ServicePageContent }
                 alt={heroImageAlt}
                 fill
                 priority
-                sizes="(max-width: 1180px) 100vw, 1180px"
+                sizes={IMAGE_SIZES.serviceHero}
                 className="aot-services-hero__img"
               />
             ) : (

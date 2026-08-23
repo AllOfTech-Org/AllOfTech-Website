@@ -97,7 +97,8 @@ export type ServicePageContent = ServiceContent & {
 };
 
 export function serviceAsset(filename: string) {
-  return `/images/Service/${encodeURIComponent(filename)}`;
+  const optimized = filename.replace(/\.(png|jpe?g)$/i, ".webp");
+  return `/images/Service/${optimized}`;
 }
 
 const COMING_DEMO: Pick<ServiceShowcase, "comingSoon" | "comingSoonLabel"> = {
@@ -232,7 +233,7 @@ export const SERVICES: ServicePageContent[] = [
         category: "Live work",
         meta: "Mashover",
         href: "https://ai.alloftech.site/",
-        imageSrc: "/images/case-studie/cs3.png",
+        imageSrc: "/images/case-studie/cs3.webp",
         imageAlt: "Mashover AI customer service chatbot",
       },
       {
@@ -347,7 +348,7 @@ export const SERVICES: ServicePageContent[] = [
         category: "Live work",
         meta: "Flanders, NJ",
         href: "/case-studies#case-study-1",
-        imageSrc: "/images/case-studie/After.png",
+        imageSrc: "/images/case-studie/After.webp",
         imageAlt: "PB(973) transformed website after AllOfTech rebuild",
       },
       {
@@ -355,7 +356,7 @@ export const SERVICES: ServicePageContent[] = [
         category: "Live work",
         meta: "Agency site",
         href: "/case-studies#case-study-2",
-        imageSrc: "/images/case-studie/cs2-After.png",
+        imageSrc: "/images/case-studie/cs2-After.webp",
         imageAlt: "Your Brand business website after AllOfTech build",
       },
     ],
@@ -602,7 +603,7 @@ export const SERVICES: ServicePageContent[] = [
         category: "Live work",
         meta: "Identity & graphics",
         href: "/case-studies#case-study-4",
-        imageSrc: "/images/case-studie/34.png",
+        imageSrc: "/images/case-studie/34.webp",
         imageAlt: "AllOfTech graphic design and brand identity portfolio",
       },
       {
@@ -610,7 +611,7 @@ export const SERVICES: ServicePageContent[] = [
         category: "Live work",
         meta: "Brand + web",
         href: "/case-studies#case-study-2",
-        imageSrc: "/images/case-studie/cs2-After.png",
+        imageSrc: "/images/case-studie/cs2-After.webp",
         imageAlt: "Your Brand identity expressed on the live website",
       },
     ],

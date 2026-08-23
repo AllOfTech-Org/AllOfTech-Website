@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   Heart,
@@ -11,6 +12,7 @@ import {
 
 import { Button } from "@/components/base-ui/button";
 import { Card, CardContent } from "@/components/base-ui/card";
+import { IMAGE_SIZES } from "@/lib/image";
 import { cn } from "@/lib/utils";
 
 type Blog4Accent = "violet" | "green" | "blue";
@@ -28,6 +30,8 @@ export interface Blog5Article {
   ctaLabel?: string;
   comingSoon?: boolean;
   comingSoonLabel?: string;
+  priority?: boolean;
+  eager?: boolean;
 }
 
 export interface Blog4Data {
@@ -202,7 +206,7 @@ export default function Blog4({
           </div>
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:mt-12 lg:grid-cols-3">
+        <div className="aot-blog4-grid mt-12 grid grid-cols-2 gap-8 lg:mt-12 lg:grid-cols-3">
           {data.articles.map((article) => (
             <Blog4ArticleCard
               key={`${article.category}-${article.title}`}
@@ -233,16 +237,31 @@ export function Blog4ArticleCard({
     <Card className="group border-border bg-card flex h-full flex-col overflow-hidden rounded-2xl pt-0 pb-4 shadow-sm transition-all hover:shadow-md">
       <div className="relative h-60 overflow-hidden sm:h-64 dark:mask-b-from-50%">
         {article.imageSrc ? (
-          <>
-            {/* Blog-4 registry chrome uses a plain img. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          article.imageSrc.startsWith("/") ? (
+            <Image
               src={article.imageSrc}
               alt={article.imageAlt}
-              className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
+              fill
+              sizes={IMAGE_SIZES.homeCard}
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              priority={Boolean(article.priority)}
+              {...(article.priority
+                ? {}
+                : { loading: article.eager ? "eager" : "lazy" })}
             />
-          </>
+          ) : (
+            <>
+              {/* Blog-4 registry chrome uses a plain img for remote demos. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={article.imageSrc}
+                alt={article.imageAlt}
+                className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </>
+          )
         ) : (
           <div className="aot-blog4-soon size-full" aria-hidden={false}>
             <span>{article.comingSoonLabel ?? "Coming soon"}</span>
@@ -296,7 +315,7 @@ export function Blog4ArticleCard({
     return (
       <a
         href={article.href}
-        className="focus-visible:ring-ring block h-full rounded-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="focus-visible:ring-ring block h-full min-w-0 rounded-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         {card}
       </a>

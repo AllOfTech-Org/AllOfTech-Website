@@ -19,6 +19,7 @@ import { Separator } from "@/components/base-ui/separator";
 import { Badge } from "@/components/base-ui/badge";
 import { FaEnvelope, FaPhoneAlt, FaArrowRight } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+import { sendContactForm } from "@/lib/emailjs-client";
 import { SERVICES } from "@/lib/services";
 import { BOOK_A_CALL_URL, CONTACT_EMAIL } from "@/lib/site";
 
@@ -116,29 +117,6 @@ function matchInterest(selected: string, options: ServiceOption[]) {
   return bestScore > 0 ? best?.value ?? "" : "";
 }
 
-async function sendContactEmail(payload: {
-  name: string;
-  email: string;
-  message: string;
-  service: string;
-}) {
-  const response = await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  let data: { ok?: boolean; error?: string } = {};
-  try {
-    data = (await response.json()) as { ok?: boolean; error?: string };
-  } catch {
-    data = {};
-  }
-
-  if (!response.ok || !data.ok) {
-    throw new Error("Failed to send");
-  }
-}
 
 export default function ContactSolutionForm(props: ContactFormProps = {}) {
   const merged = { ...defaultProps, ...props };
@@ -203,19 +181,24 @@ export default function ContactSolutionForm(props: ContactFormProps = {}) {
     setStatus("sending");
     setStatusMessage("Sending…");
 
+    const formEl = event.currentTarget;
+    const messageField = formEl.elements.namedItem("message");
+    const interest = serviceOptions.find((option) => option.value === form.service)?.label;
+    if (messageField instanceof HTMLTextAreaElement) {
+      messageField.value = interest ? `Area of interest: ${interest}\n\n${message}` : message;
+    }
+
     try {
-      await sendContactEmail({
-        name: fullName,
-        email,
-        message,
-        service: form.service,
-      });
+      await sendContactForm(formEl);
       onSubmit?.({ ...form, fullName, email, message });
       sessionStorage.removeItem("selectedService");
       setForm({ fullName: "", email: "", service: "", message: "" });
       setStatus("success");
       setStatusMessage("Message sent — we'll reply within 24 hours.");
     } catch (error) {
+      if (messageField instanceof HTMLTextAreaElement) {
+        messageField.value = message;
+      }
       console.error("Contact send failed");
       setStatus("error");
       setStatusMessage(

@@ -954,23 +954,40 @@ https://templatemo.com/tm-594-nexus-flow
     onReady(initializeServiceModals);
 
     // ---------------------------------------------------------------------
-    // Contact + review forms (server SMTP)
+    // Contact + review forms (EmailJS)
     // ---------------------------------------------------------------------
-    function postMail(url, payload) {
-        return fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        }).then(async (response) => {
-            let data = {};
-            try {
-                data = await response.json();
-            } catch (err) {
-                data = {};
+    const EMAILJS_PUBLIC_KEY = 'kgXIjzhce1SbUpve9';
+    const CONTACT_EMAILJS_SERVICE_ID = 'service_lkha1el';
+    const CONTACT_EMAILJS_TEMPLATE_ID = 'template_hat5kie';
+    const REVIEW_EMAILJS_SERVICE_ID = 'service_17hkvzg';
+    const REVIEW_EMAILJS_TEMPLATE_ID = 'template_1wgepzk';
+
+    function waitForEmailJs() {
+        return new Promise((resolve, reject) => {
+            if (window.emailjs && typeof window.emailjs.init === 'function') {
+                resolve(window.emailjs);
+                return;
             }
-            if (!response.ok || !data.ok) {
-                throw new Error('send-failed');
+            let tries = 0;
+            const timer = setInterval(() => {
+                if (window.emailjs && typeof window.emailjs.init === 'function') {
+                    clearInterval(timer);
+                    resolve(window.emailjs);
+                } else if (++tries > 50) {
+                    clearInterval(timer);
+                    reject(new Error('EmailJS is not loaded'));
+                }
+            }, 100);
+        });
+    }
+
+    function ensureEmailJs() {
+        return waitForEmailJs().then((emailjs) => {
+            if (!emailjs.__aotInit) {
+                emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+                emailjs.__aotInit = true;
             }
+            return emailjs;
         });
     }
 
@@ -1009,7 +1026,12 @@ https://templatemo.com/tm-594-nexus-flow
                 contactFeedback.classList.remove('is-visible', 'is-success');
             }
 
-            postMail('/api/contact', { name, email, message, service })
+            ensureEmailJs()
+                .then((emailjs) => emailjs.sendForm(
+                    CONTACT_EMAILJS_SERVICE_ID,
+                    CONTACT_EMAILJS_TEMPLATE_ID,
+                    contactForm
+                ))
                 .then(() => {
                     if (richSubmit && contactFeedback) {
                         contactForm.reset();
@@ -1452,12 +1474,22 @@ https://templatemo.com/tm-594-nexus-flow
                 submitButton.textContent = 'Submitting...';
             }
 
-            postMail('/api/review', {
-                name: reviewName,
-                occupation: reviewOccupation === 'Not provided' ? '' : reviewOccupation,
-                rating: Number(reviewRating),
-                message: reviewMessage,
-            })
+            const ratingValue = String(reviewRating);
+            const templateParams = {
+                review_name: reviewName,
+                review_occupation: reviewOccupation,
+                review_rating: ratingValue,
+                review_rating_stars: '★'.repeat(Number(ratingValue) || 0),
+                review_message: reviewMessage,
+                submitted_at: new Date().toLocaleString(),
+            };
+
+            ensureEmailJs()
+                .then((emailjs) => emailjs.send(
+                    REVIEW_EMAILJS_SERVICE_ID,
+                    REVIEW_EMAILJS_TEMPLATE_ID,
+                    templateParams
+                ))
                 .then(() => {
                     alert('Thank you! Your review has been submitted successfully.');
                     reviewForm.reset();

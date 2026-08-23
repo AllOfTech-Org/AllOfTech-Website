@@ -468,12 +468,33 @@ html.motion-desktop #why-choose-us .choose-unique-card.is-inview .choose-unique-
         grid-template-rows: none;
     }
 
+    #why-choose-us .choose-unique-card {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
     #why-choose-us .choose-unique-card--lead,
     #why-choose-us .choose-unique-card--wide {
         grid-row: auto;
         grid-column: auto;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
         min-height: 0;
+    }
+
+    #why-choose-us .choose-unique-card--wide .choose-unique-index {
+        flex: none;
+    }
+
+    #why-choose-us .choose-unique-copy {
+        margin-bottom: auto;
+    }
+
+    #why-choose-us .choose-unique-meter,
+    #why-choose-us .choose-unique-card--wide .choose-unique-meter {
+        flex: none;
     }
 
     #why-choose-us .choose-unique-card--wide .choose-unique-number {
@@ -525,12 +546,54 @@ html.motion-desktop #why-choose-us .choose-unique-card.is-inview .choose-unique-
 
 @media (max-width: 480px) {
     #why-choose-us .choose-unique-grid {
-        grid-template-columns: 1fr;
-        gap: 0.65rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
     }
 
+    #why-choose-us .choose-unique-card {
+        padding: 0.85rem 0.7rem 0.8rem;
+    }
+
+    #why-choose-us .choose-unique-index {
+        margin-bottom: 0.55rem;
+        font-size: 0.62rem;
+    }
+
+    #why-choose-us .choose-unique-number,
     #why-choose-us .choose-unique-card--lead .choose-unique-number {
-        font-size: 2.6rem;
+        font-size: clamp(1.55rem, 8vw, 2rem);
+        margin-bottom: 0.4rem;
+    }
+
+    #why-choose-us .choose-unique-label {
+        font-size: 0.72rem;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+    }
+
+    #why-choose-us .choose-unique-copy {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        overflow-wrap: break-word;
+    }
+
+    #why-choose-us .choose-unique-radar {
+        width: 44px;
+        height: 44px;
+        top: 0.5rem;
+        right: 0.5rem;
+        opacity: 0.35;
+    }
+
+    #why-choose-us .choose-unique-meter,
+    #why-choose-us .choose-unique-card--wide .choose-unique-meter {
+        width: 42%;
+        margin-top: 0.7rem;
+    }
+
+    #why-choose-us .choose-unique-meter--strong,
+    #why-choose-us .choose-unique-card--wide .choose-unique-meter--strong {
+        width: 72%;
     }
 }
 
