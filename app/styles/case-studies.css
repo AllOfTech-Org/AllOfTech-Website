@@ -1,0 +1,760 @@
+/* ------------------------------------------------------------------
+   Case Studies page
+   Scoped under .cs-page so home/packages .pricing and .hero stay intact.
+   ------------------------------------------------------------------ */
+
+.cs-page {
+    --cs-ai-accent: #ff5cad;
+    --cs-ai-accent-2: #7c5cff;
+    --cs-ai-dim: rgba(255, 92, 173, 0.14);
+    --cs-ai-glow: rgba(255, 92, 173, 0.4);
+    --cs-ai-surface: rgba(255, 92, 173, 0.05);
+    --cs-ai-border: rgba(255, 92, 173, 0.28);
+    --cs-ai-border-strong: rgba(255, 92, 173, 0.42);
+}
+
+.cs-page [id^="case-study-"] {
+    scroll-margin-top: 6.5rem;
+}
+
+/* Compact page hero — drop the 94vh void */
+.hero.hero--cs {
+    min-height: 0;
+    align-items: flex-start;
+    padding: clamp(6.25rem, 9vw, 7.5rem) var(--space-container-x) clamp(1.5rem, 2.6vw, 2.25rem);
+}
+
+.hero.hero--cs .hero-title {
+    font-size: clamp(2.35rem, 5.8vw, 4.4rem);
+    margin-bottom: 0.7rem;
+    line-height: 0.98;
+}
+
+.hero.hero--cs .hero-subtitle {
+    max-width: 40rem;
+    margin: 0 auto 1.15rem;
+    font-size: clamp(0.98rem, 0.4vw + 0.9rem, 1.12rem);
+    line-height: 1.6;
+}
+
+.hero.hero--cs .hero-buttons {
+    margin-bottom: 0;
+    gap: 0.75rem;
+}
+
+.cs-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 0 0.85rem;
+    padding: 0.38rem 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.07), rgba(124, 58, 237, 0.08));
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+}
+
+.cs-hero-eyebrow__dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--primary-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+/* Jump index under the hero */
+.cs-index {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 1.75rem auto 0;
+    max-width: 1080px;
+    text-align: left;
+}
+
+.cs-index-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 0.95rem;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    transition: transform 0.25s var(--ease-out), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.cs-index-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cs-index-card:nth-child(1) { --cs-idx: #b8ff3c; --cs-idx-glow: rgba(184, 255, 60, 0.28); }
+.cs-index-card:nth-child(2) { --cs-idx: var(--primary-cyan); --cs-idx-glow: rgba(0, 255, 255, 0.28); }
+.cs-index-card:nth-child(3) { --cs-idx: #ff5cad; --cs-idx-glow: rgba(255, 92, 173, 0.32); }
+.cs-index-card:nth-child(4) { --cs-idx: #a855f7; --cs-idx-glow: rgba(168, 85, 247, 0.32); }
+.cs-index-card:nth-child(5) { --cs-idx: #2dd4bf; --cs-idx-glow: rgba(45, 212, 191, 0.32); }
+
+.cs-index-card:hover {
+    border-color: color-mix(in srgb, var(--cs-idx) 55%, transparent);
+    box-shadow: 0 10px 28px var(--cs-idx-glow);
+}
+
+.cs-index-num {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--cs-idx);
+    text-shadow: 0 0 12px var(--cs-idx-glow);
+}
+
+.cs-index-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.cs-index-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.cs-index-tag {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tight stacked studies — each .pricing was adding ~8rem top + 8rem bottom */
+.cs-page .pricing {
+    padding: clamp(1.35rem, 2.6vw, 2.15rem) var(--space-container-x);
+}
+
+.cs-page #case-study-1.pricing {
+    padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.cs-page .case-study-card {
+    margin-bottom: 0;
+    padding: clamp(1.35rem, 2.4vw, 2rem);
+    contain: layout style;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+}
+
+.cs-page .case-study-card:hover,
+.cs-page .case-study-card--transform:hover,
+.cs-page .case-study-card--brand:hover,
+.cs-page .case-study-card--ai:hover,
+.cs-page .case-study-card--motion:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.cs-page .case-study-header {
+    margin-bottom: 1.1rem;
+}
+
+.cs-page .case-study-type-label {
+    margin-bottom: 1rem;
+    padding: 0.4rem 1.15rem;
+}
+
+.cs-page .case-study-title {
+    margin-bottom: 0.55rem;
+    font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+}
+
+.cs-page .cs-meta-pills {
+    margin-top: 0.8rem;
+}
+
+.cs-page .cs-transform-layout {
+    margin: 1.1rem 0 0.9rem;
+    gap: 1rem 0.75rem;
+}
+
+.cs-page .cs-transform-col {
+    padding: 1.2rem;
+}
+
+.cs-page .cs-transform-label {
+    margin-bottom: 0.7rem;
+}
+
+.cs-page .cs-transform-arrow {
+    padding-top: 1.5rem;
+}
+
+.cs-page .cs-transform-col ul {
+    margin-top: 0.65rem;
+}
+
+.cs-page .cs-transform-col ul li {
+    padding: 0.28rem 0 0.28rem 1.25rem;
+}
+
+.cs-page .cs-transform-result {
+    margin-top: 0;
+    padding: 1.2rem 1.25rem 1.1rem;
+}
+
+.cs-page .cs-transform-metrics,
+.cs-page .cs-brand-metrics,
+.cs-page .cs-ai-metrics {
+    margin: 0.85rem 0 0;
+    gap: 0.75rem;
+}
+
+.cs-page .impact-metrics {
+    margin: 0.85rem 0 0;
+    gap: 0.75rem;
+}
+
+.cs-page .impact-metric {
+    padding: 1rem 0.75rem;
+}
+
+.cs-page .impact-metric-value {
+    font-size: clamp(1.55rem, 2.4vw, 2rem);
+    margin-bottom: 0.25rem;
+}
+
+.cs-page .cs-brand-lead {
+    margin-top: 0.8rem;
+}
+
+.cs-page .brand-filter-bar {
+    margin: 1rem 0 0.9rem;
+}
+
+.cs-page .brand-bento {
+    margin-bottom: 1.1rem;
+    gap: 0.85rem;
+    contain: layout;
+}
+
+.cs-page .contact.cs-cta {
+    padding: clamp(2.75rem, 5vw, 4rem) var(--space-container-x);
+}
+
+.cs-page .contact.cs-cta .hero-buttons {
+    margin-top: 0.35rem;
+}
+
+.cs-page .section-header {
+    margin-bottom: 0.5rem;
+}
+
+.cs-page .cs-transform-result > p {
+    margin: 0 0 0.25rem;
+}
+
+.cs-page .contact.cs-cta .section-title {
+    font-size: clamp(1.7rem, 3.2vw, 2.55rem);
+    margin-bottom: 1rem;
+}
+
+.cs-page .contact.cs-cta .section-subtitle {
+    margin-top: 0.9rem;
+}
+
+/* ------------------------------------------------------------------
+   Case Study 3 — Mashover AI product
+   ------------------------------------------------------------------ */
+
+.case-study-card--ai,
+.case-study-card--motion {
+    overflow: hidden;
+    --cs-pb973-accent: var(--cs-ai-accent);
+    --cs-pb973-accent-dim: var(--cs-ai-dim);
+    --cs-pb973-accent-glow: var(--cs-ai-glow);
+    --cs-accent-surface: var(--cs-ai-surface);
+    --cs-accent-border: var(--cs-ai-border);
+    --cs-accent-border-strong: var(--cs-ai-border-strong);
+    --cs-accent-pill-border: rgba(255, 92, 173, 0.5);
+    border-color: var(--cs-ai-border-strong);
+}
+
+.case-study-card--motion {
+    --cs-ai-accent: #2dd4bf;
+    --cs-ai-accent-2: #fbbf24;
+    --cs-ai-dim: rgba(45, 212, 191, 0.14);
+    --cs-ai-glow: rgba(45, 212, 191, 0.4);
+    --cs-ai-surface: rgba(45, 212, 191, 0.05);
+    --cs-ai-border: rgba(45, 212, 191, 0.28);
+    --cs-ai-border-strong: rgba(45, 212, 191, 0.42);
+    --cs-accent-pill-border: rgba(45, 212, 191, 0.5);
+}
+
+.case-study-card--ai::before,
+.case-study-card--motion::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--cs-ai-accent), var(--cs-ai-accent-2), transparent);
+    opacity: 0.95;
+}
+
+.case-study-card--ai:hover,
+.case-study-card--motion:hover {
+    border-color: var(--cs-ai-accent);
+}
+
+.case-study-card--ai .case-study-type-label,
+.case-study-card--motion .case-study-type-label {
+    color: var(--cs-ai-accent);
+    border-color: var(--cs-ai-accent);
+    background: var(--cs-ai-dim);
+    text-shadow: 0 0 16px var(--cs-ai-glow);
+}
+
+.case-study-card--ai .case-study-title,
+.case-study-card--motion .case-study-title {
+    color: var(--text-primary);
+    text-shadow: none;
+}
+
+.case-study-card--ai .cs-title-accent,
+.case-study-card--motion .cs-title-accent {
+    color: var(--cs-ai-accent);
+    text-shadow: 0 0 18px var(--cs-ai-glow);
+}
+
+.case-study-card--ai .cs-meta-pill,
+.case-study-card--motion .cs-meta-pill {
+    color: var(--cs-ai-accent);
+    background: var(--cs-ai-dim);
+    border-color: var(--cs-accent-pill-border);
+}
+
+.cs-ai-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.15rem;
+    margin: 0 0 1.1rem;
+    align-items: stretch;
+}
+
+.cs-ai-product {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1rem;
+    background:
+        radial-gradient(ellipse 80% 70% at 10% 80%, rgba(255, 92, 173, 0.16), transparent 55%),
+        radial-gradient(ellipse 70% 60% at 90% 10%, rgba(124, 92, 255, 0.18), transparent 50%),
+        rgba(8, 4, 16, 0.65);
+    border: 1px solid var(--cs-ai-border);
+    border-radius: 16px;
+}
+
+.cs-ai-visual {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+}
+
+.cs-ai-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+}
+
+.cs-ai-visual:hover img {
+    transform: scale(1.04);
+}
+
+.cs-ai-visual .expand-icon {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.65rem;
+    margin: 0;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(8, 4, 16, 0.78);
+    border: 1px solid var(--cs-ai-border);
+    color: var(--cs-ai-accent);
+    font-size: 0.7rem;
+    font-style: normal;
+}
+
+.cs-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+}
+
+.cs-ai-live {
+    align-self: flex-start;
+    margin: 0.9rem 0 0;
+}
+
+.cs-chat-msg {
+    max-width: 92%;
+    padding: 0.7rem 0.85rem;
+    border-radius: 12px;
+}
+
+.cs-chat-msg--user {
+    align-self: flex-end;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-right-radius: 4px;
+}
+
+.cs-chat-msg--bot {
+    align-self: flex-start;
+    background: linear-gradient(160deg, rgba(255, 92, 173, 0.16), rgba(124, 92, 255, 0.12));
+    border: 1px solid var(--cs-ai-border);
+    border-bottom-left-radius: 4px;
+}
+
+.cs-chat-who {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cs-ai-accent);
+}
+
+.cs-chat-msg--user .cs-chat-who {
+    color: var(--text-secondary);
+}
+
+.cs-chat-msg p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.cs-ai-story {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    min-width: 0;
+    padding: 1.2rem;
+    background: var(--cs-ai-surface);
+    border: 1px solid var(--cs-ai-border);
+    border-radius: 16px;
+}
+
+.cs-ai-story p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.cs-ai-story strong {
+    color: var(--text-primary);
+}
+
+.cs-ai-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+}
+
+.cs-ai-kpi {
+    padding: 0.75rem 0.8rem;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--cs-ai-border);
+    border-radius: 10px;
+}
+
+.cs-ai-kpi-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--cs-ai-accent);
+    text-shadow: 0 0 12px var(--cs-ai-glow);
+    line-height: 1.15;
+}
+
+.cs-ai-kpi-label {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.case-study-card--ai .psi-tech-stack,
+.case-study-card--motion .psi-tech-stack {
+    margin-top: 0.15rem;
+    gap: 0.5rem;
+}
+
+.case-study-card--ai .tech-badge,
+.case-study-card--motion .tech-badge {
+    background: rgba(124, 92, 255, 0.18);
+    border-color: rgba(124, 92, 255, 0.45);
+    color: #c4b5fd;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.case-study-card--motion .cs-ai-product {
+    background:
+        radial-gradient(ellipse 80% 70% at 10% 80%, rgba(45, 212, 191, 0.16), transparent 55%),
+        radial-gradient(ellipse 70% 60% at 90% 10%, rgba(251, 191, 36, 0.16), transparent 50%),
+        rgba(8, 4, 16, 0.65);
+}
+
+.case-study-card--motion .tech-badge {
+    background: rgba(45, 212, 191, 0.16);
+    border-color: rgba(45, 212, 191, 0.45);
+    color: #99f6e4;
+}
+
+.cs-motion-frame {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.cs-motion-chrome {
+    justify-content: flex-start;
+}
+
+.cs-motion-chrome .cs-browser-url {
+    flex: 1;
+    min-width: 0;
+}
+
+.cs-motion-live {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.45);
+}
+
+.cs-motion-visual {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #050308;
+}
+
+.cs-motion-visual .cs-loop-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.cs-loop-video::-webkit-media-controls,
+.cs-loop-video::-webkit-media-controls-enclosure,
+.cs-loop-video::-webkit-media-controls-panel,
+.cs-loop-video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cs-ai-journey {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0.65rem;
+    align-items: stretch;
+    margin: 0 0 1rem;
+}
+
+.cs-ai-col {
+    padding: 1.15rem 1.15rem 1rem;
+    background: var(--cs-ai-surface);
+    border: 1px solid var(--cs-ai-border);
+    border-radius: 12px;
+}
+
+.cs-ai-col h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.55rem;
+    color: var(--cs-ai-accent);
+    font-size: 0.92rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-shadow: 0 0 14px var(--cs-ai-glow);
+}
+
+.cs-ai-col h3::before {
+    content: "";
+    width: 1.35rem;
+    height: 3px;
+    background: var(--cs-ai-accent);
+    box-shadow: 0 0 10px var(--cs-ai-glow);
+}
+
+.cs-ai-col p {
+    margin: 0 0 0.65rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    font-size: 0.92rem;
+}
+
+.cs-ai-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cs-ai-col ul li {
+    position: relative;
+    padding: 0.28rem 0 0.28rem 1.15rem;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.cs-ai-col ul li::before {
+    position: absolute;
+    left: 0;
+    color: var(--cs-ai-accent);
+}
+
+.cs-ai-col--problem ul li::before { content: "▸"; }
+.cs-ai-col--solution ul li::before { content: "✓"; }
+.cs-ai-col--impact ul li::before { content: "▸"; }
+
+.cs-ai-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    color: var(--cs-ai-accent);
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-shadow: 0 0 12px var(--cs-ai-glow);
+}
+
+.case-study-card--ai .cs-transform-result,
+.case-study-card--motion .cs-transform-result {
+    background: var(--cs-ai-surface);
+    border-color: var(--cs-ai-border-strong);
+}
+
+.case-study-card--ai .cs-transform-label,
+.case-study-card--motion .cs-transform-label {
+    color: var(--cs-ai-accent);
+    text-shadow: 0 0 16px var(--cs-ai-glow);
+}
+
+.case-study-card--ai .cs-ai-metrics .impact-metric,
+.case-study-card--motion .cs-ai-metrics .impact-metric {
+    border-color: var(--cs-ai-border-strong);
+    background: rgba(8, 4, 16, 0.35);
+}
+
+.case-study-card--ai .cs-ai-metrics .impact-metric-value,
+.case-study-card--motion .cs-ai-metrics .impact-metric-value {
+    color: var(--cs-ai-accent);
+    text-shadow: 0 0 15px var(--cs-ai-glow);
+}
+
+.cs-ai-result-note {
+    margin: 0.85rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+    .cs-index {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cs-ai-stage,
+    .cs-ai-journey {
+        grid-template-columns: 1fr;
+    }
+
+    .cs-ai-step {
+        flex-direction: row;
+        min-height: auto;
+        padding: 0.15rem 0;
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero.hero--cs {
+        padding: 6.25rem 1.15rem 1.35rem;
+    }
+
+    .cs-page .case-study-card {
+        padding: 1.15rem;
+    }
+
+    .cs-index {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cs-ai-kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .cs-index {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cs-index-card,
+    .cs-ai-visual img,
+    .brand-tile,
+    .brand-tile-media img {
+        transition: none;
+    }
+
+    .cs-index-card:hover,
+    .brand-tile:hover .brand-tile-media img {
+        transform: none;
+    }
+
+    .cs-loop-video {
+        display: block;
+    }
+}

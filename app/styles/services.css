@@ -1,0 +1,854 @@
+/* Services listing + funnel pages. Tailwind handles card structure;
+   this file owns the AllOfTech atmosphere, Merriweather, and motion. */
+
+.aot-services {
+  --aot-svc-cyan: var(--primary-cyan, #00ffff);
+  --aot-svc-purple: var(--primary-purple, #7c3aed);
+  --aot-svc-pink: var(--primary-pink, #ff00ff);
+  --aot-svc-ink: var(--darker-bg, #0f051a);
+  --aot-svc-soft: var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1));
+  --background: #0f051a;
+  --foreground: #ffffff;
+  --card: rgba(229, 231, 235, 0.04);
+  --card-foreground: #ffffff;
+  --muted: rgba(229, 231, 235, 0.03);
+  --muted-foreground: #a1a1aa;
+  --border: rgba(0, 255, 255, 0.22);
+  --ring: rgba(0, 255, 255, 0.7);
+  --radius: 1.15rem;
+  position: relative;
+  isolation: isolate;
+  padding: 8rem var(--space-container-x, clamp(1rem, 4vw, 2.5rem))
+    var(--space-section-y, clamp(5.5rem, 8vw, 8rem));
+  color: var(--text-primary, #fff);
+  font-family: var(--font-merriweather), Merriweather, Georgia, "Times New Roman", serif;
+}
+
+.aot-services::before {
+  content: "";
+  position: absolute;
+  inset: 8% 10% auto;
+  height: 42%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 22% 40%, rgba(0, 255, 255, 0.08), transparent 58%),
+    radial-gradient(ellipse at 78% 48%, rgba(124, 58, 237, 0.12), transparent 55%),
+    radial-gradient(ellipse at 50% 90%, rgba(255, 0, 255, 0.06), transparent 60%);
+}
+
+.aot-services__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.aot-services p,
+.aot-services li,
+.aot-services h1,
+.aot-services h2,
+.aot-services h3 {
+  max-width: none;
+}
+
+.aot-services__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(124, 58, 237, 0.16));
+  color: var(--aot-svc-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
+}
+
+.aot-services__badge-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--aot-svc-cyan);
+  box-shadow: 0 0 10px var(--aot-svc-cyan);
+}
+
+.aot-services__title {
+  margin: 0 0 1rem;
+  font-size: clamp(2.2rem, 5vw, 4.1rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: var(--tracking-tight, -0.035em);
+  color: #fff;
+}
+
+.aot-services__title .hero-flow {
+  margin-left: 0.15em;
+}
+
+.aot-services__lede {
+  max-width: 38rem;
+  margin: 0 0 2.5rem;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.aot-services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+@media (min-width: 760px) {
+  .aot-services__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .aot-services__grid--listing {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.aot-services__grid--related {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .aot-services__grid--related {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.aot-services-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 1.15rem;
+}
+
+.aot-services-card-link:focus-visible {
+  outline: 2px solid var(--aot-svc-cyan);
+  outline-offset: 4px;
+}
+
+.aot-services-card[data-slot="card"] {
+  position: relative;
+  height: 100%;
+  background: rgba(15, 5, 26, 0.55);
+  border: 1px solid rgba(229, 231, 235, 0.16);
+  border-radius: 1.15rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transition:
+    transform 500ms var(--aot-svc-soft),
+    box-shadow 500ms var(--aot-svc-soft),
+    border-color 500ms var(--aot-svc-soft);
+}
+
+.aot-services-card-link:hover .aot-services-card,
+.aot-services-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 255, 255, 0.38);
+  box-shadow: 0 22px 50px rgba(0, 255, 255, 0.18);
+}
+
+.aot-services-card__frame {
+  position: relative;
+  height: 17.5rem;
+  overflow: hidden;
+}
+
+.aot-services-card__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(0, 255, 255, 0.16) 48%,
+    rgba(168, 85, 247, 0.12) 54%,
+    transparent 78%
+  );
+  background-size: 220% 100%;
+  background-position: 130% 0;
+  opacity: 0;
+  transition:
+    opacity 450ms var(--aot-svc-soft),
+    background-position 900ms var(--aot-svc-soft);
+}
+
+.aot-services-card:hover .aot-services-card__frame::before {
+  opacity: 1;
+  background-position: -30% 0;
+}
+
+@media (min-width: 760px) {
+  .aot-services-card__frame {
+    height: 19.5rem;
+  }
+}
+
+.aot-services-card__reveal {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(10% 12% 14% 12% round 1.1rem);
+  transform: scale(1.08);
+  filter: blur(8px);
+  animation: aotServiceClip 1.05s var(--aot-svc-soft) forwards;
+  animation-delay: var(--aot-delay, 0ms);
+}
+
+.aot-services-card__img,
+.aot-services-card__video,
+.aot-services-card__stage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center;
+  transition: transform 700ms var(--aot-svc-soft);
+}
+
+.aot-services-card__video {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aot-services-card__stage {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.28), transparent 50%),
+    linear-gradient(160deg, #1a0b2e 0%, #0f051a 55%, #12061f 100%);
+}
+
+.group:hover .aot-services-card__img,
+.group:hover .aot-services-card__video {
+  transform: scale(1.07);
+}
+
+.aot-services-card__orb {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(15, 5, 26, 0.72);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 400ms var(--aot-svc-soft), color 400ms var(--aot-svc-soft);
+}
+
+.aot-services-card:hover .aot-services-card__orb {
+  background: rgba(0, 255, 255, 0.16);
+  color: var(--aot-svc-cyan);
+}
+
+.aot-services-card__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.15rem;
+  background: linear-gradient(180deg, transparent 20%, rgba(15, 5, 26, 0.82) 100%);
+  color: #fff;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aot-services-card__soon span {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(15, 5, 26, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.aot-services-card [data-slot="card-content"] {
+  padding-left: 1.15rem;
+  padding-right: 1.15rem;
+}
+
+.aot-services-card__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.aot-services-card__dot--cyan {
+  background: var(--aot-svc-cyan);
+  color: var(--aot-svc-cyan);
+}
+
+.aot-services-card__dot--purple {
+  background: var(--aot-svc-purple);
+  color: var(--aot-svc-purple);
+}
+
+.aot-services-card__dot--pink {
+  background: var(--aot-svc-pink);
+  color: var(--aot-svc-pink);
+}
+
+.aot-services-card__cta {
+  color: var(--aot-svc-cyan);
+  font-weight: 700;
+}
+
+.aot-services-hero {
+  position: relative;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  border-radius: 1.35rem;
+  overflow: hidden;
+  min-height: clamp(22rem, 62vh, 38rem);
+  border: 1px solid rgba(0, 255, 255, 0.16);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+.aot-services-hero__media {
+  position: absolute;
+  inset: 0;
+  animation: aotServiceHeroClip 1.2s var(--aot-svc-soft) both;
+}
+
+.aot-services-hero__img {
+  object-fit: cover;
+  animation: aotServiceKenBurns 18s var(--aot-svc-soft) 1.1s both;
+}
+
+.aot-services-hero__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 5, 26, 0.15) 10%, rgba(15, 5, 26, 0.82) 100%),
+    linear-gradient(90deg, rgba(15, 5, 26, 0.35), transparent 55%);
+}
+
+.aot-services-hero__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(22rem, 62vh, 38rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 42rem;
+}
+
+.aot-services-hero__get {
+  margin: 0.85rem 0 0;
+  color: #e8e8ee;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.55;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.aot-services-section {
+  margin: clamp(2.75rem, 6vw, 4.5rem) 0;
+}
+
+.aot-services-section__label {
+  margin: 0 0 0.85rem;
+  color: var(--aot-svc-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.aot-services-section h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+}
+
+.aot-services-section p {
+  color: var(--text-secondary, #a1a1aa);
+  line-height: 1.75;
+  margin: 0 0 1rem;
+  max-width: 46rem;
+}
+
+.aot-services-stills {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 5.5vw, 4rem);
+  margin-top: 1.75rem;
+}
+
+.aot-services-still {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.15rem, 3.2vw, 2.75rem);
+  align-items: center;
+}
+
+.aot-services-still--flip .aot-services-still__media {
+  order: 2;
+}
+
+.aot-services-still--flip .aot-services-still__copy {
+  order: 1;
+}
+
+@media (min-width: 840px) {
+  .aot-services-still {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  }
+
+  .aot-services-still--flip {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+}
+
+.aot-services-still__frame {
+  position: relative;
+  min-height: clamp(16.5rem, 38vw, 26rem);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(229, 231, 235, 0.14);
+  background: rgba(15, 5, 26, 0.45);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.aot-services-still__frame--empty {
+  border-color: rgba(229, 231, 235, 0.1);
+  box-shadow: none;
+  background: rgba(229, 231, 235, 0.03);
+}
+
+.aot-services-still__reveal {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(10% 12% 14% 12% round 1.1rem);
+  transform: scale(1.08);
+  filter: blur(8px);
+  animation: aotServiceClip 1.05s var(--aot-svc-soft) forwards;
+  animation-delay: var(--aot-delay, 0ms);
+}
+
+.aot-services-still__frame--empty .aot-services-still__reveal {
+  clip-path: none;
+  transform: none;
+  filter: none;
+  animation: none;
+}
+
+.aot-services-still__img,
+.aot-services-still__video {
+  object-fit: cover;
+  display: block;
+}
+
+.aot-services-still__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.aot-services-still__video::-webkit-media-controls,
+.aot-services-still__video::-webkit-media-controls-enclosure,
+.aot-services-still__video::-webkit-media-controls-panel,
+.aot-services-still__video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.aot-services-still__empty {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.aot-services-still__copy {
+  max-width: 34rem;
+}
+
+.aot-services-still--flip .aot-services-still__copy {
+  margin-left: auto;
+}
+
+.aot-services-still__copy h3 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight, -0.02em);
+  line-height: 1.25;
+}
+
+.aot-services-still__copy .aot-services-still__lead {
+  margin: -0.35rem 0 0.75rem;
+  color: #e8e8ee;
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.aot-services-still__copy p {
+  margin: 0;
+  max-width: none;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.aot-services-points {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .aot-services-points {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.aot-services-points li {
+  position: relative;
+  padding: 0.85rem 1rem 0.85rem 1.7rem;
+  border: 1px solid rgba(229, 231, 235, 0.12);
+  border-radius: 0.9rem;
+  background: rgba(229, 231, 235, 0.03);
+  color: #d4d4dc;
+  line-height: 1.5;
+}
+
+.aot-services-points li::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  top: 1.15rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--aot-svc-cyan);
+  box-shadow: 0 0 10px var(--aot-svc-cyan);
+}
+
+.aot-services-cta {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  text-align: center;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 255, 255, 0.1), transparent 55%),
+    rgba(15, 5, 26, 0.72);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.12);
+}
+
+.aot-services-cta h2 {
+  margin: 0 0 0.65rem;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+.aot-services-cta p {
+  margin: 0 auto 1.5rem;
+  max-width: 36rem;
+  color: var(--text-secondary, #a1a1aa);
+}
+
+.aot-services-cta .hero-buttons {
+  justify-content: center;
+}
+
+@keyframes aotServiceClip {
+  to {
+    clip-path: inset(0 round 0);
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes aotServiceHeroClip {
+  from {
+    clip-path: inset(14% 16% 20% 16% round 2rem);
+    filter: blur(10px);
+    transform: scale(1.08);
+  }
+  to {
+    clip-path: inset(0);
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes aotServiceKenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+.aot-services-hero__stage {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.28), transparent 50%),
+    linear-gradient(160deg, #1a0b2e 0%, #0f051a 55%, #12061f 100%);
+  animation: aotServiceKenBurns 18s var(--aot-svc-soft) 1.1s both;
+}
+
+.aot-services-hero__soon {
+  position: absolute;
+  z-index: 2;
+  top: clamp(1.25rem, 3vw, 2rem);
+  right: clamp(1.25rem, 3vw, 2rem);
+}
+
+.aot-services-hero__soon span,
+.aot-blog4-soon span {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(15, 5, 26, 0.62);
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.aot-services-features {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.aot-services-feature {
+  padding: 1.15rem 1.25rem 1.2rem;
+  border: 1px solid rgba(229, 231, 235, 0.12);
+  border-radius: 1.05rem;
+  background:
+    linear-gradient(180deg, rgba(229, 231, 235, 0.04), rgba(15, 5, 26, 0.2)),
+    rgba(15, 5, 26, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  animation: aotServiceFeatureIn 0.9s var(--aot-svc-soft) both;
+  animation-delay: var(--aot-delay, 0ms);
+}
+
+.aot-services-feature h3 {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+}
+
+.aot-services-feature p,
+.aot-services-feature li {
+  color: #d4d4dc;
+  line-height: 1.7;
+}
+
+.aot-services-feature p {
+  margin: 0 0 0.7rem;
+  max-width: none;
+}
+
+.aot-services-feature p:last-child {
+  margin-bottom: 0;
+}
+
+.aot-services-feature ul {
+  margin: 0 0 0.7rem;
+  padding: 0 0 0 1.2rem;
+}
+
+.aot-services-feature li {
+  margin: 0.2rem 0;
+}
+
+@keyframes aotServiceFeatureIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+#aot-services-root,
+.aot-home-html {
+  display: contents;
+}
+
+.aot-home-services {
+  --aot-svc-cyan: var(--primary-cyan, #00ffff);
+  --aot-svc-purple: var(--primary-purple, #7c3aed);
+  --background: #0f051a;
+  --foreground: #ffffff;
+  --card: rgba(229, 231, 235, 0.04);
+  --card-foreground: #ffffff;
+  --muted: rgba(229, 231, 235, 0.03);
+  --muted-foreground: #a1a1aa;
+  --border: rgba(0, 255, 255, 0.22);
+  --ring: rgba(0, 255, 255, 0.7);
+  --radius: 1.15rem;
+  position: relative;
+  isolation: isolate;
+  padding: var(--space-section-y, clamp(5.5rem, 8vw, 8rem))
+    var(--space-container-x, clamp(1rem, 4vw, 2.5rem));
+  color: var(--text-primary, #fff);
+  font-family: var(--font-merriweather), Merriweather, Georgia, "Times New Roman", serif;
+}
+
+.aot-home-services::before {
+  content: "";
+  position: absolute;
+  inset: 8% 10% auto;
+  height: 42%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 22% 40%, rgba(0, 255, 255, 0.08), transparent 58%),
+    radial-gradient(ellipse at 78% 48%, rgba(124, 58, 237, 0.12), transparent 55%);
+}
+
+.aot-home-services__blog {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  padding: 0;
+}
+
+.aot-home-services__blog .container {
+  max-width: 1180px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.aot-home-services__blog h2 {
+  margin-top: 0;
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 700;
+  color: var(--aot-svc-cyan);
+  text-transform: uppercase;
+  letter-spacing: clamp(-0.025em, 0.2vw, 0.025em);
+  line-height: 1.02;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.aot-home-services__blog [data-slot="card"] {
+  background: rgba(15, 5, 26, 0.55);
+  border-color: rgba(229, 231, 235, 0.16);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transition:
+    transform 500ms var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1)),
+    box-shadow 500ms var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 500ms var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .aot-home-services__blog a:hover [data-slot="card"] {
+    transform: translateY(-10px);
+    border-color: rgba(0, 255, 255, 0.38);
+    box-shadow: 0 22px 50px rgba(0, 255, 255, 0.18);
+  }
+}
+
+.aot-home-services__blog .grid > a [data-slot="card"] {
+  animation: aotServiceFeatureIn 0.95s var(--aot-svc-soft, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+.aot-home-services__blog .grid > a:nth-child(1) [data-slot="card"] { animation-delay: 40ms; }
+.aot-home-services__blog .grid > a:nth-child(2) [data-slot="card"] { animation-delay: 120ms; }
+.aot-home-services__blog .grid > a:nth-child(3) [data-slot="card"] { animation-delay: 200ms; }
+.aot-home-services__blog .grid > a:nth-child(4) [data-slot="card"] { animation-delay: 280ms; }
+.aot-home-services__blog .grid > a:nth-child(5) [data-slot="card"] { animation-delay: 360ms; }
+.aot-home-services__blog .grid > a:nth-child(6) [data-slot="card"] { animation-delay: 440ms; }
+
+.aot-home-services__blog [data-slot="card"] > div:first-child {
+  animation: aotServiceClip 1.05s var(--aot-svc-soft, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+.aot-blog4-soon {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 1.15rem;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.28), transparent 50%),
+    linear-gradient(160deg, #1a0b2e 0%, #0f051a 55%, #12061f 100%);
+}
+
+@media (max-width: 768px) {
+  .aot-services-card__orb,
+  .aot-services-card__soon span,
+  .aot-services-hero__soon span,
+  .aot-blog4-soon span,
+  .aot-services-feature {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aot-services-card__reveal,
+  .aot-services-still__reveal,
+  .aot-services-hero__media,
+  .aot-services-hero__img,
+  .aot-services-hero__stage,
+  .aot-services-feature,
+  .aot-home-services__blog .grid > a [data-slot="card"],
+  .aot-home-services__blog [data-slot="card"] > div:first-child {
+    animation: none;
+    clip-path: none;
+    filter: none;
+    transform: none;
+  }
+
+  .aot-services-card-link:hover .aot-services-card,
+  .aot-services-card:hover,
+  .group:hover .aot-services-card__img,
+  .group:hover .aot-services-card__video,
+  .aot-home-services__blog a:hover [data-slot="card"] {
+    transform: none;
+  }
+
+  .aot-services-card__frame::before,
+  .aot-services-card:hover .aot-services-card__frame::before {
+    opacity: 0;
+    transition: none;
+  }
+}

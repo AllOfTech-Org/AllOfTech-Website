@@ -1,0 +1,122 @@
+/* ------------------------------------------------------------------------
+   AllOfTech custom cursor.
+
+   Two layers, two jobs:
+   - The dot tracks the pointer immediately so hiding the OS cursor is safe.
+   - The ring eases behind in JS (requestAnimationFrame). Transform is never
+     CSS-transitioned, which is what keeps the follow from stuttering.
+
+   Desktop fine-pointer only. Touch keeps the native cursor so taps work.
+   ------------------------------------------------------------------------ */
+
+.aot-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    z-index: 2147483000;
+    pointer-events: none;
+    contain: layout style;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.aot-cursor.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.aot-cursor.is-text {
+    opacity: 0;
+}
+
+.aot-cursor__pointer,
+.aot-cursor__follower {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.aot-cursor__dot,
+.aot-cursor__ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.aot-cursor__dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-cyan);
+    box-shadow:
+        0 0 0 1.5px rgba(15, 5, 26, 0.72),
+        0 0 12px rgba(0, 255, 255, 0.55);
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 180ms var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.aot-cursor__ring {
+    width: 40px;
+    height: 40px;
+    border: 1.25px solid rgba(0, 255, 255, 0.88);
+    background: rgba(0, 255, 255, 0.05);
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.12);
+    transform: translate(-50%, -50%) scale(1);
+    transition:
+        transform 220ms var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1)),
+        background-color 220ms ease,
+        border-color 220ms ease;
+}
+
+.aot-cursor.is-hover .aot-cursor__dot {
+    transform: translate(-50%, -50%) scale(0.42);
+}
+
+.aot-cursor.is-hover .aot-cursor__ring {
+    transform: translate(-50%, -50%) scale(1.55);
+    border-color: rgba(168, 85, 247, 0.95);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.aot-cursor.is-press .aot-cursor__dot {
+    transform: translate(-50%, -50%) scale(0.28);
+    transition-duration: 80ms;
+}
+
+.aot-cursor.is-press .aot-cursor__ring {
+    transform: translate(-50%, -50%) scale(0.82);
+    transition-duration: 80ms;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html.aot-cursor-on,
+    html.aot-cursor-on * {
+        cursor: none !important;
+    }
+
+    html.aot-cursor-on input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="color"]):not([type="range"]):not([type="image"]),
+    html.aot-cursor-on textarea,
+    html.aot-cursor-on [contenteditable="true"] {
+        cursor: text !important;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .aot-cursor {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aot-cursor {
+        display: none !important;
+    }
+}

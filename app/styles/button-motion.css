@@ -1,0 +1,145 @@
+/* Button motion: JS owns transform (interruptible glide). CSS owns color/glow. */
+
+:root {
+    --aot-btn-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --aot-btn-duration: 520ms;
+    --aot-btn-press: 140ms;
+}
+
+.aot-motion,
+.cyber-button,
+.btn-primary,
+.btn-secondary,
+.contact-whatsapp-btn,
+.chatbot-button,
+.chatbot-login-button,
+.chatbot-send,
+.chatbot-close,
+.chatbot-callout-close,
+.chatbot-lead-button,
+.review-toggle-btn,
+.brand-filter-btn,
+.rating-star-btn,
+.faq-question,
+.modal-close,
+.lightbox-close,
+.clickable-service,
+.related-service-card,
+a.cs-site-badge,
+.blog-link,
+.resource-card > a,
+.mobile-menu-button,
+.mobile-menu-close,
+.nav-social a {
+    transform-origin: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.blog-link,
+.resource-card > a {
+    display: inline-block;
+}
+
+.cyber-button,
+.btn-primary,
+.btn-secondary,
+.contact-whatsapp-btn,
+.chatbot-button,
+.chatbot-login-button,
+.chatbot-send,
+.chatbot-lead-button,
+.clickable-service,
+.related-service-card,
+a.cs-site-badge,
+.rating-star-btn,
+.review-toggle-btn,
+.brand-filter-btn,
+.mobile-menu-button,
+.mobile-menu-close,
+.nav-social a,
+.nav-bottom .cyber-button {
+    transition-property: background, background-color, background-image, color, box-shadow, border-color, text-shadow, opacity, filter;
+    transition-duration: var(--aot-btn-duration);
+    transition-timing-function: var(--aot-btn-ease);
+}
+
+.cyber-button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.contact-whatsapp-btn:hover,
+.chatbot-button:hover,
+.chatbot-login-button:hover,
+.chatbot-send:hover,
+.chatbot-lead-button:hover,
+.chatbot-lead-button:hover:not(:disabled),
+.mobile-menu-button:hover,
+.mobile-menu-close:hover,
+.rating-star-btn:hover,
+.nav-social a:hover,
+.nav-bottom .cyber-button:hover,
+.clickable-service:hover,
+.related-service-card:hover,
+a.cs-site-badge:hover {
+    transform: none;
+}
+
+.chatbot-send:disabled,
+.chatbot-login-button:disabled {
+    transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .cyber-button:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .contact-whatsapp-btn:hover,
+    .chatbot-button:hover,
+    .chatbot-login-button:hover,
+    .chatbot-lead-button:hover:not(:disabled) {
+        will-change: transform;
+    }
+
+    html.motion-desktop .btn-primary:hover::after {
+        animation-duration: 920ms;
+        animation-timing-function: var(--aot-btn-ease);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyber-button,
+    .btn-primary,
+    .btn-secondary,
+    .contact-whatsapp-btn,
+    .chatbot-button,
+    .chatbot-login-button,
+    .chatbot-send,
+    .chatbot-lead-button,
+    .review-toggle-btn,
+    .brand-filter-btn,
+    .rating-star-btn,
+    .mobile-menu-button,
+    .nav-social a,
+    .clickable-service,
+    .related-service-card,
+    a.cs-site-badge {
+        transition: none;
+    }
+
+    .cyber-button:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .contact-whatsapp-btn:hover,
+    .chatbot-button:hover,
+    .chatbot-login-button:hover,
+    .chatbot-send:hover,
+    .mobile-menu-button:hover,
+    .rating-star-btn:hover,
+    .feature-card:hover,
+    .clickable-service:hover,
+    .related-service-card:hover,
+    a.cs-site-badge:hover {
+        transform: none;
+        will-change: auto;
+    }
+}

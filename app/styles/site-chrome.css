@@ -1,0 +1,54 @@
+/* Persistent chrome on home-section routes and Case Studies. Duplicate clone chrome is hidden. */
+
+body.aot-float-header .aot-page-clone > nav,
+body.aot-float-header .aot-page-clone .mobile-menu,
+body.aot-float-header .aot-page-clone .mobile-menu-overlay,
+body.aot-float-header .aot-page-clone > .footer,
+body.aot-float-header .aot-page-clone footer.footer {
+    display: none !important;
+}
+
+.aot-footer-16 p,
+.aot-footer-16 li {
+    max-width: none;
+}
+
+body.aot-persistent-chrome .aot-page-clone nav,
+body.aot-persistent-chrome .aot-page-clone .mobile-menu,
+body.aot-persistent-chrome .aot-page-clone .mobile-menu-overlay,
+body.aot-persistent-chrome .aot-page-clone .cyber-bg,
+body.aot-persistent-chrome .aot-page-clone .particles,
+body.aot-persistent-chrome .aot-page-clone .data-streams,
+body.aot-persistent-chrome .aot-page-clone .orb,
+body.aot-persistent-chrome .aot-page-clone .grid-overlay,
+body.aot-persistent-chrome .aot-page-clone .scanlines,
+body.aot-persistent-chrome .aot-page-clone .noise-overlay,
+body.aot-persistent-chrome .aot-page-clone .scroll-progress {
+    display: none !important;
+}
+
+/* Navbar stays visually still: no hover slide, no press scale. */
+.continuous-tabs-pill {
+    transition: opacity 0.12s ease;
+}
+
+.nav-links.continuous-tabs a,
+.mobile-menu-nav a,
+.nav-social a,
+.mobile-menu-button,
+.mobile-menu-close,
+.mobile-menu-cta a,
+nav .logo,
+.mobile-menu-logo {
+    transform: none;
+}
+
+.mobile-menu-button:hover,
+.nav-social a:hover,
+.logo:hover .logo-image {
+    transform: none;
+}
+
+.mobile-menu-nav a:hover {
+    padding-left: 2rem;
+}

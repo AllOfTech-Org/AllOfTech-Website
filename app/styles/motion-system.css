@@ -1,0 +1,325 @@
+/* ------------------------------------------------------------------------
+   AllOfTech motion system — one animation language for the whole site.
+
+   Language: long glide easing, slight rise, slight de-blur, generous stagger.
+   Everything below is gated on html.aot-motion, which motion-system.js only
+   adds when it can drive the animation. Without JS the site renders static
+   and fully visible.
+   ------------------------------------------------------------------------ */
+
+:root {
+    --aot-soft: cubic-bezier(0.16, 1, 0.3, 1);
+    --aot-reveal-duration: 900ms;
+    --aot-sy: 0px;
+}
+
+/* ---------------------------------------------------------------- Atmosphere
+   A single fixed aurora field behind every page so all routes share the same
+   ambient depth. Outer element takes the scroll parallax, inner element owns
+   the idle drift, so the two never fight over one transform. */
+
+.aot-atmosphere {
+    position: fixed;
+    inset: -12vh -12vw;
+    z-index: -5;
+    pointer-events: none;
+    overflow: hidden;
+    contain: layout paint;
+    opacity: 0;
+    transition: opacity 1.4s var(--aot-soft);
+}
+
+html.aot-motion .aot-atmosphere {
+    opacity: 1;
+}
+
+.aot-aurora {
+    position: absolute;
+    will-change: transform;
+}
+
+.aot-aurora > i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.24;
+    animation: aotAuroraDrift 34s ease-in-out infinite;
+}
+
+.aot-aurora--1 {
+    top: 4%;
+    left: -6%;
+    width: 46vw;
+    height: 46vw;
+    transform: translate3d(0, calc(var(--aot-sy) * -0.06), 0);
+}
+
+.aot-aurora--1 > i {
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.5), transparent 68%);
+}
+
+.aot-aurora--2 {
+    top: 38%;
+    right: -10%;
+    width: 52vw;
+    height: 52vw;
+    transform: translate3d(0, calc(var(--aot-sy) * -0.11), 0);
+}
+
+.aot-aurora--2 > i {
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.45), transparent 68%);
+    animation-duration: 44s;
+    animation-delay: -12s;
+}
+
+.aot-aurora--3 {
+    bottom: -6%;
+    left: 26%;
+    width: 40vw;
+    height: 40vw;
+    transform: translate3d(0, calc(var(--aot-sy) * -0.17), 0);
+}
+
+.aot-aurora--3 > i {
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.32), transparent 68%);
+    animation-duration: 52s;
+    animation-delay: -26s;
+}
+
+@keyframes aotAuroraDrift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+        transform: translate3d(6%, -5%, 0) scale(1.08);
+    }
+    66% {
+        transform: translate3d(-5%, 6%, 0) scale(0.94);
+    }
+}
+
+/* The existing grid joins the same scroll field on wide, fine-pointer
+   viewports. Phones skip the scroll-linked transform so blur layers stay still. */
+@media (min-width: 769px) and (hover: hover) and (pointer: fine) {
+    html.aot-motion .grid-overlay {
+        transform: translate3d(0, calc(var(--aot-sy) * -0.03), 0);
+    }
+}
+
+/* ------------------------------------------------------------------ Reveals
+   JS tags elements with data-aot-reveal, so nothing is ever hidden by CSS
+   alone. Stagger arrives as --aot-delay from the same script. */
+
+html.aot-motion [data-aot-reveal] {
+    opacity: 0;
+    transform: translate3d(var(--aot-rx, 0px), var(--aot-ry, 26px), 0) scale(var(--aot-rs, 1));
+    transition:
+        opacity var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms),
+        transform var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms),
+        filter var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms);
+}
+
+html.aot-motion [data-aot-reveal="fade"] {
+    --aot-ry: 0px;
+}
+
+html.aot-motion [data-aot-reveal="scale"] {
+    --aot-ry: 18px;
+    --aot-rs: 0.965;
+}
+
+html.aot-motion [data-aot-reveal="left"] {
+    --aot-rx: -26px;
+    --aot-ry: 0px;
+}
+
+html.aot-motion [data-aot-reveal="right"] {
+    --aot-rx: 26px;
+    --aot-ry: 0px;
+}
+
+html.aot-motion [data-aot-reveal].is-revealing {
+    will-change: opacity, transform, filter;
+}
+
+html.aot-motion [data-aot-reveal].is-inview {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* De-blur only where there is GPU headroom. Case studies skip the
+   blur pass — those cards are image-heavy and the filter stalls the page. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    html.aot-motion [data-aot-reveal] {
+        filter: blur(6px);
+    }
+
+    html.aot-motion .cs-page [data-aot-reveal] {
+        filter: none;
+    }
+}
+
+/* -------------------------------------------------------------- Card polish
+   A pointer-tracked sheen layer injected by JS. It never touches transform,
+   so the SplitButton press motion stays in sole control of that channel. */
+
+html.aot-motion .aot-spot {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        circle at var(--aot-mx, 50%) var(--aot-my, 50%),
+        rgba(0, 255, 255, 0.16),
+        rgba(168, 85, 247, 0.08) 38%,
+        transparent 62%
+    );
+    transition: opacity 0.5s var(--aot-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    html.aot-motion [data-aot-spot]:hover > .aot-spot {
+        opacity: 1;
+    }
+}
+
+/* Article links get a sweep instead of a static underline. */
+html.aot-motion .service-post a:not([class]),
+html.aot-motion .blog-post a:not([class]),
+html.aot-motion .related-links a {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.5s var(--aot-soft);
+}
+
+html.aot-motion .service-post a:not([class]):hover,
+html.aot-motion .blog-post a:not([class]):hover,
+html.aot-motion .related-links a:hover {
+    background-size: 100% 1px;
+}
+
+/* ----------------------------------------------------- First enter
+   Same fade-from-blur as section reveals. No splash, no extra motion.
+   Later visits never get this class. */
+
+html.aot-first-enter .aot-page-clone,
+html.aot-first-enter .aot-services,
+html.aot-first-enter .aot-footer-16 {
+    animation: aotFirstFade var(--aot-reveal-duration) var(--aot-soft) both;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    html.aot-first-enter .aot-page-clone,
+    html.aot-first-enter .aot-services,
+    html.aot-first-enter .aot-footer-16 {
+        animation-name: aotFirstClear;
+    }
+}
+
+html.aot-first-enter-reduce .aot-page-clone,
+html.aot-first-enter-reduce .aot-services,
+html.aot-first-enter-reduce .aot-footer-16 {
+    animation: none;
+    opacity: 1;
+    filter: none;
+}
+
+@keyframes aotFirstFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes aotFirstClear {
+    from {
+        opacity: 0;
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        filter: none;
+    }
+}
+
+/* ------------------------------------------------------------- Calm navbar
+   The nav sits outside the motion language on purpose: no reveal, no
+   parallax, no scroll-driven drift. */
+
+html.aot-motion nav [data-aot-reveal],
+html.aot-motion .mobile-menu [data-aot-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+}
+
+@media (max-width: 768px) {
+    .aot-aurora {
+        will-change: auto;
+        transform: none;
+    }
+
+    .aot-aurora > i {
+        filter: blur(60px);
+    }
+
+    .aot-aurora--3 {
+        display: none;
+    }
+
+    html.aot-motion [data-aot-reveal] {
+        --aot-reveal-duration: 560ms;
+    }
+
+    html.aot-motion [data-aot-reveal].is-revealing {
+        will-change: auto;
+    }
+}
+
+html.aot-page-hidden .aot-aurora > i,
+html.aot-page-hidden .hero-ticker__track,
+.aot-atmosphere.is-aot-paused .aot-aurora > i,
+.hero-ticker.is-aot-paused .hero-ticker__track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aot-atmosphere {
+        display: none;
+    }
+
+    html.aot-motion [data-aot-reveal] {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
+    html.aot-motion .aot-spot {
+        display: none;
+    }
+
+    html.aot-first-enter .aot-page-clone,
+    html.aot-first-enter .aot-services,
+    html.aot-first-enter .aot-footer-16 {
+        animation: none;
+        opacity: 1;
+        filter: none;
+    }
+
+    html.aot-motion .grid-overlay {
+        transform: none;
+    }
+}

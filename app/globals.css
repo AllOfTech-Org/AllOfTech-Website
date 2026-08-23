@@ -1,0 +1,39 @@
+@import "./styles/nexus.css";
+@import "./styles/about.css";
+@import "./styles/why-choose.css";
+@import "./styles/chatbot.css";
+@import "./styles/articles.css";
+@import "./styles/continuous-tabs.css";
+@import "./styles/button-motion.css";
+@import "./styles/site-chrome.css";
+@import "./styles/motion-system.css";
+@import "./styles/floating-nav.css";
+@import "./styles/hero-split.css";
+@import "./styles/aot-cursor.css";
+@import "./styles/shadcn-button.css";
+@import "./styles/footer-16.css";
+@import "./styles/team-1.css";
+@import "./styles/services.css";
+@import "./styles/contact-4.css";
+@import "./styles/case-studies.css";
+
+#sitePreloader,
+.site-preloader {
+  display: none !important;
+}
+
+html {
+  font-family: var(--font-merriweather), Merriweather, Georgia, "Times New Roman", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero-title,
+.hero-nexus,
+.hero-flow {
+  font-family: var(--font-merriweather), Merriweather, Georgia, "Times New Roman", serif;
+}

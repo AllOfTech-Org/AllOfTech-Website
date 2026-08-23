@@ -1,0 +1,863 @@
+/* Compact Team-1 composition: leadership cards + group shots as one mosaic. */
+
+.aot-team {
+  --aot-team-cyan: var(--primary-cyan, #00ffff);
+  --aot-team-purple: var(--primary-purple, #7c3aed);
+  --aot-team-ink: var(--darker-bg, #0f051a);
+  --aot-team-panel: var(--dark-bg, #1a0b2e);
+  --aot-team-soft: var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1));
+  --background: #0f051a;
+  --foreground: #ffffff;
+  --muted: rgba(229, 231, 235, 0.03);
+  --muted-foreground: #a1a1aa;
+  --border: rgba(0, 255, 255, 0.22);
+  --ring: rgba(0, 255, 255, 0.7);
+  position: relative;
+  padding: var(--space-section-y-compact, clamp(4.25rem, 6vw, 6.5rem)) var(--space-container-x);
+  isolation: isolate;
+}
+
+.aot-team::before {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 10%;
+  height: 38%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(0, 255, 255, 0.06), transparent 58%),
+    radial-gradient(ellipse at 72% 48%, rgba(124, 58, 237, 0.08), transparent 55%);
+}
+
+.aot-team p,
+.aot-team li,
+.aot-team figcaption {
+  max-width: none;
+}
+
+.aot-team__container {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#aot-team-root {
+  display: contents;
+}
+
+.aot-team1__badge {
+  border-color: rgba(0, 255, 255, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.1),
+    rgba(124, 58, 237, 0.16)
+  );
+  color: var(--aot-team-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
+}
+
+.aot-team1__heading {
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.2vw, 2.55rem);
+  color: var(--aot-team-cyan);
+  text-transform: uppercase;
+  letter-spacing: clamp(-0.025em, 0.2vw, 0.025em);
+  line-height: 1.02;
+  text-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+}
+
+.aot-team1__heading::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(72px, 22vw);
+  height: 2px;
+  background: linear-gradient(90deg, var(--aot-team-cyan), var(--aot-team-purple));
+  box-shadow: 0 0 14px var(--aot-team-cyan);
+}
+
+.aot-team1__description {
+  max-width: var(--measure-narrow, 56ch);
+  margin: 1.15rem auto 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.aot-team__stage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 184px 128px;
+  gap: 0.6rem;
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+.aot-team__tile--ceo {
+  grid-column: 1 / 4;
+  grid-row: 1 / 3;
+}
+
+.aot-team__tile--c1 {
+  grid-column: 4 / 10;
+  grid-row: 1;
+}
+
+.aot-team__tile--coo {
+  grid-column: 10 / 13;
+  grid-row: 1 / 3;
+}
+
+.aot-team__tile--c2 {
+  grid-column: 4 / 6;
+  grid-row: 2;
+}
+
+.aot-team__tile--c3 {
+  grid-column: 6 / 8;
+  grid-row: 2;
+}
+
+.aot-team__tile--c4 {
+  grid-column: 8 / 10;
+  grid-row: 2;
+}
+
+.aot-team__tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  isolation: isolate;
+}
+
+.aot-team1__card {
+  border-radius: 1.15rem;
+  border-color: rgba(0, 255, 255, 0.22);
+  background: var(--aot-team-panel);
+  box-shadow:
+    0 12px 28px rgba(15, 5, 26, 0.45),
+    0 0 22px rgba(0, 255, 255, 0.06);
+  outline: none;
+  cursor: default;
+}
+
+.aot-epc {
+  cursor: pointer;
+}
+
+.aot-epc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.aot-epc-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 5, 26, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.aot-epc-panel {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 56rem;
+  height: 80vh;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  background: var(--aot-team-panel);
+  color: #fff;
+  box-shadow:
+    0 24px 64px rgba(15, 5, 26, 0.7),
+    0 0 40px rgba(0, 255, 255, 0.12),
+    0 0 48px rgba(124, 58, 237, 0.16);
+}
+
+.aot-epc-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  background: rgba(15, 5, 26, 0.55);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.aot-epc-close:hover,
+.aot-epc-close:focus-visible {
+  background: rgba(0, 255, 255, 0.16);
+  border-color: rgba(0, 255, 255, 0.55);
+  outline: none;
+}
+
+.aot-epc-photo {
+  position: relative;
+  height: 16rem;
+  width: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.aot-epc-photo-wash {
+  display: none;
+}
+
+.aot-epc-copy {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.aot-epc-subtitle {
+  margin: 0 0 0.75rem;
+  color: var(--aot-team-cyan);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aot-epc-title {
+  margin: 0 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.22);
+  color: #fff;
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.aot-epc-body {
+  flex-grow: 1;
+  display: flex;
+  min-height: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.aot-epc-profile {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.aot-epc-skill,
+.aot-epc-vision,
+.aot-epc-email {
+  margin: 0;
+}
+
+.aot-epc-skill {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.aot-epc-vision {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.55;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 2px solid rgba(0, 255, 255, 0.45);
+}
+
+.aot-epc-connect {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+  padding-top: 0.35rem;
+}
+
+.aot-epc-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.aot-epc-email:hover,
+.aot-epc-email:focus-visible {
+  color: var(--aot-team-cyan);
+  outline: none;
+}
+
+.aot-epc-field {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 11.5rem;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(0, 255, 255, 0.16);
+  background:
+    radial-gradient(ellipse at 28% 36%, rgba(0, 255, 255, 0.08), transparent 58%),
+    radial-gradient(ellipse at 78% 72%, rgba(124, 58, 237, 0.14), transparent 52%),
+    rgba(15, 5, 26, 0.42);
+}
+
+.aot-epc-field__grid {
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 42%, black 12%, transparent 72%);
+  pointer-events: none;
+}
+
+.aot-epc-field__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.aot-epc-field__orb--cyan {
+  width: 42%;
+  aspect-ratio: 1;
+  top: 6%;
+  left: 8%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.28), transparent 70%);
+}
+
+.aot-epc-field__orb--violet {
+  width: 38%;
+  aspect-ratio: 1;
+  right: 6%;
+  bottom: 18%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%);
+}
+
+.aot-epc-orbit {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  z-index: 1;
+  width: min(58%, 11.5rem);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.aot-epc-orbit__ring,
+.aot-epc-orbit__core {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.aot-epc-orbit__ring {
+  border: 1px solid rgba(0, 255, 255, 0.16);
+}
+
+.aot-epc-orbit__ring--a {
+  inset: 0;
+  border-style: dashed;
+  border-color: rgba(0, 255, 255, 0.14);
+}
+
+.aot-epc-orbit__ring--b {
+  inset: 16%;
+  border-top-color: rgba(0, 255, 255, 0.75);
+  border-right-color: rgba(168, 85, 247, 0.4);
+}
+
+.aot-epc-orbit__ring--b::before,
+.aot-epc-orbit__ring--c::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--aot-team-cyan);
+  box-shadow: 0 0 12px var(--aot-team-cyan);
+}
+
+.aot-epc-orbit__ring--c {
+  inset: 32%;
+  border-bottom-color: rgba(0, 255, 255, 0.55);
+  border-left-color: rgba(255, 0, 255, 0.28);
+}
+
+.aot-epc-orbit__ring--c::before {
+  width: 5px;
+  height: 5px;
+  top: auto;
+  bottom: -2px;
+  background: #c084fc;
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.9);
+}
+
+.aot-epc-orbit__core {
+  inset: 44%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.38), rgba(0, 255, 255, 0.05) 55%, transparent 72%);
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.2);
+}
+
+.aot-epc-signals {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  left: 0.7rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aot-epc-signals li {
+  padding: 0.28rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 255, 0.24);
+  background: rgba(15, 5, 26, 0.55);
+  color: var(--aot-team-cyan);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+html.motion-desktop .aot-epc-field__grid {
+  animation: aotEpcGridDrift 22s linear infinite;
+}
+
+html.motion-desktop .aot-epc-orbit__ring--a {
+  animation: aotEpcOrbitSpin 42s linear infinite;
+}
+
+html.motion-desktop .aot-epc-orbit__ring--b {
+  animation: aotEpcOrbitSpin 16s linear infinite;
+}
+
+html.motion-desktop .aot-epc-orbit__ring--c {
+  animation: aotEpcOrbitSpin 10s linear infinite reverse;
+}
+
+html.motion-desktop .aot-epc-orbit__core {
+  animation: aotEpcCorePulse 3.4s ease-in-out infinite;
+}
+
+@keyframes aotEpcGridDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-28px, -28px, 0);
+  }
+}
+
+@keyframes aotEpcOrbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aotEpcCorePulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (min-width: 768px) {
+  .aot-epc-panel {
+    flex-direction: row;
+  }
+
+  .aot-epc-photo {
+    height: 100%;
+    width: 50%;
+  }
+
+  .aot-epc-copy {
+    width: 50%;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .aot-epc-photo-wash {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 5, 26, 0.6), transparent);
+  }
+}
+
+.aot-team1__card:focus-visible {
+  outline: 2px solid var(--aot-team-cyan);
+  outline-offset: 3px;
+}
+
+.aot-team1__card img,
+.aot-team__shot img {
+  max-width: none;
+}
+
+.aot-team1__wash {
+  background: linear-gradient(
+    to top,
+    rgba(15, 5, 26, 0.96) 0%,
+    rgba(26, 11, 46, 0.42) 42%,
+    transparent 72%
+  );
+}
+
+.aot-team1__name,
+.aot-team1__role {
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+}
+
+.aot-team1__name {
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.aot-team .aot-team__tile--ceo .aot-team1__name,
+.aot-team .aot-team__tile--coo .aot-team1__name {
+  font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+  overflow-wrap: break-word;
+}
+
+.aot-team1__role {
+  color: var(--aot-team-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.28);
+}
+
+.aot-team1__social {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.aot-team1__social:hover,
+.aot-team1__social:focus-visible {
+  background: var(--aot-team-cyan);
+  color: var(--aot-team-ink);
+  border-color: var(--aot-team-cyan);
+}
+
+.aot-team__shot {
+  overflow: hidden;
+  margin: 0;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(0, 255, 255, 0.16);
+  background: rgba(26, 11, 46, 0.45);
+  box-shadow:
+    0 10px 24px rgba(15, 5, 26, 0.4),
+    0 0 18px rgba(124, 58, 237, 0.08);
+}
+
+.aot-team__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.aot-team__tile--c1 img {
+  object-position: center 42%;
+}
+
+.aot-team__tile--c2 img {
+  object-position: center 18%;
+}
+
+.aot-team__tile--c3 img {
+  object-position: center 38%;
+}
+
+.aot-team__tile--c4 img {
+  object-position: center 22%;
+}
+
+.aot-team__shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    transparent 48%,
+    rgba(15, 5, 26, 0.45) 100%
+  );
+  opacity: 0.85;
+  transition: opacity 400ms var(--aot-team-soft);
+}
+
+.aot-team__shot-caption {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.55rem;
+  z-index: 2;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition:
+    opacity 400ms var(--aot-team-soft),
+    transform 400ms var(--aot-team-soft);
+}
+
+.aot-team1__card .aot-spot,
+.aot-team__shot .aot-spot {
+  z-index: 3;
+}
+
+.aot-team1__card,
+.aot-team__shot {
+  transition:
+    transform 420ms var(--aot-team-soft),
+    box-shadow 420ms var(--aot-team-soft),
+    border-color 420ms var(--aot-team-soft),
+    filter 420ms var(--aot-team-soft),
+    opacity 420ms var(--aot-team-soft);
+}
+
+.aot-team__shot img,
+.aot-team1__card img {
+  transition: transform 700ms var(--aot-team-soft), filter 420ms var(--aot-team-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.aot-motion .aot-team__stage:hover .aot-team__tile,
+  html.motion-desktop .aot-team__stage:hover .aot-team__tile {
+    opacity: 0.72;
+    filter: saturate(0.78);
+  }
+
+  html.aot-motion .aot-team__stage:hover .aot-team__tile:hover,
+  html.aot-motion .aot-team__stage:hover .aot-team__tile:focus-within,
+  html.motion-desktop .aot-team__stage:hover .aot-team__tile:hover,
+  html.motion-desktop .aot-team__stage:hover .aot-team__tile:focus-within {
+    z-index: 2;
+    opacity: 1;
+    filter: none;
+    transform: translate3d(0, -5px, 0);
+  }
+
+  .aot-team1__card:hover,
+  .aot-team1__card:focus-within {
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow:
+      0 16px 36px rgba(15, 5, 26, 0.6),
+      0 0 28px rgba(0, 255, 255, 0.16),
+      0 0 36px rgba(124, 58, 237, 0.18);
+  }
+
+  .aot-team__shot:hover,
+  .aot-team__shot:focus-within {
+    border-color: rgba(0, 255, 255, 0.42);
+    box-shadow:
+      0 14px 32px rgba(15, 5, 26, 0.55),
+      0 0 26px rgba(0, 255, 255, 0.14),
+      0 0 32px rgba(124, 58, 237, 0.16);
+  }
+
+  .aot-team__shot:hover img,
+  .aot-team__shot:focus-within img {
+    transform: scale(1.07);
+  }
+
+  .aot-team__shot:hover::after,
+  .aot-team__shot:focus-within::after {
+    opacity: 1;
+  }
+
+  .aot-team__shot:hover .aot-team__shot-caption,
+  .aot-team__shot:focus-within .aot-team__shot-caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .aot-team__stage {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    width: min(560px, 100%);
+  }
+
+  .aot-team__tile--ceo,
+  .aot-team__tile--coo,
+  .aot-team__tile--c1,
+  .aot-team__tile--c2,
+  .aot-team__tile--c3,
+  .aot-team__tile--c4 {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .aot-team__tile--ceo {
+    grid-column: 1;
+    order: 1;
+    aspect-ratio: 3 / 4;
+    max-height: 260px;
+  }
+
+  .aot-team__tile--coo {
+    grid-column: 2;
+    order: 2;
+    aspect-ratio: 3 / 4;
+    max-height: 260px;
+  }
+
+  .aot-team__tile--c1 {
+    grid-column: 1 / 3;
+    order: 3;
+    aspect-ratio: 16 / 8;
+    max-height: 150px;
+  }
+
+  .aot-team__tile--c2 {
+    order: 4;
+    aspect-ratio: 3 / 4;
+    max-height: 180px;
+  }
+
+  .aot-team__tile--c4 {
+    order: 5;
+    aspect-ratio: 3 / 4;
+    max-height: 180px;
+  }
+
+  .aot-team__tile--c3 {
+    grid-column: 1 / 3;
+    order: 6;
+    aspect-ratio: 16 / 9;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aot-team {
+    padding: 4.25rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aot-team {
+    padding: 3.5rem 1rem;
+  }
+
+  .aot-team__stage {
+    gap: 0.5rem;
+  }
+
+  .aot-team1__card,
+  .aot-team__shot {
+    border-radius: 0.95rem;
+  }
+
+  .aot-team__tile--ceo,
+  .aot-team__tile--coo {
+    max-height: 220px;
+  }
+}
+
+.aot-epc-orbit.is-aot-paused .aot-epc-orbit__ring,
+.aot-epc-orbit.is-aot-paused .aot-epc-orbit__core {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aot-team1__card,
+  .aot-team__shot,
+  .aot-team1__card img,
+  .aot-team__shot img,
+  .aot-team__shot-caption,
+  .aot-team__shot::after {
+    transition: none;
+  }
+
+  html.aot-motion .aot-team__stage:hover .aot-team__tile,
+  html.aot-motion .aot-team__stage:hover .aot-team__tile:hover,
+  .aot-team__shot:hover img,
+  .aot-team1__card:hover img {
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  .aot-team__shot-caption {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.aot-motion .aot-epc-field__grid,
+  html.motion-desktop .aot-epc-field__grid,
+  html.aot-motion .aot-epc-orbit__ring--a,
+  html.motion-desktop .aot-epc-orbit__ring--a,
+  html.aot-motion .aot-epc-orbit__ring--b,
+  html.motion-desktop .aot-epc-orbit__ring--b,
+  html.aot-motion .aot-epc-orbit__ring--c,
+  html.motion-desktop .aot-epc-orbit__ring--c,
+  html.aot-motion .aot-epc-orbit__core,
+  html.motion-desktop .aot-epc-orbit__core {
+    animation: none;
+  }
+}

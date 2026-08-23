@@ -1,0 +1,721 @@
+/* About — cinematic split with HUD orbit, glass metrics, framed mission */
+
+#about {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: var(--space-section-y) var(--space-container-x);
+    background:
+        radial-gradient(ellipse 70% 80% at 12% 45%, rgba(0, 255, 255, 0.07), transparent 58%),
+        radial-gradient(ellipse 55% 70% at 92% 70%, rgba(124, 58, 237, 0.1), transparent 62%),
+        rgba(0, 255, 255, 0.02);
+}
+
+#about .stats-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Local atmosphere */
+.about-stage__fx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    contain: layout paint;
+}
+
+.about-stage__grid {
+    position: absolute;
+    inset: -20%;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, black 18%, transparent 72%);
+    opacity: 0.55;
+}
+
+.about-stage__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.55;
+}
+
+.about-stage__orb--cyan {
+    width: min(42vw, 420px);
+    height: min(42vw, 420px);
+    top: -8%;
+    left: -8%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.45), transparent 68%);
+}
+
+.about-stage__orb--violet {
+    width: min(38vw, 380px);
+    height: min(38vw, 380px);
+    right: -6%;
+    bottom: -12%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.42), transparent 68%);
+}
+
+.about-stage__scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 140px;
+    top: -20%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.06), transparent);
+    opacity: 0;
+}
+
+#about .about-future-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: center;
+}
+
+/* Left: identity + HUD */
+#about .about-future-left {
+    position: relative;
+    padding-right: 1.25rem;
+    min-height: 18rem;
+}
+
+.about-orbit {
+    position: absolute;
+    width: min(100%, 340px);
+    aspect-ratio: 1;
+    top: 50%;
+    left: -8%;
+    transform: translateY(-50%);
+    z-index: 0;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.about-orbit__ring,
+.about-orbit__core {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.about-orbit__ring {
+    border: 1px solid rgba(0, 255, 255, 0.14);
+}
+
+.about-orbit__ring--a {
+    inset: 0;
+    border-style: dashed;
+    border-color: rgba(0, 255, 255, 0.12);
+}
+
+.about-orbit__ring--b {
+    inset: 14%;
+    border-top-color: rgba(0, 255, 255, 0.7);
+    border-right-color: rgba(168, 85, 247, 0.35);
+}
+
+.about-orbit__ring--b::before,
+.about-orbit__ring--c::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    border-radius: 50%;
+    background: var(--primary-cyan);
+    box-shadow: 0 0 14px var(--primary-cyan);
+}
+
+.about-orbit__ring--c {
+    inset: 30%;
+    border-bottom-color: rgba(0, 255, 255, 0.55);
+    border-left-color: rgba(255, 0, 255, 0.22);
+}
+
+.about-orbit__ring--c::before {
+    width: 6px;
+    height: 6px;
+    top: auto;
+    bottom: -3px;
+    background: #c084fc;
+    box-shadow: 0 0 12px rgba(192, 132, 252, 0.9);
+}
+
+.about-orbit__core {
+    inset: 44%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.35), rgba(0, 255, 255, 0.04) 55%, transparent 70%);
+    box-shadow: 0 0 28px rgba(0, 255, 255, 0.18);
+}
+
+#about .about-future-eyebrow,
+#about .about-future-heading,
+#about .about-future-rule,
+#about .about-future-kicker {
+    position: relative;
+    z-index: 1;
+}
+
+#about .about-future-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 1.15rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+#about .about-future-eyebrow__index {
+    color: var(--primary-cyan);
+    text-shadow: 0 0 12px rgba(0, 255, 255, 0.45);
+}
+
+#about .about-future-eyebrow__pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary-cyan);
+    box-shadow: 0 0 10px var(--primary-cyan);
+    flex-shrink: 0;
+}
+
+#about .about-future-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(3rem, 6.4vw, 5.6rem);
+    line-height: 0.92;
+    letter-spacing: var(--tracking-heading);
+    text-transform: uppercase;
+    color: var(--primary-cyan);
+    text-align: left;
+    margin: 0;
+}
+
+#about .about-future-heading__line {
+    display: block;
+}
+
+#about .about-future-heading__line:not(.about-future-heading__line--glow) {
+    text-shadow: 0 0 24px rgba(0, 255, 255, 0.28);
+}
+
+#about .about-future-heading__line--glow {
+    background: linear-gradient(100deg, #67ffff 0%, var(--primary-cyan) 38%, #e9ffff 72%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+#about .about-future-rule {
+    width: 92px;
+    height: 2px;
+    margin: 1.35rem 0 1.2rem;
+    background: linear-gradient(90deg, var(--primary-cyan), rgba(168, 85, 247, 0.7), transparent);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.45);
+}
+
+#about .about-future-kicker {
+    margin: 0;
+    max-width: 34ch;
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #a1a1aa;
+    text-align: left;
+}
+
+/* Right column */
+#about .about-future-right {
+    position: relative;
+    border-left: 1px solid rgba(229, 231, 235, 0.16);
+    padding-left: clamp(2rem, 4vw, 3.25rem);
+    text-align: left;
+}
+
+#about .about-future-right::before {
+    content: "";
+    position: absolute;
+    top: 8%;
+    bottom: 8%;
+    left: -1px;
+    width: 2px;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(0, 255, 255, 0.05) 12%,
+        rgba(0, 255, 255, 0.05) 88%,
+        transparent
+    );
+    overflow: hidden;
+}
+
+#about .about-future-right::after {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 8%;
+    width: 2px;
+    height: 22%;
+    background: linear-gradient(180deg, transparent, var(--primary-cyan), transparent);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.65);
+    opacity: 0.85;
+}
+
+#about .about-future-description,
+#about .about-future-mission-text {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #a1a1aa;
+    text-align: left;
+}
+
+#about .about-future-description {
+    margin: 0 0 1.75rem;
+}
+
+/* Metric tiles */
+#about .about-future-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin: 0 0 1.65rem;
+}
+
+#about .about-future-stat {
+    position: relative;
+    isolation: isolate;
+    padding: 1.2rem 1rem 1.1rem;
+    text-align: left;
+    background: rgba(8, 4, 18, 0.55);
+    border: 1px solid rgba(229, 231, 235, 0.14);
+    border-radius: 14px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+        border-color 0.35s var(--ease-standard),
+        transform 0.35s var(--ease-standard),
+        box-shadow 0.35s var(--ease-standard),
+        background 0.35s var(--ease-standard);
+}
+
+#about .about-future-stat-number,
+#about .about-future-stat-label,
+#about .about-future-stat-meter {
+    position: relative;
+    z-index: 1;
+}
+
+#about .about-future-stat-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.85rem, 3.4vw, 2.7rem);
+    line-height: 1;
+    color: var(--primary-cyan);
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+}
+
+#about .about-future-stat-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.68rem;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+#about .about-future-stat-meter {
+    display: block;
+    height: 2px;
+    width: 42%;
+    margin-top: 0.85rem;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--primary-cyan), rgba(168, 85, 247, 0.8));
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+    transform-origin: left center;
+    transition: width 0.45s var(--ease-standard);
+}
+
+/* Mission frame */
+#about .about-future-mission {
+    position: relative;
+    isolation: isolate;
+    padding: 1.35rem 1.35rem 1.25rem;
+    background:
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) top left / 18px 1px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) top left / 1px 18px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) top right / 18px 1px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) top right / 1px 18px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) bottom left / 18px 1px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) bottom left / 1px 18px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) bottom right / 18px 1px no-repeat,
+        linear-gradient(var(--primary-cyan), var(--primary-cyan)) bottom right / 1px 18px no-repeat,
+        rgba(8, 4, 18, 0.42);
+    border: 1px solid rgba(229, 231, 235, 0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.35s var(--ease-standard), box-shadow 0.35s var(--ease-standard);
+}
+
+#about .about-future-mission-title,
+#about .about-future-mission-text,
+#about .about-future-pillars {
+    position: relative;
+    z-index: 1;
+}
+
+#about .about-future-mission-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.2vw, 2.45rem);
+    line-height: 1.1;
+    letter-spacing: var(--tracking-heading);
+    color: var(--primary-cyan);
+    margin: 0 0 0.7rem;
+    text-align: left;
+    text-shadow: 0 0 16px rgba(0, 255, 255, 0.22);
+}
+
+#about .about-future-mission-text {
+    margin: 0;
+}
+
+#about .about-future-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+}
+
+#about .about-future-pillars li {
+    padding: 0.38rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 255, 0.22);
+    background: rgba(0, 255, 255, 0.06);
+    color: #d7fdff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* Desktop motion — gated the same way as the rest of the site */
+html.motion-desktop .about-stage__grid {
+    animation: aboutGridDrift 28s linear infinite;
+}
+
+html.motion-desktop .about-stage__orb--cyan {
+    animation: aboutOrbFloat 16s ease-in-out infinite;
+}
+
+html.motion-desktop .about-stage__orb--violet {
+    animation: aboutOrbFloat 21s ease-in-out infinite reverse;
+}
+
+html.motion-desktop .about-stage__scan {
+    opacity: 1;
+    animation: aboutScanSweep 7.5s ease-in-out infinite;
+}
+
+html.motion-desktop .about-orbit__ring--a {
+    animation: aboutOrbitSpin 48s linear infinite;
+}
+
+html.motion-desktop .about-orbit__ring--b {
+    animation: aboutOrbitSpin 18s linear infinite;
+}
+
+html.motion-desktop .about-orbit__ring--c {
+    animation: aboutOrbitSpin 11s linear infinite reverse;
+}
+
+html.motion-desktop .about-orbit__core {
+    animation: aboutCorePulse 3.6s ease-in-out infinite;
+}
+
+html.motion-desktop #about .about-future-eyebrow__pulse {
+    animation: aboutPulse 1.8s ease-in-out infinite;
+}
+
+html.motion-desktop #about .about-future-heading__line--glow {
+    animation: aboutTitleShimmer 7s ease-in-out infinite;
+    background-size: 220% 100%;
+}
+
+html.motion-desktop #about .about-future-right::after {
+    animation: aboutRailTravel 4.8s ease-in-out infinite;
+}
+
+html.motion-desktop #about .about-future-stat.is-inview .about-future-stat-meter {
+    animation: aboutMeterGrow 0.9s var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1)) both;
+    animation-delay: var(--aot-delay, 0ms);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    html.motion-desktop #about .about-future-stat:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 255, 255, 0.42);
+        background: rgba(0, 255, 255, 0.06);
+        box-shadow:
+            0 14px 32px rgba(0, 255, 255, 0.1),
+            0 0 0 1px rgba(0, 255, 255, 0.08);
+    }
+
+    html.motion-desktop #about .about-future-stat:hover .about-future-stat-meter {
+        width: 72%;
+    }
+
+    html.motion-desktop #about .about-future-mission:hover {
+        border-color: rgba(0, 255, 255, 0.28);
+        box-shadow: 0 16px 36px rgba(0, 255, 255, 0.08);
+    }
+
+    html.motion-desktop #about .about-future-pillars li:hover {
+        border-color: rgba(0, 255, 255, 0.5);
+        background: rgba(0, 255, 255, 0.12);
+    }
+}
+
+@keyframes aboutOrbitSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes aboutCorePulse {
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+}
+
+@keyframes aboutPulse {
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 10px var(--primary-cyan);
+    }
+    50% {
+        opacity: 0.35;
+        box-shadow: 0 0 4px var(--primary-cyan);
+    }
+}
+
+@keyframes aboutGridDrift {
+    to {
+        transform: translate3d(-56px, -56px, 0);
+    }
+}
+
+@keyframes aboutOrbFloat {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(4%, 6%, 0);
+    }
+}
+
+@keyframes aboutScanSweep {
+    0% {
+        top: -20%;
+        opacity: 0;
+    }
+    12% {
+        opacity: 1;
+    }
+    88% {
+        opacity: 0.4;
+    }
+    100% {
+        top: 95%;
+        opacity: 0;
+    }
+}
+
+@keyframes aboutRailTravel {
+    0% {
+        top: 8%;
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        top: 70%;
+        opacity: 0;
+    }
+}
+
+@keyframes aboutMeterGrow {
+    from {
+        transform: scaleX(0);
+        opacity: 0.2;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes aboutTitleShimmer {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@media (max-width: 1024px) {
+    #about {
+        padding: 85px 1rem;
+    }
+
+    #about .about-future-layout {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        align-items: flex-start;
+    }
+
+    #about .about-future-left {
+        padding-right: 0;
+        min-height: 0;
+    }
+
+    .about-orbit {
+        width: 220px;
+        left: auto;
+        right: -12px;
+        top: 8%;
+        transform: none;
+        opacity: 0.45;
+    }
+
+    #about .about-future-right {
+        border-left: none;
+        border-top: 1px solid rgba(229, 231, 235, 0.16);
+        padding-left: 0;
+        padding-top: 1.4rem;
+    }
+
+    #about .about-future-right::before,
+    #about .about-future-right::after {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    #about {
+        padding: 72px 0.9rem;
+    }
+
+    #about .about-future-heading {
+        font-size: clamp(2.1rem, 10vw, 3.1rem);
+        line-height: 0.96;
+        letter-spacing: 0.01em;
+    }
+
+    #about .about-future-kicker,
+    #about .about-future-description,
+    #about .about-future-mission-text {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    #about .about-future-stats-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+    }
+
+    #about .about-future-stat {
+        padding: 1rem 0.85rem 0.95rem;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    #about .about-future-stat-number {
+        font-size: clamp(1.55rem, 6vw, 2rem);
+    }
+
+    #about .about-future-stat-label {
+        font-size: 0.64rem;
+        letter-spacing: 0.08em;
+    }
+
+    .about-orbit {
+        width: 160px;
+        opacity: 0.32;
+    }
+
+    #about .about-future-mission {
+        padding: 1.1rem 1rem 1rem;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+@media (max-width: 480px) {
+    #about .about-future-stats-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #about .about-future-pillars li {
+        letter-spacing: 0.08em;
+        font-size: 0.66rem;
+    }
+}
+
+.about-orbit.is-aot-paused .about-orbit__ring,
+.about-orbit.is-aot-paused .about-orbit__core,
+.about-stage__fx.is-aot-paused .about-stage__grid,
+.about-stage__fx.is-aot-paused .about-stage__orb,
+.about-stage__fx.is-aot-paused .about-stage__scan {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-stage__grid,
+    .about-stage__orb,
+    .about-stage__scan,
+    .about-orbit__ring,
+    .about-orbit__core,
+    #about .about-future-eyebrow__pulse,
+    #about .about-future-heading__line--glow,
+    #about .about-future-right::after,
+    #about .about-future-stat-meter {
+        animation: none !important;
+    }
+
+    html.motion-desktop #about .about-future-stat:hover {
+        transform: none;
+    }
+}

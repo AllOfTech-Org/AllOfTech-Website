@@ -1,0 +1,574 @@
+/* Floating AllOfTech header. Outer nav is transparent so the hero continues
+   underneath; .nav-container is a dark themed bar with softer rounding. */
+
+:root {
+  --aot-nav-radius: 1.35rem;
+  --aot-nav-item-radius: 0.85rem;
+  --aot-nav-surface: rgba(15, 5, 26, 0.86);
+  --aot-nav-ink: #ffffff;
+  --aot-nav-muted: #c4c4cc;
+  --aot-nav-inner: rgba(0, 255, 255, 0.12);
+  --aot-nav-cta: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+  --aot-nav-cta-hover: linear-gradient(135deg, #5fffff, var(--primary-purple));
+}
+
+body.aot-float-header {
+  scroll-padding-top: 7.75rem;
+}
+
+nav.aot-site-nav,
+nav:has(> .nav-container) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.05rem 0.75rem 0;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  z-index: 10000;
+  pointer-events: none;
+  transition: none;
+}
+
+nav.aot-site-nav.nav-scrolled,
+nav:has(> .nav-container).nav-scrolled {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+nav.aot-site-nav .nav-container,
+nav:has(> .nav-container) > .nav-container {
+  pointer-events: auto;
+  width: min(1480px, calc(100% - 1.1rem));
+  max-width: 1480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  min-height: 4.65rem;
+  padding: 0.62rem 0.62rem 0.62rem 1.15rem;
+  border-radius: var(--aot-nav-radius);
+  background: var(--aot-nav-surface);
+  border: 1px solid rgba(0, 255, 255, 0.16);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+nav.aot-site-nav.nav-scrolled .nav-container,
+nav:has(> .nav-container).nav-scrolled > .nav-container {
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.46),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+nav.aot-site-nav .nav-social,
+nav:has(> .nav-container) .nav-social,
+.mobile-menu-social {
+  display: flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+}
+
+.mobile-menu-social {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0.35rem 1.35rem 1.35rem;
+}
+
+nav.aot-site-nav .nav-social a,
+nav:has(> .nav-container) .nav-social a,
+.mobile-menu-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.aot-site-nav .nav-social a svg,
+nav:has(> .nav-container) .nav-social a svg,
+.mobile-menu-social a svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  nav.aot-site-nav .nav-social a:hover,
+  nav:has(> .nav-container) .nav-social a:hover,
+  .mobile-menu-social a:hover {
+    transform: none;
+    background: var(--primary-cyan);
+    border-color: var(--primary-cyan);
+    color: var(--darker-bg);
+    box-shadow: none;
+  }
+}
+
+nav.aot-site-nav .logo,
+nav:has(> .nav-container) .logo,
+.mobile-menu-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  color: var(--aot-nav-ink);
+  text-decoration: none;
+  text-shadow: none;
+  transform: none;
+}
+
+nav.aot-site-nav .logo::before,
+nav.aot-site-nav .logo::after,
+nav:has(> .nav-container) .logo::before,
+nav:has(> .nav-container) .logo::after,
+.mobile-menu-logo::before,
+.mobile-menu-logo::after {
+  content: none !important;
+  display: none !important;
+}
+
+nav.aot-site-nav .logo .logo-wordmark-wrap,
+nav:has(> .nav-container) .logo .logo-wordmark-wrap,
+.mobile-menu-logo .logo-wordmark-wrap {
+  display: inline-flex;
+  align-items: center;
+  height: 3.15rem;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 0;
+  filter: none;
+}
+
+nav.aot-site-nav .logo .logo-wordmark,
+nav:has(> .nav-container) .logo .logo-wordmark,
+.mobile-menu-logo .logo-wordmark {
+  height: 7.15rem;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: lighten;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.12));
+}
+
+nav.aot-site-nav .nav-links,
+nav:has(> .nav-container) .nav-links,
+nav.aot-site-nav .nav-links.continuous-tabs,
+nav:has(> .nav-container) .nav-links.continuous-tabs {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  list-style: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+nav.aot-site-nav .nav-links::-webkit-scrollbar,
+nav:has(> .nav-container) .nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+nav.aot-site-nav .nav-links > li,
+nav:has(> .nav-container) .nav-links > li {
+  flex: 0 0 auto;
+  max-width: none;
+  margin: 0;
+}
+
+nav.aot-site-nav .nav-links a,
+nav:has(> .nav-container) .nav-links a,
+nav.aot-site-nav .nav-links.continuous-tabs a,
+nav:has(> .nav-container) .nav-links.continuous-tabs a {
+  display: block;
+  padding: 0.78rem 0.95rem;
+  border-radius: var(--aot-nav-item-radius);
+  color: var(--aot-nav-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-transform: none;
+  text-decoration: none;
+  text-shadow: none;
+  white-space: nowrap;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  transition:
+    color 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.aot-site-nav .nav-links a::before,
+nav.aot-site-nav .nav-links a::after,
+nav.aot-site-nav .nav-links a.active::after,
+nav:has(> .nav-container) .nav-links a::before,
+nav:has(> .nav-container) .nav-links a::after,
+nav:has(> .nav-container) .nav-links a.active::after {
+  content: none !important;
+  display: none !important;
+}
+
+nav.aot-site-nav .continuous-tabs-pill,
+nav:has(> .nav-container) .continuous-tabs-pill {
+  display: none !important;
+}
+
+nav.aot-site-nav .nav-links a:focus-visible,
+nav:has(> .nav-container) .nav-links a:focus-visible {
+  color: var(--aot-nav-ink);
+  background: var(--aot-nav-inner);
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 255, 0.22);
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+}
+
+nav.aot-site-nav .nav-links a.is-tab-active,
+nav.aot-site-nav .nav-links a.active,
+nav.aot-site-nav .nav-links.continuous-tabs a.is-tab-active,
+nav.aot-site-nav .nav-links.continuous-tabs a.active,
+nav:has(> .nav-container) .nav-links a.is-tab-active,
+nav:has(> .nav-container) .nav-links a.active {
+  color: var(--darker-bg);
+  background: var(--aot-nav-cta);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.22);
+  text-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  nav.aot-site-nav .nav-links a:hover,
+  nav.aot-site-nav .nav-links.continuous-tabs a:hover,
+  nav:has(> .nav-container) .nav-links a:hover,
+  nav:has(> .nav-container) .nav-links.continuous-tabs a:hover {
+    color: var(--aot-nav-ink);
+    background: var(--aot-nav-inner);
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 255, 0.22);
+    text-shadow: none;
+    transform: none;
+  }
+
+  nav.aot-site-nav .nav-links a.is-tab-active:hover,
+  nav.aot-site-nav .nav-links a.active:hover,
+  nav:has(> .nav-container) .nav-links a.is-tab-active:hover,
+  nav:has(> .nav-container) .nav-links a.active:hover {
+    color: var(--darker-bg);
+    background: var(--aot-nav-cta-hover);
+    box-shadow: 0 0 26px rgba(0, 255, 255, 0.35);
+  }
+}
+
+nav.aot-site-nav .nav-bottom,
+nav:has(> .nav-container) .nav-bottom {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+nav.aot-site-nav .nav-bottom .cyber-button,
+nav:has(> .nav-container) .nav-bottom .cyber-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: none;
+  padding: 0.88rem 1.45rem;
+  border-radius: var(--aot-nav-item-radius);
+  background: var(--aot-nav-cta);
+  color: var(--darker-bg);
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-transform: none;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.22);
+}
+
+nav.aot-site-nav .nav-bottom .cyber-button:hover,
+nav:has(> .nav-container) .nav-bottom .cyber-button:hover {
+  background: var(--aot-nav-cta-hover);
+  color: var(--darker-bg);
+  transform: none;
+  box-shadow: 0 0 26px rgba(0, 255, 255, 0.35);
+}
+
+nav.aot-site-nav .mobile-menu-button,
+nav:has(> .nav-container) .mobile-menu-button {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: var(--aot-nav-item-radius);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--aot-nav-ink);
+  box-shadow: none;
+}
+
+nav.aot-site-nav .hamburger span,
+nav:has(> .nav-container) .hamburger span {
+  background: var(--primary-cyan);
+  box-shadow: none;
+}
+
+nav.aot-site-nav .mobile-menu-button.active .hamburger span,
+nav:has(> .nav-container) .mobile-menu-button.active .hamburger span {
+  background: var(--primary-orange);
+}
+
+.mobile-menu {
+  top: 6.85rem;
+  height: calc(100vh - 6.85rem);
+}
+
+.mobile-menu-logo {
+  color: #fff;
+  text-shadow: none;
+}
+
+.mobile-menu-cta .cyber-button {
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.hero {
+  padding-top: clamp(9.75rem, 14vw, 13.25rem);
+}
+
+.service-post,
+.blog-container,
+.terms-container,
+.resources-container {
+  padding-top: 9rem;
+}
+
+@media (max-width: 1100px) {
+  nav.aot-site-nav .nav-links a,
+  nav:has(> .nav-container) .nav-links a,
+  nav.aot-site-nav .nav-links.continuous-tabs a,
+  nav:has(> .nav-container) .nav-links.continuous-tabs a {
+    padding: 0.68rem 0.78rem;
+    font-size: 0.84rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark-wrap,
+  nav:has(> .nav-container) .logo .logo-wordmark-wrap {
+    height: 2.85rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark,
+  nav:has(> .nav-container) .logo .logo-wordmark {
+    height: 6.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 920px) {
+  nav.aot-site-nav .nav-container,
+  nav:has(> .nav-container) > .nav-container {
+    min-height: 4.15rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+    gap: 0.55rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark-wrap,
+  nav:has(> .nav-container) .logo .logo-wordmark-wrap {
+    height: 2.55rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark,
+  nav:has(> .nav-container) .logo .logo-wordmark {
+    height: 5.9rem;
+  }
+
+  nav.aot-site-nav .nav-links a,
+  nav:has(> .nav-container) .nav-links a,
+  nav.aot-site-nav .nav-links.continuous-tabs a,
+  nav:has(> .nav-container) .nav-links.continuous-tabs a {
+    padding: 0.58rem 0.62rem;
+    font-size: 0.78rem;
+  }
+
+  nav.aot-site-nav .nav-social a,
+  nav:has(> .nav-container) .nav-social a {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  nav.aot-site-nav .nav-bottom .cyber-button,
+  nav:has(> .nav-container) .nav-bottom .cyber-button {
+    padding: 0.72rem 1.05rem;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 768px) {
+  nav.aot-site-nav,
+  nav:has(> .nav-container) {
+    padding: 0.8rem 0.8rem 0;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  nav.aot-site-nav .nav-container,
+  nav:has(> .nav-container) > .nav-container {
+    width: 100%;
+    max-width: 100%;
+    min-height: 4.15rem;
+    padding: 0.42rem 0.42rem 0.42rem 0.65rem;
+    gap: 0.4rem;
+  }
+
+  nav.aot-site-nav .nav-links,
+  nav:has(> .nav-container) .nav-links,
+  nav.aot-site-nav .nav-links.continuous-tabs,
+  nav:has(> .nav-container) .nav-links.continuous-tabs {
+    display: none;
+  }
+
+  nav.aot-site-nav .logo,
+  nav:has(> .nav-container) .logo {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark-wrap,
+  nav:has(> .nav-container) .logo .logo-wordmark-wrap {
+    flex-shrink: 1;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  nav.aot-site-nav .nav-social,
+  nav:has(> .nav-container) .nav-social {
+    display: flex !important;
+    flex: 0 0 auto;
+    margin-left: 0;
+    gap: 0.32rem;
+  }
+
+  nav.aot-site-nav .nav-social a,
+  nav:has(> .nav-container) .nav-social a {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  nav.aot-site-nav .nav-bottom,
+  nav:has(> .nav-container) .nav-bottom,
+  nav.aot-site-nav .nav-bottom .cyber-button,
+  nav:has(> .nav-container) .nav-bottom .cyber-button {
+    display: none;
+  }
+
+  nav.aot-site-nav .mobile-menu-button,
+  nav:has(> .nav-container) .mobile-menu-button {
+    flex: 0 0 auto;
+    margin-left: 0;
+  }
+
+  .hero {
+    padding-top: 8.25rem;
+  }
+
+  .service-post,
+  .blog-container,
+  .terms-container,
+  .resources-container {
+    padding-top: 8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav.aot-site-nav,
+  nav:has(> .nav-container) {
+    padding: 0.7rem 0.65rem 0;
+  }
+
+  nav.aot-site-nav .nav-container,
+  nav:has(> .nav-container) > .nav-container {
+    padding: 0.38rem 0.38rem 0.38rem 0.55rem;
+    gap: 0.32rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark-wrap,
+  nav:has(> .nav-container) .logo .logo-wordmark-wrap,
+  .mobile-menu-logo .logo-wordmark-wrap {
+    height: 2.1rem;
+  }
+
+  nav.aot-site-nav .logo .logo-wordmark,
+  nav:has(> .nav-container) .logo .logo-wordmark,
+  .mobile-menu-logo .logo-wordmark {
+    height: 4.55rem;
+  }
+
+  nav.aot-site-nav .nav-social a,
+  nav:has(> .nav-container) .nav-social a,
+  .mobile-menu-social a {
+    width: 2.05rem;
+    height: 2.05rem;
+  }
+
+  nav.aot-site-nav .mobile-menu-button,
+  nav:has(> .nav-container) .mobile-menu-button {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .hero {
+    padding-top: 7.35rem;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  nav.aot-site-nav .nav-links a:hover,
+  nav.aot-site-nav .nav-links.continuous-tabs a:hover,
+  nav:has(> .nav-container) .nav-links a:hover,
+  nav:has(> .nav-container) .nav-links.continuous-tabs a:hover {
+    color: var(--aot-nav-muted);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  nav.aot-site-nav .nav-links a.is-tab-active:hover,
+  nav.aot-site-nav .nav-links a.active:hover,
+  nav:has(> .nav-container) .nav-links a.is-tab-active:hover,
+  nav:has(> .nav-container) .nav-links a.active:hover {
+    color: var(--darker-bg);
+    background: var(--aot-nav-cta-hover);
+    box-shadow: 0 0 26px rgba(0, 255, 255, 0.35);
+  }
+}
