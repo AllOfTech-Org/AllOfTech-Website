@@ -1,0 +1,438 @@
+/* Free website audit — share-only landing page.
+   Same AllOfTech atmosphere as contact/services: Merriweather, cyan, quiet space. */
+
+.aot-audit {
+  --aot-audit-cyan: var(--primary-cyan, #00ffff);
+  --aot-audit-purple: var(--primary-purple, #7c3aed);
+  --aot-audit-ink: var(--darker-bg, #0f051a);
+  --aot-audit-soft: var(--aot-soft, cubic-bezier(0.16, 1, 0.3, 1));
+  --background: #0f051a;
+  --foreground: #ffffff;
+  --primary: #00ffff;
+  --primary-foreground: #0f051a;
+  --muted: rgba(26, 11, 46, 0.72);
+  --muted-foreground: #a1a1aa;
+  --accent: rgba(124, 58, 237, 0.28);
+  --accent-foreground: #ffffff;
+  --destructive: #fb7185;
+  --border: rgba(0, 255, 255, 0.22);
+  --input: rgba(15, 5, 26, 0.72);
+  --ring: rgba(0, 255, 255, 0.7);
+  --card: rgba(26, 11, 46, 0.62);
+  --card-foreground: #ffffff;
+  --popover: #1a0b2e;
+  --popover-foreground: #ffffff;
+  --radius: 1.15rem;
+  position: relative;
+  isolation: isolate;
+  padding: 8rem var(--space-container-x, clamp(1rem, 4vw, 2.5rem))
+    var(--space-section-y, clamp(5.5rem, 8vw, 8rem));
+  color: var(--text-primary, #fff);
+  font-family: var(--font-merriweather), Merriweather, Georgia, "Times New Roman", serif;
+}
+
+.aot-audit::before {
+  content: "";
+  position: absolute;
+  inset: 6% 8% auto;
+  height: 42%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 18% 40%, rgba(0, 255, 255, 0.08), transparent 58%),
+    radial-gradient(ellipse at 82% 36%, rgba(124, 58, 237, 0.14), transparent 55%);
+}
+
+.aot-audit p,
+.aot-audit li,
+.aot-audit h1,
+.aot-audit h2,
+.aot-audit h3,
+.aot-audit label {
+  max-width: none;
+}
+
+.aot-audit__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.aot-audit__hero {
+  max-width: 40rem;
+}
+
+.aot-audit__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.15rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(124, 58, 237, 0.16));
+  color: var(--aot-audit-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
+}
+
+.aot-audit__badge-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--aot-audit-cyan);
+  box-shadow: 0 0 10px var(--aot-audit-cyan);
+}
+
+.aot-audit__hero h1 {
+  margin: 0 0 1.15rem;
+  font-size: clamp(2.35rem, 5.2vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: var(--tracking-tight, -0.035em);
+  color: #fff;
+}
+
+.aot-audit__accent {
+  color: var(--aot-audit-cyan);
+  text-shadow: 0 0 18px rgba(0, 255, 255, 0.4);
+}
+
+.aot-audit__lede {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.2rem);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+.aot-audit__proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.65rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aot-audit__proof li {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(0, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(15, 5, 26, 0.45);
+  color: #e8e8ee;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+}
+
+.aot-audit__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.25rem, 5vw, 4.25rem);
+  align-items: start;
+  margin-top: clamp(2.75rem, 5.5vw, 4.25rem);
+}
+
+.aot-audit__story {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 4vw, 3.25rem);
+  min-width: 0;
+}
+
+.aot-audit__label {
+  margin: 0 0 0.7rem;
+  color: var(--aot-audit-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.aot-audit__block h2,
+.aot-audit__faq h2,
+.aot-audit__form-head h2,
+.aot-audit__done h2 {
+  margin: 0 0 1.15rem;
+  color: #fff;
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-heading, -0.025em);
+  line-height: 1.2;
+}
+
+.aot-audit__points,
+.aot-audit__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aot-audit__points li,
+.aot-audit__steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.95rem 1.1rem;
+  align-items: start;
+  padding: 1.15rem 1.2rem 1.2rem;
+  border: 1px solid rgba(229, 231, 235, 0.12);
+  border-radius: 1.05rem;
+  background:
+    linear-gradient(180deg, rgba(229, 231, 235, 0.04), rgba(15, 5, 26, 0.2)),
+    rgba(15, 5, 26, 0.35);
+}
+
+.aot-audit__points li > span,
+.aot-audit__steps li > span {
+  color: var(--aot-audit-cyan);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+.aot-audit__points h3,
+.aot-audit__steps h3,
+.aot-audit__faq h3 {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.aot-audit__points p,
+.aot-audit__steps p,
+.aot-audit__faq p,
+.aot-audit__form-head p,
+.aot-audit__done p,
+.aot-audit__legal {
+  margin: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.aot-audit__form-wrap {
+  min-width: 0;
+}
+
+.aot-audit__card {
+  padding: clamp(1.35rem, 3vw, 1.85rem);
+  background: rgba(15, 5, 26, 0.62);
+  border: 1px solid rgba(0, 255, 255, 0.18);
+  border-radius: 1.75rem;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.32),
+    0 0 36px rgba(124, 58, 237, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.aot-audit__form,
+.aot-audit__done {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aot-audit__form-head {
+  margin-bottom: 0.15rem;
+}
+
+.aot-audit__form-kicker,
+.aot-audit__done-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--aot-audit-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.aot-audit__form-head h2,
+.aot-audit__done h2 {
+  margin-bottom: 0.45rem;
+}
+
+.aot-audit__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.aot-audit__pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.aot-audit label {
+  color: var(--aot-audit-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.28);
+}
+
+.aot-audit__optional {
+  color: var(--text-secondary, #a1a1aa);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+.aot-audit [data-slot="input"],
+.aot-audit [data-slot="textarea"],
+.aot-audit [data-slot="select-trigger"] {
+  background: rgba(11, 11, 18, 0.9);
+  color: var(--text-primary, #fff);
+  font-family: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.aot-audit [data-slot="select-trigger"] {
+  width: 100%;
+}
+
+.aot-audit__select {
+  z-index: 10050;
+  background: #1a0b2e;
+  color: #fff;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.aot-audit__select [data-slot="select-item"] {
+  color: #fff;
+}
+
+.aot-audit__select [data-slot="select-item"]:focus,
+.aot-audit__select [data-slot="select-item"][data-highlighted] {
+  background: rgba(124, 58, 237, 0.28);
+  color: #fff;
+}
+
+.aot-audit__submit {
+  background: linear-gradient(135deg, var(--aot-audit-cyan), var(--aot-audit-purple)) !important;
+  color: var(--aot-audit-ink) !important;
+  font-family: var(--font-merriweather), Merriweather, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-height: 3.1rem;
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.22);
+}
+
+.aot-audit__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 255, 255, 0.28);
+}
+
+.aot-audit__submit:disabled {
+  opacity: 0.7;
+}
+
+.aot-audit__legal {
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.aot-audit__done strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.aot-audit__feedback {
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.9rem;
+}
+
+.aot-audit__feedback.is-visible {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.85rem;
+  background: rgba(124, 58, 237, 0.16);
+  border: 1px solid rgba(124, 58, 237, 0.28);
+}
+
+.aot-audit__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.aot-audit__faq {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.aot-audit__faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.35rem 2rem;
+}
+
+.aot-audit__faq article {
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(229, 231, 235, 0.1);
+}
+
+@media (min-width: 640px) {
+  .aot-audit__pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .aot-audit__layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(19rem, 0.95fr);
+  }
+
+  .aot-audit__form-wrap {
+    position: sticky;
+    top: 6.6rem;
+  }
+
+  .aot-audit__faq-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 979px) {
+  .aot-audit__form-wrap {
+    order: -1;
+  }
+
+  .aot-audit__card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aot-audit__submit {
+    transition: none;
+  }
+
+  .aot-audit__submit:hover:not(:disabled) {
+    transform: none;
+  }
+}

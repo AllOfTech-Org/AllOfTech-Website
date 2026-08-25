@@ -58,6 +58,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/audit",
+        destination: "/free-website-audit",
+        permanent: true,
+      },
+      {
+        source: "/website-audit",
+        destination: "/free-website-audit",
+        permanent: true,
+      },
+      {
         source: "/:path*.html",
         destination: "/:path*",
         permanent: true,

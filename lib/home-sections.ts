@@ -80,7 +80,12 @@ export function isServicesPath(path: string) {
 
 export function isPersistPath(path: string) {
   const clean = normalizePath(path);
-  return isHomeShellPath(clean) || clean === "/case-studies" || isServicesPath(clean);
+  return (
+    isHomeShellPath(clean) ||
+    clean === "/case-studies" ||
+    clean === "/free-website-audit" ||
+    isServicesPath(clean)
+  );
 }
 
 export function sectionIdForPath(path: string) {
