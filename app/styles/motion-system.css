@@ -208,8 +208,8 @@ html.aot-motion .related-links a:hover {
 }
 
 /* ----------------------------------------------------- First enter
-   Frost overlay + hold/dissolve live in first-enter critical CSS so the
-   page never flashes sharp on enter or reload. */
+   Intro overlay + hold/split live in first-enter critical CSS so the
+   page never flashes on enter or reload. */
 
 /* ------------------------------------------------------------- Calm navbar
    The nav sits outside the motion language on purpose: no reveal, no
@@ -269,8 +269,13 @@ html.aot-page-hidden .hero-ticker__track,
         display: none;
     }
 
-    html.aot-first-enter body::after {
+    html.aot-first-enter body::before {
         content: none;
+        display: none;
+    }
+
+    html.aot-first-enter .aot-intro,
+    html.aot-first-enter-exit .aot-intro {
         display: none;
     }
 

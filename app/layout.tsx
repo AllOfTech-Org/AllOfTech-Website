@@ -6,6 +6,7 @@ import ContinuousNav from "@/components/ContinuousNav";
 import JsonLd from "@/components/JsonLd";
 import SiteChrome from "@/components/SiteChrome";
 import SiteFooter from "@/components/SiteFooter";
+import SiteIntro from "@/components/SiteIntro";
 import { FIRST_ENTER_BOOT_SCRIPT, FIRST_ENTER_CRITICAL_CSS } from "@/lib/first-enter";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/home";
 import { siteGraph } from "@/lib/seo";
@@ -122,6 +123,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: FIRST_ENTER_BOOT_SCRIPT }} />
       </head>
       <body id="top" className="aot-float-header">
+        <SiteIntro />
         <Script
           src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
           strategy="afterInteractive"
