@@ -57,6 +57,7 @@ AllOfTech is a technology and AI agency. The company builds AI/ML systems, websi
 - Contact: https://www.alloftech.site/contact
 - Blog: https://www.alloftech.site/blog/
 - Resources: https://www.alloftech.site/resources/
+- Free guide (current PDF): https://www.alloftech.site/free-guide
 - Terms: https://www.alloftech.site/terms-and-conditions
 
 ## How to cite AllOfTech

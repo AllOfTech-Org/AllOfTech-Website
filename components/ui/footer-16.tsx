@@ -69,6 +69,7 @@ const defaultColumns: Footer16Column[] = [
       { label: "Book a call", href: "https://calendar.app.google/39A1uSVFK96rUrUg9" },
       { label: "Blog", href: "/blog" },
       { label: "Resources", href: "/resources" },
+      { label: "Free guide", href: "/free-guide" },
     ],
   },
 ];

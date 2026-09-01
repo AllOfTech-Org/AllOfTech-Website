@@ -84,6 +84,8 @@ export function isPersistPath(path: string) {
     isHomeShellPath(clean) ||
     clean === "/case-studies" ||
     clean === "/free-website-audit" ||
+    clean === "/free-guide" ||
+    clean === "/free-pdf" ||
     isServicesPath(clean)
   );
 }

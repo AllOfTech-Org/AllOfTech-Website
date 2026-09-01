@@ -1,0 +1,353 @@
+/* Scoped to /free-pdf only. Separate from /free-guide. */
+
+.page {
+  --aot-mp-cyan: var(--primary-cyan, #00ffff);
+  --aot-mp-purple: var(--primary-purple, #7c3aed);
+  --aot-mp-ink: var(--darker-bg, #0f051a);
+  --aot-mp-line: rgba(229, 231, 235, 0.14);
+  contain: layout;
+  padding: 8rem var(--space-container-x, clamp(1rem, 4vw, 2.5rem))
+    var(--space-section-y, clamp(5.5rem, 8vw, 8rem));
+  color: var(--text-primary, #fff);
+}
+
+.page p,
+.page li,
+.page h1,
+.page h2,
+.page h3,
+.page label {
+  max-width: none;
+}
+
+.inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.15rem, 4.6vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: var(--tracking-tight, -0.035em);
+  color: #fff;
+}
+
+.accent {
+  color: var(--aot-mp-cyan);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.05rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(0, 255, 255, 0.06);
+  color: var(--aot-mp-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badgeDot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--aot-mp-cyan);
+}
+
+.lede {
+  margin: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: clamp(1.02rem, 0.4vw + 0.95rem, 1.16rem);
+  line-height: 1.7;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.25rem);
+  align-items: start;
+}
+
+.read p {
+  margin: 0 0 1.05rem;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.read p:last-child {
+  margin-bottom: 0;
+}
+
+.gate {
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.35rem, 3vw, 1.85rem);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  background: rgba(15, 5, 26, 0.72);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.32),
+    0 0 36px rgba(124, 58, 237, 0.08);
+}
+
+.kicker {
+  margin: 0 0 0.45rem;
+  color: var(--aot-mp-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.cardTitle {
+  margin: 0 0 0.45rem;
+  color: #fff;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.cardBody,
+.legal,
+.done p {
+  margin: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.meta {
+  margin: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.86rem;
+}
+
+.open,
+.submit,
+.fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.1rem;
+  border: 0;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, var(--aot-mp-cyan), var(--aot-mp-purple));
+  color: var(--aot-mp-ink);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.open:hover,
+.submit:hover:not(:disabled),
+.fallback:hover {
+  filter: brightness(1.06);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.open svg,
+.submit svg {
+  flex-shrink: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  color: var(--aot-mp-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.9rem;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  border-radius: 0.85rem;
+  background: rgba(11, 11, 18, 0.9);
+  color: #fff;
+  font: inherit;
+  font-size: 0.95rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.field input::placeholder {
+  color: #71717a;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.18);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: #fb7185;
+}
+
+.error {
+  margin: 0;
+  color: #fb7185;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.done h2 {
+  margin: 0 0 0.45rem;
+  color: #fff;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.fallback {
+  margin-top: 0.35rem;
+}
+
+.cta {
+  margin-top: clamp(2.75rem, 5.5vw, 4.25rem);
+  padding-top: clamp(2.25rem, 4vw, 3rem);
+  border-top: 1px solid var(--aot-mp-line);
+}
+
+.label {
+  margin: 0 0 0.65rem;
+  color: var(--aot-mp-cyan);
+  letter-spacing: var(--tracking-label, 0.08em);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.cta h2 {
+  margin: 0 0 0.8rem;
+  max-width: 22ch;
+  color: #fff;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-heading, -0.025em);
+  line-height: 1.2;
+}
+
+.ctaBody {
+  margin: 0 0 1.75rem;
+  max-width: 40rem;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.points {
+  margin: 0 0 1.85rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.points li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem 1rem;
+  align-items: start;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--aot-mp-line);
+}
+
+.points li:last-child {
+  border-bottom: 1px solid var(--aot-mp-line);
+}
+
+.points li > span {
+  color: var(--aot-mp-cyan);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.55;
+}
+
+.points h3 {
+  margin: 0 0 0.35rem;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.points p {
+  margin: 0;
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+    gap: 3.5rem;
+  }
+
+  .gate {
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  .points {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 1.75rem;
+  }
+
+  .points li {
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--aot-mp-line);
+    border-bottom: none;
+  }
+
+  .points li:last-child {
+    border-bottom: none;
+  }
+}

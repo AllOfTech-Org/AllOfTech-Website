@@ -24,6 +24,8 @@ const PAGE_ENTRIES: PathEntry[] = [
   { path: "/why-choose-us", changeFrequency: "monthly", priority: 0.6 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/free-website-audit", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/free-guide", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/free-pdf", changeFrequency: "monthly", priority: 0.5 },
   { path: "/case-studies", changeFrequency: "weekly", priority: 0.8 },
   { path: "/blog/", changeFrequency: "weekly", priority: 0.6 },
   ...BLOG_POSTS.map((post) => ({

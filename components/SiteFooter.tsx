@@ -47,6 +47,7 @@ export default function SiteFooter() {
             { label: "Book a call", href: BOOK_A_CALL_URL },
             { label: "Blog", href: "/blog" },
             { label: "Resources", href: "/resources" },
+            { label: "Free guide", href: "/free-guide" },
           ],
         },
       ]}

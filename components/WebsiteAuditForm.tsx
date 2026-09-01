@@ -335,6 +335,10 @@ declare global {
     UserTracking?: {
       getUserId?: () => string;
       getSessionId?: () => string;
+      trackFormSubmission?: (
+        formId: string,
+        formData: { name: string; email: string },
+      ) => void;
     };
   }
 }
