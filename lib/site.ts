@@ -50,7 +50,7 @@ export const PUBLISHED_STATS = {
   serviceCategories: 6,
   ratingValue: "4.9",
   ratingBest: "5",
-  reviewCount: 4,
+  reviewCount: 5,
 } as const;
 
 export function absoluteUrl(path = "/") {

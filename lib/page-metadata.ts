@@ -176,7 +176,7 @@ export function reviewsSchemas() {
     webPageNode({
       path: "/reviews",
       name: "AllOfTech client reviews",
-      description: "Published client reviews of AllOfTech web, AI, and animation work.",
+      description: "Published client reviews of AllOfTech web, ERP, AI, and animation work.",
     }),
     {
       "@context": "https://schema.org",

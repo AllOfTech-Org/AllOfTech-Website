@@ -8,6 +8,13 @@ export type PublishedReview = {
 
 export const PUBLISHED_REVIEWS: PublishedReview[] = [
   {
+    author: "Tanvir Islam",
+    client: "O.T METAL STEEL(PVT)LIMITED",
+    service: "ERP Development",
+    rating: 5,
+    body: "They have developed a marvelous ERP for my company. Honestly, it has made my life easier. I can monitor everything so easily with this ERP system. It has everything from invoice to inventory. It works seamlessly. Will recommend them for their professionalism and honesty.",
+  },
+  {
     author: "Raima Akter",
     client: "Anzaras Cake",
     service: "Website Development",

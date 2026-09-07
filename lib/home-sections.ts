@@ -150,7 +150,7 @@ const SECTION_SEO: Record<
   "/reviews": {
     title: "Client Reviews | 4.9 Average | AllOfTech",
     description:
-      "Read published AllOfTech client reviews for web development, AI chatbots, and animation. 4.9 average from four verified client reviews.",
+      "Read published AllOfTech client reviews for web development, ERP, AI chatbots, and animation. 4.9 average from five verified client reviews.",
     keywords: [
       "AllOfTech reviews",
       "AllOfTech testimonials",
