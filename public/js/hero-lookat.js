@@ -2,8 +2,9 @@
     Hero look-at.
 
     The object stays in its grid slot. The mesh turns toward the cursor;
-    the nucleus counter-rotates so it stays a round volume, and the
-    highlight slides with --hero-look-nx/ny.
+    the nucleus / glass / specular counter-rotate so they stay round volumes.
+    Transforms are set on those nodes directly so cursor motion never
+    invalidates CSS custom properties on the whole 3D tree.
 */
 (function () {
     'use strict';
@@ -20,6 +21,10 @@
     const desktopMq = window.matchMedia('(min-width: 981px)');
 
     let stage = null;
+    let core = null;
+    let nucleus = null;
+    let glass = null;
+    let specular = null;
     let active = false;
     let frame = 0;
     let bounds = null;
@@ -33,6 +38,21 @@
         return !reducedMotionMq.matches && desktopMq.matches;
     }
 
+    function firstEnterHold() {
+        const root = document.documentElement;
+        return (
+            root.classList.contains('aot-first-enter') &&
+            !root.classList.contains('aot-first-enter-exit')
+        );
+    }
+
+    function bindParts() {
+        core = stage ? stage.querySelector('.hero-core') : null;
+        nucleus = stage ? stage.querySelector('.hero-core__nucleus') : null;
+        glass = stage ? stage.querySelector('.hero-core__glass') : null;
+        specular = stage ? stage.querySelector('.hero-core__specular') : null;
+    }
+
     function measure() {
         if (!stage) return;
         const rect = stage.getBoundingClientRect();
@@ -44,11 +64,25 @@
     }
 
     function paint() {
-        if (!stage) return;
-        stage.style.setProperty('--hero-look-x', (currentX * MAX_YAW).toFixed(2) + 'deg');
-        stage.style.setProperty('--hero-look-y', (currentY * -MAX_PITCH).toFixed(2) + 'deg');
-        stage.style.setProperty('--hero-look-nx', currentX.toFixed(3));
-        stage.style.setProperty('--hero-look-ny', currentY.toFixed(3));
+        const yaw = currentX * MAX_YAW;
+        const pitch = currentY * -MAX_PITCH;
+        const yawCss = yaw.toFixed(2) + 'deg';
+        const pitchCss = pitch.toFixed(2) + 'deg';
+        const invYaw = (-yaw).toFixed(2) + 'deg';
+        const invPitch = (-pitch).toFixed(2) + 'deg';
+        const billboard = 'rotateY(' + invYaw + ') rotateX(' + invPitch + ')';
+
+        if (core) core.style.transform = 'rotateX(' + pitchCss + ') rotateY(' + yawCss + ')';
+        if (nucleus) nucleus.style.transform = billboard + ' translateZ(46px)';
+        if (glass) glass.style.transform = billboard + ' translateZ(74px)';
+        if (specular) specular.style.transform = billboard + ' translate3d(0, 0, 96px)';
+    }
+
+    function clearPaint() {
+        if (core) core.style.removeProperty('transform');
+        if (nucleus) nucleus.style.removeProperty('transform');
+        if (glass) glass.style.removeProperty('transform');
+        if (specular) specular.style.removeProperty('transform');
     }
 
     function tick() {
@@ -114,7 +148,7 @@
     }
 
     function attach() {
-        if (!enabled()) {
+        if (!enabled() || firstEnterHold()) {
             detach();
             return;
         }
@@ -129,6 +163,7 @@
 
         unbind();
         stage = next;
+        bindParts();
         active = true;
         measure();
         document.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -144,19 +179,33 @@
         targetY = 0;
         currentX = 0;
         currentY = 0;
-        if (stage) {
-            stage.style.removeProperty('--hero-look-x');
-            stage.style.removeProperty('--hero-look-y');
-            stage.style.removeProperty('--hero-look-nx');
-            stage.style.removeProperty('--hero-look-ny');
-        }
+        clearPaint();
         stage = null;
+        core = null;
+        nucleus = null;
+        glass = null;
+        specular = null;
         bounds = null;
     }
 
     function sync() {
-        if (enabled()) attach();
+        if (enabled() && !firstEnterHold()) attach();
         else detach();
+    }
+
+    function whenFirstEnterDone(fn) {
+        const root = document.documentElement;
+        if (!root.classList.contains('aot-first-enter')) {
+            fn();
+            return;
+        }
+        const obs = new MutationObserver(() => {
+            if (!root.classList.contains('aot-first-enter')) {
+                obs.disconnect();
+                fn();
+            }
+        });
+        obs.observe(root, { attributes: true, attributeFilter: ['class'] });
     }
 
     function bindMediaListener(mq, handler) {
@@ -173,8 +222,14 @@
     });
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', sync, { once: true });
+        document.addEventListener(
+            'DOMContentLoaded',
+            () => {
+                whenFirstEnterDone(sync);
+            },
+            { once: true }
+        );
     } else {
-        sync();
+        whenFirstEnterDone(sync);
     }
 })();

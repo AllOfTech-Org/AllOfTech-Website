@@ -130,7 +130,7 @@
     position: absolute;
     inset: 0;
     transform-style: preserve-3d;
-    transform: rotateX(var(--hero-look-y, 0deg)) rotateY(var(--hero-look-x, 0deg));
+    transform: rotateX(0deg) rotateY(0deg);
     will-change: transform;
 }
 
@@ -224,7 +224,7 @@
     filter:
         drop-shadow(0 0 16px rgba(0, 255, 255, 0.45))
         drop-shadow(0 0 34px rgba(124, 58, 237, 0.25));
-    transform: translate3d(calc(var(--hero-look-nx, 0) * 8px), calc(var(--hero-look-ny, 0) * 6px), 20px);
+    transform: translateZ(20px);
 }
 
 /* Billboarded so the bead stays a round volume when the core tilts. */
@@ -236,7 +236,7 @@
     margin: -12% 0 0 -12%;
     border-radius: 50%;
     background: radial-gradient(
-        circle at calc(34% + var(--hero-look-nx, 0) * 12%) calc(30% + var(--hero-look-ny, 0) * 10%),
+        circle at 34% 30%,
         #ffffff 0%,
         #d8ffff 12%,
         var(--primary-cyan) 30%,
@@ -248,10 +248,7 @@
         inset 0 3px 8px rgba(255, 255, 255, 0.45),
         0 0 34px rgba(0, 255, 255, 0.55),
         0 0 70px rgba(255, 0, 255, 0.3);
-    transform:
-        rotateY(calc(var(--hero-look-x, 0deg) * -1))
-        rotateX(calc(var(--hero-look-y, 0deg) * -1))
-        translateZ(46px);
+    transform: translateZ(46px);
     animation: heroNucleusPulse calc(4.5s * var(--hero-3d-time, 1)) ease-in-out infinite;
 }
 
@@ -288,7 +285,7 @@
 .hero-core__spark--a {
     top: 16%;
     left: 24%;
-    transform: translate3d(calc(var(--hero-look-nx, 0) * 18px), calc(var(--hero-look-ny, 0) * 14px), 90px);
+    transform: translate3d(0, 0, 90px);
 }
 
 .hero-core__spark--b {
@@ -296,7 +293,7 @@
     right: 15%;
     background: var(--primary-pink);
     box-shadow: 0 0 12px var(--primary-pink);
-    transform: translate3d(calc(var(--hero-look-nx, 0) * 14px), calc(var(--hero-look-ny, 0) * 10px), 64px);
+    transform: translate3d(0, 0, 64px);
     animation-delay: calc(-1.6s * var(--hero-3d-time, 1));
 }
 
@@ -307,7 +304,7 @@
     height: calc(4px * var(--hero-3d-scale, 1));
     background: var(--secondary-amber);
     box-shadow: 0 0 10px var(--secondary-amber);
-    transform: translate3d(calc(var(--hero-look-nx, 0) * 22px), calc(var(--hero-look-ny, 0) * 16px), 110px);
+    transform: translate3d(0, 0, 110px);
     animation-delay: calc(-3.1s * var(--hero-3d-time, 1));
 }
 
@@ -316,7 +313,7 @@
     right: 27%;
     width: calc(5px * var(--hero-3d-scale, 1));
     height: calc(5px * var(--hero-3d-scale, 1));
-    transform: translate3d(calc(var(--hero-look-nx, 0) * 12px), calc(var(--hero-look-ny, 0) * 9px), 78px);
+    transform: translate3d(0, 0, 78px);
     animation-delay: calc(-4.4s * var(--hero-3d-time, 1));
 }
 
@@ -324,15 +321,12 @@
     inset: 34%;
     border-radius: 50%;
     background:
-        radial-gradient(circle at calc(32% + var(--hero-look-nx, 0) * 10%) calc(26% + var(--hero-look-ny, 0) * 8%),
+        radial-gradient(circle at 32% 26%,
             rgba(255, 255, 255, 0.28), transparent 46%),
         radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 0.14) 88%, transparent 100%);
     mix-blend-mode: screen;
     filter: blur(4px);
-    transform:
-        rotateY(calc(var(--hero-look-x, 0deg) * -1))
-        rotateX(calc(var(--hero-look-y, 0deg) * -1))
-        translateZ(74px);
+    transform: translateZ(74px);
 }
 
 .hero-core__specular {
@@ -343,20 +337,17 @@
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12) 38%, transparent 66%);
     filter: blur(11px);
-    transform:
-        rotateY(calc(var(--hero-look-x, 0deg) * -1))
-        rotateX(calc(var(--hero-look-y, 0deg) * -1))
-        translate3d(calc(var(--hero-look-nx, 0) * -18px), calc(var(--hero-look-ny, 0) * -14px), 96px);
+    transform: translate3d(0, 0, 96px);
 }
 
 @keyframes heroHaloBreathe {
     0%, 100% {
         opacity: 0.7;
-        transform: translate3d(calc(var(--hero-look-nx, 0) * -10px), calc(var(--hero-look-ny, 0) * -8px), -150px) scale(0.94);
+        transform: translate3d(0, 0, -150px) scale(0.94);
     }
     50% {
         opacity: 0.95;
-        transform: translate3d(calc(var(--hero-look-nx, 0) * -10px), calc(var(--hero-look-ny, 0) * -8px), -150px) scale(1.02);
+        transform: translate3d(0, 0, -150px) scale(1.02);
     }
 }
 
@@ -764,7 +755,13 @@ html.aot-page-hidden .hero-core__spark,
 html.aot-page-hidden .hero-core__ring,
 html.aot-page-hidden .hero-sat,
 html.aot-page-hidden .hero-sat__body,
-html.aot-page-hidden .hero-core__nucleus {
+html.aot-page-hidden .hero-core__nucleus,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-core__halo,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-core__spark,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-core__ring,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-sat,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-sat__body,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-core__nucleus {
     animation-play-state: paused;
 }
 

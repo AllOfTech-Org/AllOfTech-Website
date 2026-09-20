@@ -200,10 +200,10 @@ export default function AotCursor() {
         ringX = x;
         ringY = y;
         paintRing(x, y);
+        readTarget(event.target);
       }
 
       paintPointer(x, y);
-      readTarget(event.target);
       setVisible(true);
       kick();
     }

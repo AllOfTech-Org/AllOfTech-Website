@@ -210,11 +210,10 @@ export default function ContactSolutionForm(props: ContactFormProps = {}) {
   const rise: Variants = reduce
     ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+        hidden: { opacity: 0, y: 22 },
         visible: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           transition: { duration: 0.8, ease },
         },
       };

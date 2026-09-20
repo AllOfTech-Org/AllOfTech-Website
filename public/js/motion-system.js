@@ -25,6 +25,24 @@
         return liteMq.matches || coarseMq.matches;
     }
 
+    function firstEnterActive() {
+        return root.classList.contains('aot-first-enter');
+    }
+
+    function whenFirstEnterDone(fn) {
+        if (!firstEnterActive()) {
+            fn();
+            return;
+        }
+        const obs = new MutationObserver(() => {
+            if (!firstEnterActive()) {
+                obs.disconnect();
+                fn();
+            }
+        });
+        obs.observe(root, { attributes: true, attributeFilter: ['class'] });
+    }
+
     function syncRuntimeClasses() {
         root.classList.toggle('aot-lite', lite());
         root.classList.toggle('aot-page-hidden', document.hidden);
@@ -150,12 +168,33 @@
     let targetY = window.scrollY;
     let smoothY = window.scrollY;
     let frame = 0;
+    let lastSy = '';
+    let atmosphereEl = null;
+    let gridEl = null;
+
+    function scrollTargets() {
+        if (!atmosphereEl || !atmosphereEl.isConnected) {
+            atmosphereEl = document.querySelector('.aot-atmosphere');
+        }
+        if (!gridEl || !gridEl.isConnected) {
+            gridEl = document.querySelector('.grid-overlay');
+        }
+        return [atmosphereEl, gridEl];
+    }
+
+    function paintScroll(value) {
+        if (value === lastSy) return;
+        lastSy = value;
+        scrollTargets().forEach((el) => {
+            if (el) el.style.setProperty('--aot-sy', value);
+        });
+    }
 
     function tick() {
         frame = 0;
         const delta = targetY - smoothY;
         smoothY += delta * 0.09;
-        root.style.setProperty('--aot-sy', smoothY.toFixed(2) + 'px');
+        paintScroll(smoothY.toFixed(1) + 'px');
         if (Math.abs(delta) > 0.15) frame = requestAnimationFrame(tick);
     }
 
@@ -171,7 +210,7 @@
 
     function startScrollField() {
         if (reduced() || lite()) {
-            root.style.setProperty('--aot-sy', '0px');
+            paintScroll('0px');
             return;
         }
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -186,7 +225,9 @@
         window.removeEventListener('resize', onScroll);
         if (frame) cancelAnimationFrame(frame);
         frame = 0;
-        root.style.setProperty('--aot-sy', '0px');
+        lastSy = '';
+        paintScroll('0px');
+        root.style.removeProperty('--aot-sy');
     }
 
     // --------------------------------------------------------------- reveals
@@ -306,6 +347,13 @@
     let spotTarget = null;
     let spotX = 0;
     let spotY = 0;
+    let spotCard = null;
+    let spotRect = null;
+
+    function invalidateSpotRect() {
+        spotRect = null;
+        spotCard = null;
+    }
 
     function paintSpot() {
         spotFrame = 0;
@@ -317,12 +365,18 @@
     function onPointerMove(event) {
         if (event.pointerType === 'touch') return;
         const card = event.target instanceof Element ? event.target.closest('[data-aot-spot]') : null;
-        if (!card) return;
-        const rect = card.getBoundingClientRect();
-        if (!rect.width || !rect.height) return;
+        if (!card) {
+            spotTarget = null;
+            return;
+        }
+        if (card !== spotCard || !spotRect) {
+            spotCard = card;
+            spotRect = card.getBoundingClientRect();
+        }
+        if (!spotRect.width || !spotRect.height) return;
         spotTarget = card;
-        spotX = ((event.clientX - rect.left) / rect.width) * 100;
-        spotY = ((event.clientY - rect.top) / rect.height) * 100;
+        spotX = ((event.clientX - spotRect.left) / spotRect.width) * 100;
+        spotY = ((event.clientY - spotRect.top) / spotRect.height) * 100;
         if (spotFrame) return;
         spotFrame = requestAnimationFrame(paintSpot);
     }
@@ -379,8 +433,12 @@
         root.classList.add('aot-motion');
         syncRuntimeClasses();
         apply();
-        startScrollField();
-        document.addEventListener('pointermove', onPointerMove, { passive: true });
+        whenFirstEnterDone(() => {
+            startScrollField();
+            document.addEventListener('pointermove', onPointerMove, { passive: true });
+            window.addEventListener('scroll', invalidateSpotRect, { passive: true });
+            window.addEventListener('resize', invalidateSpotRect, { passive: true });
+        });
         document.addEventListener('visibilitychange', syncRuntimeClasses);
         function onLiteChange() {
             syncRuntimeClasses();

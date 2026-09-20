@@ -99,6 +99,24 @@ https://templatemo.com/tm-594-nexus-flow
 
     onReady(syncMotionDesktopClass);
 
+    function firstEnterActive() {
+        return document.documentElement.classList.contains('aot-first-enter');
+    }
+
+    function whenFirstEnterDone(fn) {
+        if (!firstEnterActive()) {
+            fn();
+            return;
+        }
+        const obs = new MutationObserver(() => {
+            if (!firstEnterActive()) {
+                obs.disconnect();
+                fn();
+            }
+        });
+        obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
+
     // ---------------------------------------------------------------------
     // Intro preloader
     // ---------------------------------------------------------------------
@@ -234,13 +252,13 @@ https://templatemo.com/tm-594-nexus-flow
     function generateMatrixRain() {
         const matrixRain = document.getElementById('matrixRain');
         if (!matrixRain) return;
-        const maxColumns = 40;
-        const columns = Math.min(Math.floor(window.innerWidth / 24), maxColumns);
+        const columns = Math.min(Math.floor(window.innerWidth / 96), 14);
+        const spacing = window.innerWidth / Math.max(columns, 1);
         const fragment = document.createDocumentFragment();
         for (let i = 0; i < columns; i++) {
             const column = document.createElement('div');
             column.className = 'matrix-column';
-            column.style.left = `${i * 20}px`;
+            column.style.left = `${i * spacing}px`;
             column.style.animationDuration = `${Math.random() * 5 + 10}s`;
             column.style.animationDelay = `${Math.random() * 5}s`;
             let text = '';
@@ -257,7 +275,7 @@ https://templatemo.com/tm-594-nexus-flow
     function generateParticles() {
         const particlesContainer = document.getElementById('particlesContainer');
         if (!particlesContainer) return;
-        const particleCount = window.innerWidth < 1200 ? 30 : 40;
+        const particleCount = window.innerWidth < 1200 ? 12 : 16;
         const fragment = document.createDocumentFragment();
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -273,7 +291,7 @@ https://templatemo.com/tm-594-nexus-flow
     function generateDataStreams() {
         const dataStreams = document.getElementById('dataStreams');
         if (!dataStreams) return;
-        const streamCount = 6;
+        const streamCount = 3;
         const fragment = document.createDocumentFragment();
         for (let i = 0; i < streamCount; i++) {
             const stream = document.createElement('div');
@@ -289,12 +307,15 @@ https://templatemo.com/tm-594-nexus-flow
 
     function setupBackgroundEffects() {
         if (prefersReducedMotion || isMobilePerformanceMode()) return;
-        const matrixRain = document.getElementById('matrixRain');
-        if (matrixRain && matrixRain.childElementCount === 0) generateMatrixRain();
-        const particlesContainer = document.getElementById('particlesContainer');
-        if (particlesContainer && particlesContainer.childElementCount === 0) generateParticles();
-        const dataStreams = document.getElementById('dataStreams');
-        if (dataStreams && dataStreams.childElementCount === 0) generateDataStreams();
+        whenFirstEnterDone(() => {
+            if (prefersReducedMotion || isMobilePerformanceMode()) return;
+            const matrixRain = document.getElementById('matrixRain');
+            if (matrixRain && matrixRain.childElementCount === 0) generateMatrixRain();
+            const particlesContainer = document.getElementById('particlesContainer');
+            if (particlesContainer && particlesContainer.childElementCount === 0) generateParticles();
+            const dataStreams = document.getElementById('dataStreams');
+            if (dataStreams && dataStreams.childElementCount === 0) generateDataStreams();
+        });
     }
 
     onReady(setupBackgroundEffects);
@@ -316,7 +337,7 @@ https://templatemo.com/tm-594-nexus-flow
                     const matrixRain = document.getElementById('matrixRain');
                     if (!matrixRain) return;
                     matrixRain.textContent = '';
-                    if (!isMobilePerformanceMode()) generateMatrixRain();
+                    if (!isMobilePerformanceMode() && !firstEnterActive()) generateMatrixRain();
                 });
             }, 250);
         },
@@ -324,79 +345,9 @@ https://templatemo.com/tm-594-nexus-flow
     );
 
     // ---------------------------------------------------------------------
-    // Pointer effects: orb parallax (throttled with rAF, off on touch/reduced motion)
-    // ---------------------------------------------------------------------
-    let orbs = null;
-    let pointerX = 0;
-    let pointerY = 0;
-    let pointerHasMoved = false;
-    let pointerFrame = 0;
-
-    window.addEventListener('aot:content-mounted', () => {
-        orbs = document.querySelectorAll('.orb');
-    });
-
-    function pointerEffectsEnabled() {
-        return isDesktopMotionEnabled();
-    }
-
-    function applyPointerEffects() {
-        pointerFrame = 0;
-        if (!pointerHasMoved) return;
-        if (!pointerEffectsEnabled()) return;
-
-        if (!orbs || orbs.length === 0) orbs = document.querySelectorAll('.orb');
-        const halfW = window.innerWidth / 2;
-        const halfH = window.innerHeight / 2;
-        orbs.forEach((orb, index) => {
-            const speed = (index + 1) * 0.02;
-            const x = (pointerX - halfW) * speed;
-            const y = (pointerY - halfH) * speed;
-            orb.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        });
-    }
-
-    function onPointerMove(e) {
-        pointerX = e.clientX;
-        pointerY = e.clientY;
-        pointerHasMoved = true;
-        if (pointerFrame) return;
-        pointerFrame = requestAnimationFrame(applyPointerEffects);
-    }
-
-    function attachPointerEffects() {
-        if (!pointerEffectsEnabled()) return;
-        document.addEventListener('mousemove', onPointerMove, { passive: true });
-    }
-
-    function detachPointerEffects() {
-        document.removeEventListener('mousemove', onPointerMove);
-        if (pointerFrame) {
-            cancelAnimationFrame(pointerFrame);
-            pointerFrame = 0;
-        }
-    }
-
-    onReady(attachPointerEffects);
-
-    bindMediaListener(reducedMotionMq, (ev) => {
-        prefersReducedMotion = ev.matches;
-        if (prefersReducedMotion) detachPointerEffects();
-        else attachPointerEffects();
-    });
-    bindMediaListener(coarsePointerMq, (ev) => {
-        isCoarsePointer = ev.matches;
-        if (isCoarsePointer) detachPointerEffects();
-        else attachPointerEffects();
-    });
-    bindMediaListener(desktopMq, (ev) => {
-        isDesktop = ev.matches;
-        if (!isDesktop) detachPointerEffects();
-        else attachPointerEffects();
-    });
-
     // Instant in-page jumps for leftover hash targets — known sections
     // are rewritten to clean paths by SiteChrome before this runs.
+    // ---------------------------------------------------------------------
     onReady(() => {
         document.addEventListener(
             'click',
@@ -466,6 +417,67 @@ https://templatemo.com/tm-594-nexus-flow
     let gridCurrentY = 0;
     const GRID_PARALLAX_MAX = 12;
     const GRID_PARALLAX_LERP = 0.06;
+    const GRID_SETTLE = 0.04;
+    let gridOverlay = null;
+
+    function gridParallaxTick() {
+        gridParallaxFrame = 0;
+        gridCurrentX += (gridTargetX - gridCurrentX) * GRID_PARALLAX_LERP;
+        gridCurrentY += (gridTargetY - gridCurrentY) * GRID_PARALLAX_LERP;
+        if (!gridOverlay || !gridOverlay.isConnected) {
+            gridOverlay = document.querySelector('.grid-overlay');
+        }
+        if (gridOverlay) {
+            gridOverlay.style.setProperty('--aot-gx', gridCurrentX.toFixed(2) + 'px');
+            gridOverlay.style.setProperty('--aot-gy', gridCurrentY.toFixed(2) + 'px');
+        }
+        const dx = gridTargetX - gridCurrentX;
+        const dy = gridTargetY - gridCurrentY;
+        if (gridParallaxActive && dx * dx + dy * dy > GRID_SETTLE) {
+            gridParallaxFrame = requestAnimationFrame(gridParallaxTick);
+        }
+    }
+
+    function onGridParallaxMove(e) {
+        if (!isDesktopMotionEnabled()) return;
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        gridTargetX = nx * GRID_PARALLAX_MAX;
+        gridTargetY = ny * GRID_PARALLAX_MAX;
+        if (!gridParallaxFrame) {
+            gridParallaxFrame = requestAnimationFrame(gridParallaxTick);
+        }
+    }
+
+    function attachGridParallax() {
+        if (!isDesktopMotionEnabled() || gridParallaxActive) return;
+        gridParallaxActive = true;
+        gridOverlay = document.querySelector('.grid-overlay');
+        document.addEventListener('pointermove', onGridParallaxMove, { passive: true });
+    }
+
+    function detachGridParallax() {
+        if (!gridParallaxActive) return;
+        gridParallaxActive = false;
+        document.removeEventListener('pointermove', onGridParallaxMove);
+        if (gridParallaxFrame) {
+            cancelAnimationFrame(gridParallaxFrame);
+            gridParallaxFrame = 0;
+        }
+        gridTargetX = 0;
+        gridTargetY = 0;
+        gridCurrentX = 0;
+        gridCurrentY = 0;
+        if (!gridOverlay || !gridOverlay.isConnected) {
+            gridOverlay = document.querySelector('.grid-overlay');
+        }
+        if (gridOverlay) {
+            gridOverlay.style.removeProperty('--aot-gx');
+            gridOverlay.style.removeProperty('--aot-gy');
+            gridOverlay.style.removeProperty('transform');
+        }
+        gridOverlay = null;
+    }
 
     function initHeroIntro() {
         const root = document.documentElement;
@@ -522,49 +534,6 @@ https://templatemo.com/tm-594-nexus-flow
         bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     }
 
-    function gridParallaxTick() {
-        gridCurrentX += (gridTargetX - gridCurrentX) * GRID_PARALLAX_LERP;
-        gridCurrentY += (gridTargetY - gridCurrentY) * GRID_PARALLAX_LERP;
-        const overlay = document.querySelector('.grid-overlay');
-        if (overlay) {
-            overlay.style.transform = `translate3d(${gridCurrentX}px, ${gridCurrentY}px, 0)`;
-        }
-        if (gridParallaxActive) {
-            gridParallaxFrame = requestAnimationFrame(gridParallaxTick);
-        }
-    }
-
-    function onGridParallaxMove(e) {
-        if (!isDesktopMotionEnabled()) return;
-        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
-        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
-        gridTargetX = nx * GRID_PARALLAX_MAX;
-        gridTargetY = ny * GRID_PARALLAX_MAX;
-    }
-
-    function attachGridParallax() {
-        if (!isDesktopMotionEnabled() || gridParallaxActive) return;
-        gridParallaxActive = true;
-        document.addEventListener('mousemove', onGridParallaxMove, { passive: true });
-        gridParallaxFrame = requestAnimationFrame(gridParallaxTick);
-    }
-
-    function detachGridParallax() {
-        if (!gridParallaxActive) return;
-        gridParallaxActive = false;
-        document.removeEventListener('mousemove', onGridParallaxMove);
-        if (gridParallaxFrame) {
-            cancelAnimationFrame(gridParallaxFrame);
-            gridParallaxFrame = 0;
-        }
-        gridTargetX = 0;
-        gridTargetY = 0;
-        gridCurrentX = 0;
-        gridCurrentY = 0;
-        const overlay = document.querySelector('.grid-overlay');
-        if (overlay) overlay.style.transform = '';
-    }
-
     function initScrollProgress() {
         const bar = document.querySelector('.scroll-progress__bar');
         if (!bar) return;
@@ -606,7 +575,7 @@ https://templatemo.com/tm-594-nexus-flow
     onReady(() => {
         initHeroIntro();
         if (isDesktopMotionEnabled()) {
-            attachGridParallax();
+            whenFirstEnterDone(attachGridParallax);
         }
         initScrollProgress();
 
@@ -639,15 +608,15 @@ https://templatemo.com/tm-594-nexus-flow
 
     bindMediaListener(reducedMotionMq, () => {
         if (!isDesktopMotionEnabled()) detachGridParallax();
-        else attachGridParallax();
+        else whenFirstEnterDone(attachGridParallax);
     });
     bindMediaListener(coarsePointerMq, () => {
         if (!isDesktopMotionEnabled()) detachGridParallax();
-        else attachGridParallax();
+        else whenFirstEnterDone(attachGridParallax);
     });
     bindMediaListener(desktopMq, () => {
         if (!isDesktopMotionEnabled()) detachGridParallax();
-        else attachGridParallax();
+        else whenFirstEnterDone(attachGridParallax);
     });
 
     // ---------------------------------------------------------------------
@@ -917,12 +886,13 @@ https://templatemo.com/tm-594-nexus-flow
         const particles = modal.querySelector('.modal-particles');
 
         if (matrixRain && matrixRain.children.length === 0) {
-            const columns = Math.max(0, Math.floor(modal.offsetWidth / 20));
+            const columns = Math.min(8, Math.max(0, Math.floor(modal.offsetWidth / 96)));
+            const spacing = modal.offsetWidth / Math.max(columns, 1);
             const fragment = document.createDocumentFragment();
             for (let i = 0; i < columns; i++) {
                 const column = document.createElement('div');
                 column.className = 'matrix-column';
-                column.style.left = `${i * 20}px`;
+                column.style.left = `${i * spacing}px`;
                 column.style.animationDuration = `${Math.random() * 5 + 10}s`;
                 column.style.animationDelay = `${Math.random() * 5}s`;
                 let text = '';
@@ -937,7 +907,7 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         if (particles && particles.children.length === 0) {
-            const particleCount = 20;
+            const particleCount = 10;
             const fragment = document.createDocumentFragment();
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');

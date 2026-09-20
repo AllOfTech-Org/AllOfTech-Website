@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------
    AllOfTech motion system — one animation language for the whole site.
 
-   Language: long glide easing, slight rise, slight de-blur, generous stagger.
+   Language: long glide easing, slight rise, generous stagger.
    Everything below is gated on html.aot-motion, which motion-system.js only
    adds when it can drive the animation. Without JS the site renders static
    and fully visible.
@@ -27,6 +27,7 @@
     contain: layout paint;
     opacity: 0;
     transition: opacity 1.4s var(--aot-soft);
+    --aot-sy: 0px;
 }
 
 html.aot-motion .aot-atmosphere {
@@ -35,7 +36,6 @@ html.aot-motion .aot-atmosphere {
 
 .aot-aurora {
     position: absolute;
-    will-change: transform;
 }
 
 .aot-aurora > i {
@@ -105,7 +105,11 @@ html.aot-motion .aot-atmosphere {
    viewports. Phones skip the scroll-linked transform so blur layers stay still. */
 @media (min-width: 769px) and (hover: hover) and (pointer: fine) {
     html.aot-motion .grid-overlay {
-        transform: translate3d(0, calc(var(--aot-sy) * -0.03), 0);
+        transform: translate3d(
+            var(--aot-gx, 0px),
+            calc(var(--aot-gy, 0px) + var(--aot-sy, 0px) * -0.03),
+            0
+        );
     }
 }
 
@@ -118,8 +122,7 @@ html.aot-motion [data-aot-reveal] {
     transform: translate3d(var(--aot-rx, 0px), var(--aot-ry, 26px), 0) scale(var(--aot-rs, 1));
     transition:
         opacity var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms),
-        transform var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms),
-        filter var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms);
+        transform var(--aot-reveal-duration) var(--aot-soft) var(--aot-delay, 0ms);
 }
 
 html.aot-motion [data-aot-reveal="fade"] {
@@ -142,26 +145,16 @@ html.aot-motion [data-aot-reveal="right"] {
 }
 
 html.aot-motion [data-aot-reveal].is-revealing {
-    will-change: opacity, transform, filter;
+    will-change: opacity, transform;
 }
 
 html.aot-motion [data-aot-reveal].is-inview {
     opacity: 1;
     transform: none;
-    filter: none;
 }
 
-/* De-blur only where there is GPU headroom. Case studies skip the
-   blur pass — those cards are image-heavy and the filter stalls the page. */
-@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-    html.aot-motion [data-aot-reveal] {
-        filter: blur(6px);
-    }
-
-    html.aot-motion .cs-page [data-aot-reveal] {
-        filter: none;
-    }
-}
+/* Blur-in reveals were desktop-only and forced a filter paint on every card.
+   Opacity + transform already carry the motion language without that stall. */
 
 /* -------------------------------------------------------------- Card polish
    A pointer-tracked sheen layer injected by JS. It never touches transform,
@@ -174,7 +167,6 @@ html.aot-motion .aot-spot {
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
-    mix-blend-mode: screen;
     background: radial-gradient(
         circle at var(--aot-mx, 50%) var(--aot-my, 50%),
         rgba(0, 255, 255, 0.16),
@@ -219,7 +211,6 @@ html.aot-motion nav [data-aot-reveal],
 html.aot-motion .mobile-menu [data-aot-reveal] {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
 }
 
@@ -248,9 +239,24 @@ html.aot-motion .mobile-menu [data-aot-reveal] {
 
 html.aot-page-hidden .aot-aurora > i,
 html.aot-page-hidden .hero-ticker__track,
+html.aot-first-enter:not(.aot-first-enter-exit) .aot-aurora > i,
+html.aot-first-enter:not(.aot-first-enter-exit) .hero-ticker__track,
 .aot-atmosphere.is-aot-paused .aot-aurora > i,
 .hero-ticker.is-aot-paused .hero-ticker__track {
     animation-play-state: paused;
+}
+
+/* The first-enter overlay already covers the page. Skip compositing the
+   full-viewport chrome until the hold ends and the split begins. */
+html.aot-first-enter:not(.aot-first-enter-exit) .aot-atmosphere,
+html.aot-first-enter:not(.aot-first-enter-exit) .cyber-bg,
+html.aot-first-enter:not(.aot-first-enter-exit) .particles,
+html.aot-first-enter:not(.aot-first-enter-exit) .data-streams,
+html.aot-first-enter:not(.aot-first-enter-exit) .orb,
+html.aot-first-enter:not(.aot-first-enter-exit) .grid-overlay,
+html.aot-first-enter:not(.aot-first-enter-exit) .scanlines,
+html.aot-first-enter:not(.aot-first-enter-exit) .noise-overlay {
+    visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -261,7 +267,6 @@ html.aot-page-hidden .hero-ticker__track,
     html.aot-motion [data-aot-reveal] {
         opacity: 1;
         transform: none;
-        filter: none;
         transition: none;
     }
 

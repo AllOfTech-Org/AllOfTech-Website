@@ -248,21 +248,30 @@ https://templatemo.com/tm-594-nexus-flow
             background: var(--darker-bg);
             overflow: hidden;
             z-index: -5;
+            contain: strict;
         }
 
-        /* Animated gradient background */
+        /* Animated gradient background.
+           Rotate the wrapper; keep the blur on a child so the filter is
+           not recomposited on every animation frame. */
         .cyber-gradient {
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
+            animation: gradientRotate 30s linear infinite;
+        }
+
+        .cyber-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: 
                 radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 60% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 50%);
-            animation: gradientRotate 30s linear infinite;
             filter: blur(40px);
         }
 
@@ -312,8 +321,8 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         @keyframes matrixFall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(200vh); }
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(0, 200vh, 0); }
         }
 
         /* Animated grid overlay */
@@ -324,6 +333,9 @@ https://templatemo.com/tm-594-nexus-flow
             width: 100%;
             height: 100%;
             z-index: -2;
+            --aot-sy: 0px;
+            --aot-gx: 0px;
+            --aot-gy: 0px;
         }
 
         .grid-lines {
@@ -377,7 +389,6 @@ https://templatemo.com/tm-594-nexus-flow
             box-shadow: 0 0 10px var(--primary-cyan);
             animation: float 20s infinite;
             opacity: 0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .particle:nth-child(odd) {
@@ -388,7 +399,7 @@ https://templatemo.com/tm-594-nexus-flow
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) translateX(0);
+                transform: translate3d(0, 100vh, 0);
                 opacity: 0;
             }
             10% {
@@ -398,46 +409,62 @@ https://templatemo.com/tm-594-nexus-flow
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) translateX(100px);
+                transform: translate3d(100px, -100vh, 0);
                 opacity: 0;
             }
         }
 
-        /* Glowing orbs */
+        /* Glowing orbs — blur lives on the child so the float animation
+           never transforms a filtered layer. */
         .orb {
             position: fixed;
+            pointer-events: none;
+            z-index: -4;
+        }
+
+        .orb::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.5;
             animation: orbFloat 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -4;
         }
 
         .orb1 {
             width: 300px;
             height: 300px;
-            background: var(--primary-cyan);
             top: 10%;
             left: -150px;
+        }
+
+        .orb1::before {
+            background: var(--primary-cyan);
             animation-delay: 0s;
         }
 
         .orb2 {
             width: 400px;
             height: 400px;
-            background: var(--primary-pink);
             bottom: 10%;
             right: -200px;
+        }
+
+        .orb2::before {
+            background: var(--primary-pink);
             animation-delay: 5s;
         }
 
         .orb3 {
             width: 250px;
             height: 250px;
-            background: var(--primary-purple);
             top: 50%;
             left: 50%;
+        }
+
+        .orb3::before {
+            background: var(--primary-purple);
             animation-delay: 10s;
         }
 
@@ -552,6 +579,11 @@ https://templatemo.com/tm-594-nexus-flow
             .cyber-gradient {
                 animation: none;
                 transform: none;
+                filter: none;
+            }
+
+            .cyber-gradient::before {
+                animation: none;
                 filter: none;
             }
 
@@ -4509,12 +4541,24 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         html.aot-page-hidden .cyber-gradient,
+        html.aot-page-hidden .cyber-gradient::before,
         html.aot-page-hidden .grid-lines,
         html.aot-page-hidden .grid-glow,
         html.aot-page-hidden .orb,
+        html.aot-page-hidden .orb::before,
         html.aot-page-hidden .particle,
         html.aot-page-hidden .matrix-column,
-        html.aot-page-hidden .data-stream {
+        html.aot-page-hidden .data-stream,
+        html.aot-page-hidden .scanlines::before,
+        html.aot-first-enter .cyber-gradient,
+        html.aot-first-enter .cyber-gradient::before,
+        html.aot-first-enter .grid-lines,
+        html.aot-first-enter .grid-glow,
+        html.aot-first-enter .orb::before,
+        html.aot-first-enter .particle,
+        html.aot-first-enter .matrix-column,
+        html.aot-first-enter .data-stream,
+        html.aot-first-enter .scanlines::before {
             animation-play-state: paused !important;
         }
 
@@ -4529,10 +4573,12 @@ https://templatemo.com/tm-594-nexus-flow
             .site-preloader__hint,
             .site-preloader__flash,
             .cyber-gradient,
+            .cyber-gradient::before,
             .grid-lines,
             .grid-glow,
             .particle,
             .orb,
+            .orb::before,
             .matrix-column,
             .scanlines::before,
             .data-stream {

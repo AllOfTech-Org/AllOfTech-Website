@@ -122,33 +122,9 @@
         return `translate3d(0, ${p.ty}px, 0) scale(${p.x}, ${p.y})`;
     }
 
-    function readPose(el) {
-        const t = getComputedStyle(el).transform;
-        if (!t || t === 'none') return { ...REST };
-        try {
-            const m = new DOMMatrixReadOnly(t);
-            return { x: m.a, y: m.d, ty: m.f };
-        } catch {
-            return pose.get(el) || { ...REST };
-        }
-    }
-
-    function stop(el) {
-        const anim = running.get(el);
-        if (!anim) return readPose(el);
-        try {
-            if (typeof anim.commitStyles === 'function') anim.commitStyles();
-        } catch {
-            // Keep going from the last known pose if the engine rejects commit.
-        }
-        const now = readPose(el);
-        anim.cancel();
-        running.delete(el);
-        return now;
-    }
-
     function go(el, next, duration, easing) {
-        const from = stop(el);
+        const from = pose.get(el) || { ...REST };
+        const prev = running.get(el);
         const keyframes = [
             { transform: cssTransform(from) },
             { transform: cssTransform(next) },
@@ -166,6 +142,7 @@
         }
         running.set(el, anim);
         pose.set(el, next);
+        if (prev && prev !== anim) prev.cancel();
         anim.addEventListener('finish', () => {
             if (running.get(el) === anim) running.delete(el);
         });
