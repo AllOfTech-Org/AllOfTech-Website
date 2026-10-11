@@ -1,13 +1,9 @@
-/*
-
-TemplateMo 594 nexus flow
-
-https://templatemo.com/tm-594-nexus-flow
-
-*/
-
 @charset "utf-8";
-/* CSS Document */
+/*
+ * AllOfTech - base site styles
+ * https://www.alloftech.site
+ * Copyright (c) AllOfTech. All rights reserved.
+ */
 
  * {
             margin: 0;
@@ -614,10 +610,9 @@ https://templatemo.com/tm-594-nexus-flow
             .choose-unique-card,
             .about-future-stat,
             .about-future-mission,
-            .aot-team1__card,
+            .aot-team-grid__card,
             .aot-epc-signals li,
             .aot-services-card,
-            .aot-contact-4,
             .blog-card,
             .resource-card {
                 backdrop-filter: none;
@@ -1332,7 +1327,7 @@ https://templatemo.com/tm-594-nexus-flow
             }
         }
 
-        .hero-nexus {
+        .hero-accent {
             background: linear-gradient(135deg, var(--primary-cyan), #00ccff);
             background: -webkit-linear-gradient(135deg, var(--primary-cyan), #00ccff);
             -webkit-background-clip: text;
@@ -1361,7 +1356,7 @@ https://templatemo.com/tm-594-nexus-flow
         }
         
 		@media (max-width: 480px) {
-			.hero-nexus, .hero-flow {
+			.hero-accent, .hero-flow {
 				display: inline-block;
 				margin: 0;
 				word-break: keep-all;
@@ -1391,7 +1386,7 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         /* Clean hover effect */
-        .hero-title:hover .hero-nexus {
+        .hero-title:hover .hero-accent {
             transform: translateX(-3px) scale(1.02);
             filter: brightness(1.2) drop-shadow(0 0 30px rgba(0, 255, 255, 0.9));
         }
@@ -1402,7 +1397,7 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         /* Subtle background glow for each word */
-        .hero-nexus::before {
+        .hero-accent::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -1439,13 +1434,13 @@ https://templatemo.com/tm-594-nexus-flow
         }
 
         /* Apply animation pause on hover */
-        .hero-title:hover .hero-nexus,
+        .hero-title:hover .hero-accent,
         .hero-title:hover .hero-flow {
             animation-play-state: paused;
         }
 
         /* Border animation */
-        .hero-nexus::after,
+        .hero-accent::after,
         .hero-flow::after {
             content: '';
             position: absolute;
@@ -1456,7 +1451,7 @@ https://templatemo.com/tm-594-nexus-flow
             transition: width 0.3s ease;
         }
 
-        .hero-nexus::after {
+        .hero-accent::after {
             background: linear-gradient(90deg, var(--primary-cyan), transparent);
         }
 
@@ -1466,7 +1461,7 @@ https://templatemo.com/tm-594-nexus-flow
             right: 0;
         }
 
-        .hero-title:hover .hero-nexus::after,
+        .hero-title:hover .hero-accent::after,
         .hero-title:hover .hero-flow::after {
             width: 100%;
         }
@@ -4446,7 +4441,7 @@ https://templatemo.com/tm-594-nexus-flow
 				white-space: nowrap;
             }
             
-			.hero-nexus, .hero-flow {
+			.hero-accent, .hero-flow {
 				display: inline-block;
 				margin: 0;
 				word-break: keep-all;
@@ -5114,22 +5109,22 @@ https://templatemo.com/tm-594-nexus-flow
             }
         }
 
-        html.motion-desktop.hero-intro-pending .hero-nexus,
+        html.motion-desktop.hero-intro-pending .hero-accent,
         html.motion-desktop.hero-intro-pending .hero-flow {
             animation: none;
         }
 
-        html.motion-desktop.hero-intro-pending .hero-nexus::before,
+        html.motion-desktop.hero-intro-pending .hero-accent::before,
         html.motion-desktop.hero-intro-pending .hero-flow::before {
             animation: none;
         }
 
-        html.motion-desktop .hero-nexus,
+        html.motion-desktop .hero-accent,
         html.motion-desktop .hero-flow {
             animation: none;
         }
 
-        html.motion-desktop .hero-nexus::before,
+        html.motion-desktop .hero-accent::before,
         html.motion-desktop .hero-flow::before {
             animation: none;
         }
@@ -5139,7 +5134,7 @@ https://templatemo.com/tm-594-nexus-flow
             clip-path: inset(0 0 0 0);
         }
 
-        html.motion-desktop.hero-intro-pending .hero-wipe--nexus {
+        html.motion-desktop.hero-intro-pending .hero-wipe--lead {
             clip-path: inset(0 100% 0 0);
             animation: heroWipeReveal 440ms var(--ease-out) forwards;
         }

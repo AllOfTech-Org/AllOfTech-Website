@@ -1,7 +1,7 @@
 export const BLOG_INDEX = {
-  title: "Tech Agency Blog | Technology Insights | AllOfTech",
+  title: "Blog | AllOfTech",
   description:
-    "Expert insights from a leading tech agency on AI development, web development, blockchain, mobile apps, and digital transformation. Stay updated with the latest technology trends and best practices.",
+    "Notes from the AllOfTech team on AI development, web development, mobile apps and hiring a tech agency, written from the projects we actually ship.",
   keywords: [
     "tech agency blog",
     "technology blog",
@@ -44,7 +44,7 @@ export const BLOG_POSTS: BlogPost[] = [
     route: "/blog/ai-agency-services-guide",
     title: "AI Agency Services: Guide to AI Development | AllOfTech",
     description:
-      "Complete guide to AI agency services. Learn about AI/ML development, machine learning solutions, predictive analytics, and how an AI agency can transform your business.",
+      "What an AI agency actually does: AI/ML development, machine learning, predictive analytics and automation, and how to tell whether your business needs it.",
     keywords: [
       "AI agency services",
       "AI development guide",

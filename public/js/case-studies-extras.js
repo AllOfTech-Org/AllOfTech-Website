@@ -1,6 +1,6 @@
 
         // Image Lightbox Functionality. Uses the shared body-scroll lock from
-        // templatemo-nexus-scripts.js when available so nested overlays don't
+        // site-core.js when available so nested overlays don't
         // step on each other's body.style.overflow value.
         (function () {
             function initializeImageLightbox() {

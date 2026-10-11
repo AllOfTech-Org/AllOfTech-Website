@@ -870,7 +870,11 @@
     }
 }
 
-/* Login Modal Styles */
+/* Login Modal Styles (kept for restore; hidden while CHATBOT_LOGIN_REQUIRED is false) */
+.chatbot-login-modal[hidden] {
+    display: none !important;
+}
+
 .chatbot-login-modal {
     display: flex;
     flex-direction: column;

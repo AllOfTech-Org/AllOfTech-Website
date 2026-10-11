@@ -8,8 +8,8 @@ body.aot-float-header .aot-page-clone footer.footer {
     display: none !important;
 }
 
-.aot-footer-16 p,
-.aot-footer-16 li {
+.aot-footer p,
+.aot-footer li {
     max-width: none;
 }
 

@@ -97,7 +97,7 @@
         '.cta-box',
         '.contact-form-wrapper',
         '.contact-info',
-        '.aot-team1__card',
+        '.aot-team-grid__card',
         '.aot-team__shot',
         '.service-post > h2',
         '.service-post > h3',
@@ -118,7 +118,7 @@
         '.choose-unique-card',
         '.about-future-stat',
         '.about-future-mission',
-        '.aot-team1__card',
+        '.aot-team-grid__card',
         '.aot-team__shot',
     ].join(',');
 
@@ -131,7 +131,7 @@
         '.choose-unique-card',
         '.about-future-stat',
         '.about-future-mission',
-        '.aot-team1__card',
+        '.aot-team-grid__card',
         '.aot-team__shot',
     ].join(',');
 

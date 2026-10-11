@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import Blog4, { type Blog4Data, type Blog5Article } from "@/components/ui/blog-4";
+import ServiceCards, { type ServiceArticle, type ServiceCardsData } from "@/components/ui/service-cards";
 import { SERVICES, type ServiceIconName } from "@/lib/services";
 
 const ICONS: Record<ServiceIconName, LucideIcon> = {
@@ -31,7 +31,7 @@ const BLOG_ACCENTS = ["violet", "green", "blue"] as const;
 export default function HomeServices() {
   const path = usePathname();
   const atServices = path === "/services";
-  const articles: Blog5Article[] = SERVICES.map((service, index) => ({
+  const articles: ServiceArticle[] = SERVICES.map((service, index) => ({
     category: service.eyebrow,
     readTime: service.listingMeta,
     title: service.listingTitle,
@@ -48,12 +48,12 @@ export default function HomeServices() {
     eager: atServices && index < 2,
   }));
 
-  const data: Blog4Data = {
+  const data: ServiceCardsData = {
     badge: "SERVICES",
     heading: "Complete technology\nsolutions",
     headingId: "services-heading",
     description:
-      "As a leading technology agency, we specialize in AI & Machine Learning Development, Web Development, Animation Services, Graphics & Branding, UX/UI Design, and Mobile App Development. Open a card for the full brief.",
+      "Six things we do well: AI & Machine Learning Development, Web Development, Animation Services, Graphics & Branding, UX/UI Design, and Mobile App Development. Open a card for the full brief.",
     aside: "Pictures, the complete write-up, and a path to start - one service at a time.",
     viewAllLabel: "All services",
     viewAllHref: "/services",
@@ -64,7 +64,7 @@ export default function HomeServices() {
 
   return (
     <div className="aot-home-services fade-up section-major dark">
-      <Blog4
+      <ServiceCards
         id="services"
         data={data}
         className="aot-home-services__blog"

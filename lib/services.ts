@@ -127,7 +127,7 @@ export const SERVICES: ServicePageContent[] = [
   {
     slug: "ai-development",
     route: "/services/ai-development",
-    title: "AI/ML Development Services | AI Agency | AllOfTech",
+    title: "AI and Machine Learning Development | AllOfTech",
     description:
       "AllOfTech is an AI agency building custom AI/ML solutions, chatbots, predictive analytics, and automation for US businesses. Get a free consultation.",
     keywords: [
@@ -251,7 +251,7 @@ export const SERVICES: ServicePageContent[] = [
   {
     slug: "web-development",
     route: "/services/web-development",
-    title: "Web Development Services | Web Agency | AllOfTech",
+    title: "Website and Web App Development | AllOfTech",
     description:
       "AllOfTech builds fast, responsive, conversion-focused websites and web apps for US businesses. Custom web development that grows your sales.",
     keywords: [
@@ -497,7 +497,7 @@ export const SERVICES: ServicePageContent[] = [
   {
     slug: "branding",
     route: "/services/branding",
-    title: "Graphics & Branding Services | Brand Agency | AllOfTech",
+    title: "Logo, Brand Identity and Graphic Design | AllOfTech",
     description:
       "AllOfTech designs logos, brand identities, and marketing graphics for US businesses. Memorable branding that helps you stand out and sell.",
     keywords: [
@@ -727,7 +727,7 @@ export const SERVICES: ServicePageContent[] = [
   {
     slug: "mobile-app-development",
     route: "/services/mobile-app-development",
-    title: "Mobile App Development Services | App Agency | AllOfTech",
+    title: "iOS and Android App Development | AllOfTech",
     description:
       "AllOfTech builds iPhone and Android apps that make buying, booking, and staying connected effortless. Put your business in customers' pockets.",
     keywords: [

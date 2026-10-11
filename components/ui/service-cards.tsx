@@ -15,15 +15,15 @@ import { Card, CardContent } from "@/components/base-ui/card";
 import { IMAGE_SIZES } from "@/lib/image";
 import { cn } from "@/lib/utils";
 
-type Blog4Accent = "violet" | "green" | "blue";
+type CardAccent = "violet" | "green" | "blue";
 
-export interface Blog5Article {
+export interface ServiceArticle {
   category: string;
   readTime: string;
   title: string;
   excerpt?: string;
   href?: string;
-  accent: Blog4Accent;
+  accent: CardAccent;
   imageSrc?: string;
   imageAlt: string;
   icon: LucideIcon;
@@ -34,7 +34,7 @@ export interface Blog5Article {
   eager?: boolean;
 }
 
-export interface Blog4Data {
+export interface ServiceCardsData {
   badge: string;
   heading: string;
   headingId?: string;
@@ -43,14 +43,14 @@ export interface Blog4Data {
   viewAllLabel: string;
   viewAllHref: string;
   showViewAll?: boolean;
-  articles: Blog5Article[];
+  articles: ServiceArticle[];
   ctaLabel?: string;
   activeSlide?: number;
   slideCount?: number;
 }
 
-export interface Blog4Props {
-  data?: Blog4Data;
+export interface ServiceCardsProps {
+  data?: ServiceCardsData;
   className?: string;
   id?: string;
   renderViewAllLink?: (props: {
@@ -64,7 +64,7 @@ export interface Blog4Props {
 }
 
 const accentClasses: Record<
-  Blog4Accent,
+  CardAccent,
   {
     dot: string;
     iconTile: string;
@@ -96,7 +96,7 @@ const accentClasses: Record<
   },
 };
 
-const defaultBlog4Data: Blog4Data = {
+const defaultServiceCardsData: ServiceCardsData = {
   badge: "RESOURCES",
   heading: "Design systems and\nfrontend engineering",
   description:
@@ -145,13 +145,13 @@ const defaultBlog4Data: Blog4Data = {
   ],
 };
 
-export default function Blog4({
-  data = defaultBlog4Data,
+export default function ServiceCards({
+  data = defaultServiceCardsData,
   className,
   id,
   renderViewAllLink,
   renderArticleLink,
-}: Blog4Props) {
+}: ServiceCardsProps) {
   const viewAll = (
     <Button
       asChild
@@ -206,9 +206,9 @@ export default function Blog4({
           </div>
         </div>
 
-        <div className="aot-blog4-grid mt-12 grid grid-cols-2 gap-8 lg:mt-12 lg:grid-cols-3">
+        <div className="aot-service-grid mt-12 grid grid-cols-2 gap-8 lg:mt-12 lg:grid-cols-3">
           {data.articles.map((article) => (
-            <Blog4ArticleCard
+            <ServiceArticleCard
               key={`${article.category}-${article.title}`}
               article={article}
               ctaLabel={article.ctaLabel ?? data.ctaLabel ?? "Read article"}
@@ -221,14 +221,14 @@ export default function Blog4({
   );
 }
 
-export function Blog4ArticleCard({
+export function ServiceArticleCard({
   article,
   ctaLabel = "Read article",
   renderArticleLink,
 }: {
-  article: Blog5Article;
+  article: ServiceArticle;
   ctaLabel?: string;
-  renderArticleLink?: Blog4Props["renderArticleLink"];
+  renderArticleLink?: ServiceCardsProps["renderArticleLink"];
 }) {
   const accent = accentClasses[article.accent];
   const Icon = article.icon;
@@ -251,7 +251,7 @@ export function Blog4ArticleCard({
             />
           ) : (
             <>
-              {/* Blog-4 registry chrome uses a plain img for remote demos. */}
+              {/* Remote images use a plain img. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.imageSrc}
@@ -263,7 +263,7 @@ export function Blog4ArticleCard({
             </>
           )
         ) : (
-          <div className="aot-blog4-soon size-full" aria-hidden={false}>
+          <div className="aot-service-soon size-full" aria-hidden={false}>
             <span>{article.comingSoonLabel ?? "Coming soon"}</span>
           </div>
         )}

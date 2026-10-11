@@ -1,6 +1,6 @@
-/* Lower links panel only. The footer-16 wordmark + texture stay in the component. */
+/* Lower links panel only. The footer wordmark + texture stay in the component. */
 
-.aot-footer-16 {
+.aot-footer {
   position: relative;
   isolation: isolate;
   z-index: 1;
@@ -8,8 +8,8 @@
 }
 
 /* Site chrome pins every `nav` to the top. Footer columns must stay in the footer. */
-.aot-footer-16 nav,
-.aot-footer-16__cols {
+.aot-footer nav,
+.aot-footer__cols {
   position: static;
   top: auto;
   left: auto;
@@ -26,13 +26,13 @@
   transform: none;
 }
 
-.aot-footer-16__panel,
-.aot-footer-16__panel * {
+.aot-footer__panel,
+.aot-footer__panel * {
   max-width: none;
   text-decoration: none;
 }
 
-.aot-footer-16__panel {
+.aot-footer__panel {
   position: relative;
   z-index: 20;
   isolation: isolate;
@@ -43,13 +43,13 @@
   color: #e4e4e7;
 }
 
-.aot-footer-16__inner {
+.aot-footer__inner {
   width: min(1180px, calc(100% - clamp(2rem, 8vw, 6rem)));
   margin: 0 auto;
   padding: clamp(2.1rem, 3.4vw, 3rem) 0 1.85rem;
 }
 
-.aot-footer-16__intro {
+.aot-footer__intro {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -59,11 +59,11 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.aot-footer-16__brand {
+.aot-footer__brand {
   min-width: 0;
 }
 
-.aot-footer-16__brand-link {
+.aot-footer__brand-link {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
@@ -72,25 +72,25 @@
   transition: opacity 0.2s ease;
 }
 
-.aot-footer-16__brand-link:hover {
+.aot-footer__brand-link:hover {
   opacity: 0.82;
 }
 
-.aot-footer-16__logo {
+.aot-footer__logo {
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
   object-fit: contain;
 }
 
-.aot-footer-16__brand-name {
+.aot-footer__brand-name {
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1;
 }
 
-.aot-footer-16__tagline {
+.aot-footer__tagline {
   margin: 0.7rem 0 0;
   max-width: 28rem;
   color: rgba(161, 161, 170, 0.92);
@@ -99,7 +99,7 @@
   line-height: 1.55;
 }
 
-.aot-footer-16__cta {
+.aot-footer__cta {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -111,7 +111,7 @@
   transition: color 0.2s ease;
 }
 
-.aot-footer-16__cta::after {
+.aot-footer__cta::after {
   content: "";
   display: inline-block;
   width: 0.55rem;
@@ -122,22 +122,22 @@
   transform: rotate(45deg) translateY(1px);
 }
 
-.aot-footer-16__cta:hover {
+.aot-footer__cta:hover {
   color: var(--primary-cyan, #00ffff);
 }
 
-.aot-footer-16__cols {
+.aot-footer__cols {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: clamp(1.5rem, 5vw, 4.25rem);
   row-gap: 2.25rem;
 }
 
-.aot-footer-16__col {
+.aot-footer__col {
   min-width: 0;
 }
 
-.aot-footer-16__col-title {
+.aot-footer__col-title {
   margin: 0 0 1.05rem;
   padding: 0 0 0.72rem;
   border-bottom: 1px solid rgba(0, 255, 255, 0.18);
@@ -150,7 +150,7 @@
   text-transform: uppercase;
 }
 
-.aot-footer-16__list {
+.aot-footer__list {
   display: flex;
   flex-direction: column;
   gap: 0.12rem;
@@ -159,13 +159,13 @@
   list-style: none;
 }
 
-.aot-footer-16__list li {
+.aot-footer__list li {
   margin: 0;
   padding: 0;
   max-width: none;
 }
 
-.aot-footer-16__link {
+.aot-footer__link {
   display: inline-block;
   max-width: 100%;
   padding: 0.32rem 0;
@@ -182,19 +182,19 @@
   transition: color 0.2s ease, background-size 0.28s ease;
 }
 
-.aot-footer-16__link:hover,
-.aot-footer-16__link:focus-visible {
+.aot-footer__link:hover,
+.aot-footer__link:focus-visible {
   color: #fafafa;
   background-size: 1.65rem 1px;
   outline: none;
 }
 
-.aot-footer-16__link--email {
+.aot-footer__link--email {
   overflow-wrap: anywhere;
   letter-spacing: 0;
 }
 
-.aot-footer-16__bar {
+.aot-footer__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -204,20 +204,20 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.aot-footer-16__copy {
+.aot-footer__copy {
   margin: 0;
   color: rgba(161, 161, 170, 0.82);
   font-size: 0.8125rem;
   line-height: 1.5;
 }
 
-.aot-footer-16__meta {
+.aot-footer__meta {
   display: flex;
   align-items: center;
   gap: 0.35rem 1.15rem;
 }
 
-.aot-footer-16__legal {
+.aot-footer__legal {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.15rem;
@@ -226,18 +226,18 @@
   list-style: none;
 }
 
-.aot-footer-16__legal a {
+.aot-footer__legal a {
   color: rgba(212, 212, 216, 0.78);
   font-size: 0.8125rem;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.aot-footer-16__legal a:hover {
+.aot-footer__legal a:hover {
   color: #fafafa;
 }
 
-.aot-footer-16__socials {
+.aot-footer__socials {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -246,7 +246,7 @@
   list-style: none;
 }
 
-.aot-footer-16__social {
+.aot-footer__social {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,30 +259,30 @@
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.aot-footer-16__social:hover {
+.aot-footer__social:hover {
   color: #fafafa;
   border-color: rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.08);
 }
 
-.aot-footer-16__social svg {
+.aot-footer__social svg {
   width: 0.95rem;
   height: 0.95rem;
 }
 
 @media (max-width: 720px) {
-  .aot-footer-16__cols {
+  .aot-footer__cols {
     grid-template-columns: 1fr;
     row-gap: 1.85rem;
   }
 
-  .aot-footer-16__intro {
+  .aot-footer__intro {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .aot-footer-16__bar,
-  .aot-footer-16__meta {
+  .aot-footer__bar,
+  .aot-footer__meta {
     flex-direction: column;
     align-items: flex-start;
   }

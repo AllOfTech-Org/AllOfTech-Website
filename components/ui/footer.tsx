@@ -8,36 +8,36 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 
-export interface Footer16Link {
+export interface FooterLink {
   label: string;
   href: string;
 }
 
-export interface Footer16Column {
+export interface FooterColumn {
   title: string;
-  links: Footer16Link[];
+  links: FooterLink[];
 }
 
-export interface Footer16Social {
+export interface FooterSocial {
   label: string;
   href: string;
   icon: "facebook" | "twitter" | "instagram" | "linkedin";
 }
 
-export interface Footer16Props {
+export interface FooterProps {
   brandName?: string;
   tagline?: string;
   homeHref?: string;
   logoSrc?: string;
-  cta?: Footer16Link;
-  columns?: Footer16Column[];
-  legalLinks?: Footer16Link[];
-  socials?: Footer16Social[];
+  cta?: FooterLink;
+  columns?: FooterColumn[];
+  legalLinks?: FooterLink[];
+  socials?: FooterSocial[];
   copyright?: string;
   backgroundImage?: string;
 }
 
-const defaultColumns: Footer16Column[] = [
+const defaultColumns: FooterColumn[] = [
   {
     title: "Company",
     links: [
@@ -74,11 +74,11 @@ const defaultColumns: Footer16Column[] = [
   },
 ];
 
-const defaultLegalLinks: Footer16Link[] = [
+const defaultLegalLinks: FooterLink[] = [
   { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ];
 
-const defaultSocials: Footer16Social[] = [
+const defaultSocials: FooterSocial[] = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/AllOfTech.official",
@@ -91,7 +91,7 @@ const defaultSocials: Footer16Social[] = [
   },
 ];
 
-const backgroundUrl = "/images/footer-16-bg.avif";
+const backgroundUrl = "/images/footer-bg.avif";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0 },
@@ -154,7 +154,7 @@ function externalProps(href: string) {
   return {};
 }
 
-export function Footer16({
+export function Footer({
   brandName = "AllOfTech",
   tagline = "Building Digital Systems That Scale",
   homeHref = "/",
@@ -165,9 +165,9 @@ export function Footer16({
   socials = defaultSocials,
   copyright = "© 2026 AllOfTech. All rights reserved.",
   backgroundImage = backgroundUrl,
-}: Footer16Props) {
+}: FooterProps) {
   return (
-    <footer className="aot-footer-16 relative w-full overflow-hidden bg-zinc-950 text-zinc-100 antialiased">
+    <footer className="aot-footer relative w-full overflow-hidden bg-zinc-950 text-zinc-100 antialiased">
       <div
         className="absolute inset-0 z-10 bg-cover bg-center sm:-translate-y-16"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -221,33 +221,33 @@ export function Footer16({
           </svg>
         </motion.div>
 
-        <div className="aot-footer-16__panel">
-          <div className="aot-footer-16__inner">
-            <motion.div variants={panelRise} className="aot-footer-16__intro">
-              <div className="aot-footer-16__brand">
+        <div className="aot-footer__panel">
+          <div className="aot-footer__inner">
+            <motion.div variants={panelRise} className="aot-footer__intro">
+              <div className="aot-footer__brand">
                 <a
                   href={homeHref}
-                  className="aot-footer-16__brand-link"
+                  className="aot-footer__brand-link"
                   aria-label={`${brandName} home`}
                 >
                   <img
                     src={logoSrc}
                     alt="AllOfTech"
-                    className="aot-footer-16__logo"
+                    className="aot-footer__logo"
                     width={32}
                     height={32}
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
                   />
-                  <span className="aot-footer-16__brand-name">{brandName}</span>
+                  <span className="aot-footer__brand-name">{brandName}</span>
                 </a>
-                <p className="aot-footer-16__tagline">{tagline}</p>
+                <p className="aot-footer__tagline">{tagline}</p>
               </div>
               {cta ? (
                 <a
                   href={cta.href}
-                  className="aot-footer-16__cta"
+                  className="aot-footer__cta"
                   {...externalProps(cta.href)}
                 >
                   {cta.label}
@@ -259,18 +259,18 @@ export function Footer16({
               variants={sectionVariants}
               role="navigation"
               aria-label="Footer navigation"
-              className="aot-footer-16__cols"
+              className="aot-footer__cols"
             >
               {columns.map((column) => (
                 <motion.div
                   variants={panelRise}
-                  className="aot-footer-16__col"
+                  className="aot-footer__col"
                   key={column.title}
                 >
-                  <h3 className="aot-footer-16__col-title">{column.title}</h3>
+                  <h3 className="aot-footer__col-title">{column.title}</h3>
                   <motion.ul
                     variants={listVariants}
-                    className="aot-footer-16__list"
+                    className="aot-footer__list"
                   >
                     {column.links.map((link) => (
                       <motion.li variants={linkVariants} key={link.label}>
@@ -278,8 +278,8 @@ export function Footer16({
                           href={link.href}
                           className={
                             link.href.startsWith("mailto:")
-                              ? "aot-footer-16__link aot-footer-16__link--email"
-                              : "aot-footer-16__link"
+                              ? "aot-footer__link aot-footer__link--email"
+                              : "aot-footer__link"
                           }
                           {...externalProps(link.href)}
                         >
@@ -292,11 +292,11 @@ export function Footer16({
               ))}
             </motion.div>
 
-            <motion.div variants={panelRise} className="aot-footer-16__bar">
-              <p className="aot-footer-16__copy">{copyright}</p>
+            <motion.div variants={panelRise} className="aot-footer__bar">
+              <p className="aot-footer__copy">{copyright}</p>
 
-              <div className="aot-footer-16__meta">
-                <ul className="aot-footer-16__legal">
+              <div className="aot-footer__meta">
+                <ul className="aot-footer__legal">
                   {legalLinks.map((link) => (
                     <li key={link.label}>
                       <a href={link.href} {...externalProps(link.href)}>
@@ -306,7 +306,7 @@ export function Footer16({
                   ))}
                 </ul>
 
-                <ul className="aot-footer-16__socials" aria-label="Social links">
+                <ul className="aot-footer__socials" aria-label="Social links">
                   {socials.map((social) => {
                     const Icon = socialIcons[social.icon];
 
@@ -315,7 +315,7 @@ export function Footer16({
                         <a
                           href={social.href}
                           aria-label={social.label}
-                          className="aot-footer-16__social"
+                          className="aot-footer__social"
                           target="_blank"
                           rel="me noopener noreferrer"
                         >

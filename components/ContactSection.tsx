@@ -1,4 +1,4 @@
-import ContactSolutionForm from "@/components/ui/contact-4";
+import ContactSolutionForm from "@/components/ui/contact-form";
 
 export default function ContactSection() {
   return <ContactSolutionForm />;

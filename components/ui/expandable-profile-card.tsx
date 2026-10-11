@@ -140,7 +140,7 @@ export default function ExpandableProfileCard({
           }
         }}
         className={cn(
-          "aot-team1__card aot-epc group relative h-full min-h-0 overflow-hidden rounded-[1.15rem] border-[2px] focus-within:ring-2 focus-within:ring-offset-2",
+          "aot-team-grid__card aot-epc group relative h-full min-h-0 overflow-hidden rounded-[1.15rem] border-[2px] focus-within:ring-2 focus-within:ring-offset-2",
           className,
         )}
       >
@@ -158,17 +158,17 @@ export default function ExpandableProfileCard({
           decoding="async"
           draggable={false}
         />
-        <div className="aot-team1__wash absolute inset-0 opacity-80" />
-        <div className="aot-team1__meta absolute inset-0 z-[2] flex flex-col justify-end p-3 md:p-3.5">
+        <div className="aot-team-grid__wash absolute inset-0 opacity-80" />
+        <div className="aot-team-grid__meta absolute inset-0 z-[2] flex flex-col justify-end p-3 md:p-3.5">
           <motion.h3
             layoutId={`title-${layoutId}`}
-            className="aot-team1__name text-lg font-semibold tracking-tight text-white md:text-xl"
+            className="aot-team-grid__name text-lg font-semibold tracking-tight text-white md:text-xl"
           >
             {title}
           </motion.h3>
           <motion.p
             layoutId={`subtitle-${layoutId}`}
-            className="aot-team1__role text-[0.65rem] font-medium tracking-[0.08em] uppercase"
+            className="aot-team-grid__role text-[0.65rem] font-medium tracking-[0.08em] uppercase"
           >
             {subtitle}
           </motion.p>

@@ -1,5 +1,5 @@
 import ExpandableProfileCard from "@/components/ui/expandable-profile-card";
-import Team1, { IconMap, type TeamMember } from "@/components/ui/team-1";
+import TeamGrid, { IconMap, type TeamMember } from "@/components/ui/team-grid";
 import { TEAM_GROUP_SHOTS, TEAM_LEADERSHIP } from "@/lib/team";
 
 function LeadershipProfileContent({ member }: { member: TeamMember }) {
@@ -16,7 +16,7 @@ function LeadershipProfileContent({ member }: { member: TeamMember }) {
         {linkedin ? (
           <a
             href={linkedin.url}
-            className="aot-team1__social flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="aot-team-grid__social flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2"
             aria-label={`${member.name} on LinkedIn`}
             target="_blank"
             rel="noopener noreferrer"
@@ -88,7 +88,7 @@ export default function TeamSection() {
       aria-labelledby="team-heading"
     >
       <div className="aot-team__container">
-        <Team1
+        <TeamGrid
           badge="The studio"
           heading="Our Team"
           headingId="team-heading"

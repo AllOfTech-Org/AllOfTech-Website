@@ -1,4 +1,4 @@
-import { Footer16 } from "@/components/ui/footer-16";
+import { Footer } from "@/components/ui/footer";
 import {
   BOOK_A_CALL_URL,
   CONTACT_EMAIL,
@@ -9,7 +9,7 @@ import {
 
 export default function SiteFooter() {
   return (
-    <Footer16
+    <Footer
       brandName={SITE_NAME}
       tagline={SITE_TAGLINE}
       homeHref="/"
@@ -65,7 +65,7 @@ export default function SiteFooter() {
         },
       ]}
       copyright={`© ${new Date().getFullYear()} ${SITE_NAME}. All rights reserved.`}
-      backgroundImage="/images/footer-16-bg.avif"
+      backgroundImage="/images/footer-bg.avif"
     />
   );
 }

@@ -1,4 +1,4 @@
-import type { TeamMember } from "@/components/ui/team-1";
+import type { TeamMember } from "@/components/ui/team-grid";
 
 function teamImage(file: string) {
   const optimized = file.replace(/\.(png|jpe?g)$/i, ".webp");

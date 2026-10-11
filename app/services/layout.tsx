@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import PageScripts from "@/components/PageScripts";
-import { NEXUS_SCRIPTS } from "@/lib/scripts";
+import { PAGE_SCRIPTS } from "@/lib/scripts";
 
 export default function ServicesLayout({
   children,
@@ -10,7 +10,7 @@ export default function ServicesLayout({
   return (
     <>
       {children}
-      <PageScripts scripts={NEXUS_SCRIPTS} />
+      <PageScripts scripts={PAGE_SCRIPTS} />
     </>
   );
 }

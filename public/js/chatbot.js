@@ -12,6 +12,8 @@
     const chatbotLoginForm = document.getElementById('chatbotLoginForm');
     const chatbotInputContainer = document.getElementById('chatbotInputContainer');
     const chatbotStatus = document.getElementById('chatbotStatus');
+    // Set to true to bring back the email login gate (markup + functions below stay in place).
+    const CHATBOT_LOGIN_REQUIRED = false;
     const API_BASE_URL = 'https://alloftech-alloftech-ai.hf.space';
     const API_URL = `${API_BASE_URL}/chat`;
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6mx1chaD0UyESeUU-xOYK2RYaduxF5LFy2290Gey7wqIyJLMlAZfxWe32cbLbJUyf/exec';
@@ -189,9 +191,20 @@
         }
     }
 
+    function canUseChat() {
+        return !CHATBOT_LOGIN_REQUIRED || isLoggedIn();
+    }
+
     // Show login modal
     function showLoginModal() {
-        chatbotLoginModal.style.display = 'flex';
+        if (!CHATBOT_LOGIN_REQUIRED) {
+            hideLoginModal();
+            return;
+        }
+        if (chatbotLoginModal) {
+            chatbotLoginModal.hidden = false;
+            chatbotLoginModal.style.display = 'flex';
+        }
         chatbotMessages.style.display = 'none';
         chatbotInputContainer.style.display = 'none';
         chatbotStatus.textContent = 'Enter Email';
@@ -199,7 +212,10 @@
 
     // Hide login modal and show chat
     function hideLoginModal() {
-        chatbotLoginModal.style.display = 'none';
+        if (chatbotLoginModal) {
+            chatbotLoginModal.hidden = true;
+            chatbotLoginModal.style.display = 'none';
+        }
         chatbotMessages.style.display = 'flex';
         chatbotInputContainer.style.display = 'flex';
         const email = getStoredEmail();
@@ -263,7 +279,7 @@
 
     // Initialize login state
     function initializeLoginState() {
-        if (isLoggedIn()) {
+        if (canUseChat()) {
             hideLoginModal();
             const email = getStoredEmail();
             if (email) {
@@ -279,7 +295,7 @@
         hideCallout();
         if (chatbotWindow.classList.contains('active')) {
             initializeLoginState();
-            if (isLoggedIn()) {
+            if (canUseChat()) {
                 chatbotInput.focus();
             } else {
                 const emailField = document.getElementById('chatbotLoginEmail');
@@ -700,7 +716,7 @@
     }
 
     chatbotSend.addEventListener('click', function() {
-        if (isLoggedIn()) {
+        if (canUseChat()) {
             sendMessage();
         } else {
             showLoginModal();
@@ -710,7 +726,7 @@
     chatbotInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            if (isLoggedIn()) {
+            if (canUseChat()) {
                 sendMessage();
             } else {
                 showLoginModal();

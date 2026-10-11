@@ -3,7 +3,7 @@ import HtmlClone from "@/components/HtmlClone";
 import JsonLd from "@/components/JsonLd";
 import { BLOG_INDEX } from "@/lib/blog";
 import { blogIndexSchemas } from "@/lib/page-metadata";
-import { NEXUS_SCRIPTS } from "@/lib/scripts";
+import { PAGE_SCRIPTS } from "@/lib/scripts";
 import { shareMetadata } from "@/lib/seo";
 import markup from "./markup.html";
 
@@ -18,7 +18,7 @@ export default function BlogIndexPage() {
   return (
     <>
       <JsonLd data={blogIndexSchemas()} />
-      <HtmlClone html={markup} scripts={NEXUS_SCRIPTS} />
+      <HtmlClone html={markup} scripts={PAGE_SCRIPTS} />
     </>
   );
 }

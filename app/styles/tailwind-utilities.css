@@ -1,4 +1,4 @@
-/* Tailwind for shadcn blocks (Button 21, Footer 16, Team 1, blog-4 / services, contact-4). Preflight is omitted so the rest of the site is unchanged. Utilities are unlayered so spacing wins over the site reset. */
+/* Tailwind utilities for the React components (buttons, footer, team, service cards, contact form). Preflight is omitted so the rest of the site is unchanged. Utilities are unlayered so spacing wins over the site reset. */
 
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css";

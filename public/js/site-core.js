@@ -1,12 +1,8 @@
 /*
-
-TemplateMo 594 nexus flow
-
-https://templatemo.com/tm-594-nexus-flow
-
-*/
-
-// JavaScript Document
+ * AllOfTech - core site scripts
+ * https://www.alloftech.site
+ * Copyright (c) AllOfTech. All rights reserved.
+ */
 (function () {
     'use strict';
 

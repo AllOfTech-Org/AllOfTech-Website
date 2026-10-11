@@ -32,7 +32,7 @@ export interface TeamMember {
   imageHeight?: number;
 }
 
-export interface Team1Props {
+export interface TeamGridProps {
   badge?: string;
   heading?: string;
   headingId?: string;
@@ -50,7 +50,7 @@ export const IconMap: Record<SocialIconType, React.ElementType> = {
   email: Mail,
 };
 
-export function Team1Card({
+export function TeamCard({
   member,
   className,
 }: {
@@ -60,7 +60,7 @@ export function Team1Card({
   return (
     <div
       className={cn(
-        "aot-team1__card group relative h-full min-h-0 overflow-hidden rounded-[1.15rem] border-[2px] focus-within:ring-2 focus-within:ring-offset-2",
+        "aot-team-grid__card group relative h-full min-h-0 overflow-hidden rounded-[1.15rem] border-[2px] focus-within:ring-2 focus-within:ring-offset-2",
         className,
       )}
       tabIndex={0}
@@ -79,20 +79,20 @@ export function Team1Card({
       />
 
       <div
-        className="aot-team1__blur absolute inset-0 rounded-[1.15rem] opacity-0 backdrop-blur-md transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100"
+        className="aot-team-grid__blur absolute inset-0 rounded-[1.15rem] opacity-0 backdrop-blur-md transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100"
         style={{
           WebkitMaskImage: "linear-gradient(to top, black 12%, transparent 72%)",
           maskImage: "linear-gradient(to top, black 12%, transparent 72%)",
         }}
       />
 
-      <div className="aot-team1__wash absolute inset-0 opacity-80 transition-opacity duration-500 group-focus-within:opacity-95 group-hover:opacity-95" />
+      <div className="aot-team-grid__wash absolute inset-0 opacity-80 transition-opacity duration-500 group-focus-within:opacity-95 group-hover:opacity-95" />
 
-      <div className="aot-team1__meta absolute inset-0 z-[2] flex flex-col justify-end p-3 md:p-3.5">
-        <h3 className="aot-team1__name text-lg font-semibold tracking-tight text-white md:text-xl">
+      <div className="aot-team-grid__meta absolute inset-0 z-[2] flex flex-col justify-end p-3 md:p-3.5">
+        <h3 className="aot-team-grid__name text-lg font-semibold tracking-tight text-white md:text-xl">
           {member.name}
         </h3>
-        <p className="aot-team1__role text-[0.65rem] font-medium tracking-[0.08em] uppercase">
+        <p className="aot-team-grid__role text-[0.65rem] font-medium tracking-[0.08em] uppercase">
           {member.role}
         </p>
 
@@ -113,7 +113,7 @@ export function Team1Card({
                       <a
                         key={idx}
                         href={social.url}
-                        className="aot-team1__social flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2"
+                        className="aot-team-grid__social flex h-8 w-8 items-center justify-center rounded-full text-white backdrop-blur-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2"
                         aria-label={`${member.name} — ${social.icon}`}
                         {...(external
                           ? { target: "_blank", rel: "noopener noreferrer" }
@@ -133,41 +133,41 @@ export function Team1Card({
   );
 }
 
-export default function Team1({
+export default function TeamGrid({
   badge = "Our Team",
   heading = "The people behind AllOfTech",
   headingId,
   description = "Leadership you can meet, and a studio that ships the work together.",
   members = [],
   className,
-}: Team1Props) {
+}: TeamGridProps) {
   return (
-    <div className={cn("aot-team1", className)}>
-      <div className="aot-team1__intro mx-auto mb-8 flex max-w-2xl flex-col items-center text-center md:mb-10">
+    <div className={cn("aot-team-grid", className)}>
+      <div className="aot-team-grid__intro mx-auto mb-8 flex max-w-2xl flex-col items-center text-center md:mb-10">
         {badge && (
-          <div className="aot-team1__badge mb-4 inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium tracking-[0.08em] uppercase">
+          <div className="aot-team-grid__badge mb-4 inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium tracking-[0.08em] uppercase">
             {badge}
           </div>
         )}
         {heading && (
           <h2
             id={headingId}
-            className="aot-team1__heading relative mb-5 text-3xl font-bold tracking-tight md:text-4xl"
+            className="aot-team-grid__heading relative mb-5 text-3xl font-bold tracking-tight md:text-4xl"
           >
             {heading}
           </h2>
         )}
         {description && (
-          <p className="aot-team1__description text-base leading-relaxed md:text-lg">
+          <p className="aot-team-grid__description text-base leading-relaxed md:text-lg">
             {description}
           </p>
         )}
       </div>
 
       {members.length > 0 && (
-        <div className="aot-team1__grid mx-auto grid max-w-[640px] grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="aot-team-grid__grid mx-auto grid max-w-[640px] grid-cols-1 gap-4 sm:grid-cols-2">
           {members.map((member) => (
-            <Team1Card key={member.id} member={member} className="aspect-[3/4] max-h-[320px]" />
+            <TeamCard key={member.id} member={member} className="aspect-[3/4] max-h-[320px]" />
           ))}
         </div>
       )}

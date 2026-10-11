@@ -111,10 +111,10 @@
             <div class="hero-container">
                 <div class="hero-split">
                     <div class="hero-copy">
-                        <p class="hero-eyebrow hero-seq">27 projects delivered <span class="hero-eyebrow__dot"
-                                aria-hidden="true">•</span> 98% client satisfaction</p>
+                        <p class="hero-eyebrow hero-seq">AI, web, mobile and design <span class="hero-eyebrow__dot"
+                                aria-hidden="true">•</span> one team in Dhaka</p>
                         <h1 class="hero-title">
-                            <span class="hero-wipe hero-wipe--nexus">We build what your</span>
+                            <span class="hero-wipe hero-wipe--lead">We build what your</span>
                             <span class="hero-wipe hero-wipe--flow"><span class="hero-flow">business runs on.</span></span>
                         </h1>
                         <p class="hero-subtitle hero-seq">AllOfTech is a tech and AI agency delivering AI/ML systems,
@@ -271,8 +271,8 @@
                     </div>
 
                     <div class="about-future-right">
-                        <p class="about-future-description">AllOfTech is a forward-thinking technology agency dedicated
-                            to delivering cutting-edge solutions that empower businesses to thrive in the digital age.
+                        <p class="about-future-description">AllOfTech is a technology agency in Dhaka. We design and
+                            build the software, apps and brands that small and growing businesses run on every day.
                         </p>
 
                         <div class="about-future-stats-bar" role="list" aria-label="AllOfTech key statistics">
@@ -296,9 +296,9 @@
 
                         <div class="about-future-mission">
                             <h3 class="about-future-mission-title">Our Mission</h3>
-                            <p class="about-future-mission-text">To transform ideas into impactful digital realities by
-                                leveraging advanced technologies, ensuring efficiency, security, and user-centric
-                                experiences that drive measurable results for our clients.</p>
+                            <p class="about-future-mission-text">To take an idea from a first conversation to a working
+                                product that is fast, secure and easy to use, and to measure it by what it changes
+                                for the client's business.</p>
                         </div>
                     </div>
                 </div>
@@ -641,10 +641,9 @@
                                 <span class="faq-chevron" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-answer" hidden>
-                                <p>AllOfTech is a leading technology agency and AI agency specializing in AI/ML
-                                    development, web development, mobile app development, UX/UI design, graphics &
-                                    branding, and animation services. We help businesses transform digitally with
-                                    cutting-edge technology solutions.</p>
+                                <p>AllOfTech is a technology and AI agency based in Dhaka. We build AI/ML systems,
+                                    websites, mobile apps, UX/UI design, graphics & branding, and animation, with one
+                                    team handling the work from first sketch to launch.</p>
                             </div>
                         </article>
 
@@ -655,16 +654,15 @@
                                 <span class="faq-chevron" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-answer" hidden>
-                                <p>AllOfTech has delivered 27 projects with 98% client satisfaction. We offer 9+ years
-                                    of combined experience, mastery of 50+ technologies, and a 95% on-time delivery
-                                    rate. As a trusted tech agency, we provide comprehensive solutions from AI
-                                    development to complete digital transformation.</p>
+                                <p>We have delivered 27 projects with 98% client satisfaction, bring 9+ years of
+                                    combined experience across 50+ technologies, and ship 95% of projects on time. One
+                                    team covers everything from an AI prototype to a finished website or app.</p>
                             </div>
                         </article>
 
                         <article class="faq-item">
                             <button class="faq-question" type="button" aria-expanded="false">
-                                <span class="faq-question-text">What makes AllOfTech a top AI agency?</span>
+                                <span class="faq-question-text">What kind of AI work does AllOfTech do?</span>
                                 <span class="faq-chevron" aria-hidden="true">+</span>
                             </button>
                             <div class="faq-answer" hidden>
@@ -801,7 +799,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 AllOfTech. All rights reserved.</p>
-                <p class="footer-credit">Innovative Technology Solutions Agency | Registration: 01301927872</p>
+                <p class="footer-credit">Technology and AI agency, Dhaka | Registration: 01301927872</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
                     Road No-2, Adarsh Nagar, Middle Badda, West Lane of Abul Hotel, Dhaka, Bangladesh
                 </p>
@@ -852,8 +850,9 @@
                 </div>
             </div>
 
-            <!-- Login Modal -->
-            <div class="chatbot-login-modal" id="chatbotLoginModal">
+            <!-- Login Modal (kept in markup; currently hidden. Restore by setting
+                 CHATBOT_LOGIN_REQUIRED = true in public/js/chatbot.js) -->
+            <div class="chatbot-login-modal" id="chatbotLoginModal" hidden>
                 <div class="chatbot-login-content">
                     <div class="chatbot-login-header">
                         <h3>Enter Your Email</h3>
@@ -877,8 +876,8 @@
                 </div>
             </div>
 
-            <!-- Chat Messages Area (hidden until logged in) -->
-            <div class="chatbot-messages" id="chatbotMessages" style="display: none;">
+            <!-- Chat Messages Area -->
+            <div class="chatbot-messages" id="chatbotMessages">
                 <div class="chatbot-message chatbot-message-bot">
                     <div class="message-avatar">
                         <img src="/images/new-Logo.png" alt="AllOfTech Logo" class="message-logo" width="32" height="32"
@@ -889,7 +888,7 @@
                     </div>
                 </div>
             </div>
-            <div class="chatbot-input-container" id="chatbotInputContainer" style="display: none;">
+            <div class="chatbot-input-container" id="chatbotInputContainer">
                 <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Type your message..."
                     aria-label="Chat input">
                 <button class="chatbot-send" id="chatbotSend" aria-label="Send message">

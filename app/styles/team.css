@@ -1,4 +1,4 @@
-/* Compact Team-1 composition: leadership cards + group shots as one mosaic. */
+/* Compact team composition: leadership cards + group shots as one mosaic. */
 
 .aot-team {
   --aot-team-cyan: var(--primary-cyan, #00ffff);
@@ -49,7 +49,7 @@
   display: contents;
 }
 
-.aot-team1__badge {
+.aot-team-grid__badge {
   border-color: rgba(0, 255, 255, 0.28);
   background: linear-gradient(
     135deg,
@@ -62,7 +62,7 @@
   box-shadow: 0 0 18px rgba(0, 255, 255, 0.08);
 }
 
-.aot-team1__heading {
+.aot-team-grid__heading {
   font-family: var(--font-merriweather), Merriweather, Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.7rem, 3.2vw, 2.55rem);
@@ -73,7 +73,7 @@
   text-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
 }
 
-.aot-team1__heading::after {
+.aot-team-grid__heading::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -85,7 +85,7 @@
   box-shadow: 0 0 14px var(--aot-team-cyan);
 }
 
-.aot-team1__description {
+.aot-team-grid__description {
   max-width: var(--measure-narrow, 56ch);
   margin: 1.15rem auto 0;
   color: var(--text-secondary, #a1a1aa);
@@ -139,7 +139,7 @@
   isolation: isolate;
 }
 
-.aot-team1__card {
+.aot-team-grid__card {
   border-radius: 1.15rem;
   border-color: rgba(0, 255, 255, 0.22);
   background: var(--aot-team-panel);
@@ -539,17 +539,17 @@ html.motion-desktop .aot-epc-orbit__core {
   }
 }
 
-.aot-team1__card:focus-visible {
+.aot-team-grid__card:focus-visible {
   outline: 2px solid var(--aot-team-cyan);
   outline-offset: 3px;
 }
 
-.aot-team1__card img,
+.aot-team-grid__card img,
 .aot-team__shot img {
   max-width: none;
 }
 
-.aot-team1__wash {
+.aot-team-grid__wash {
   background: linear-gradient(
     to top,
     rgba(15, 5, 26, 0.96) 0%,
@@ -558,35 +558,35 @@ html.motion-desktop .aot-epc-orbit__core {
   );
 }
 
-.aot-team1__name,
-.aot-team1__role {
+.aot-team-grid__name,
+.aot-team-grid__role {
   font-family: var(--font-merriweather), Merriweather, Georgia, serif;
 }
 
-.aot-team1__name {
+.aot-team-grid__name {
   text-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
   line-height: 1.12;
   text-wrap: balance;
 }
 
-.aot-team .aot-team__tile--ceo .aot-team1__name,
-.aot-team .aot-team__tile--coo .aot-team1__name {
+.aot-team .aot-team__tile--ceo .aot-team-grid__name,
+.aot-team .aot-team__tile--coo .aot-team-grid__name {
   font-size: clamp(0.8rem, 1.2vw, 1.05rem);
   overflow-wrap: break-word;
 }
 
-.aot-team1__role {
+.aot-team-grid__role {
   color: var(--aot-team-cyan);
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.28);
 }
 
-.aot-team1__social {
+.aot-team-grid__social {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
-.aot-team1__social:hover,
-.aot-team1__social:focus-visible {
+.aot-team-grid__social:hover,
+.aot-team-grid__social:focus-visible {
   background: var(--aot-team-cyan);
   color: var(--aot-team-ink);
   border-color: var(--aot-team-cyan);
@@ -663,12 +663,12 @@ html.motion-desktop .aot-epc-orbit__core {
     transform 400ms var(--aot-team-soft);
 }
 
-.aot-team1__card .aot-spot,
+.aot-team-grid__card .aot-spot,
 .aot-team__shot .aot-spot {
   z-index: 3;
 }
 
-.aot-team1__card,
+.aot-team-grid__card,
 .aot-team__shot {
   transition:
     transform 420ms var(--aot-team-soft),
@@ -679,7 +679,7 @@ html.motion-desktop .aot-epc-orbit__core {
 }
 
 .aot-team__shot img,
-.aot-team1__card img {
+.aot-team-grid__card img {
   transition: transform 700ms var(--aot-team-soft), filter 420ms var(--aot-team-soft);
 }
 
@@ -700,8 +700,8 @@ html.motion-desktop .aot-epc-orbit__core {
     transform: translate3d(0, -5px, 0);
   }
 
-  .aot-team1__card:hover,
-  .aot-team1__card:focus-within {
+  .aot-team-grid__card:hover,
+  .aot-team-grid__card:focus-within {
     border-color: rgba(0, 255, 255, 0.5);
     box-shadow:
       0 16px 36px rgba(15, 5, 26, 0.6),
@@ -808,7 +808,7 @@ html.motion-desktop .aot-epc-orbit__core {
     gap: 0.5rem;
   }
 
-  .aot-team1__card,
+  .aot-team-grid__card,
   .aot-team__shot {
     border-radius: 0.95rem;
   }
@@ -825,9 +825,9 @@ html.motion-desktop .aot-epc-orbit__core {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aot-team1__card,
+  .aot-team-grid__card,
   .aot-team__shot,
-  .aot-team1__card img,
+  .aot-team-grid__card img,
   .aot-team__shot img,
   .aot-team__shot-caption,
   .aot-team__shot::after {
@@ -837,7 +837,7 @@ html.motion-desktop .aot-epc-orbit__core {
   html.aot-motion .aot-team__stage:hover .aot-team__tile,
   html.aot-motion .aot-team__stage:hover .aot-team__tile:hover,
   .aot-team__shot:hover img,
-  .aot-team1__card:hover img {
+  .aot-team-grid__card:hover img {
     transform: none;
     opacity: 1;
     filter: none;

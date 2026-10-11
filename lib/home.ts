@@ -1,9 +1,9 @@
-export const HOME_TITLE = "Top Tech Agency | AI Agency | Web Development Agency | AllOfTech";
+export const HOME_TITLE = "AllOfTech - AI, Web and Mobile App Development Agency";
 export const HOME_DESCRIPTION =
-  "AllOfTech is a leading AI & tech agency delivering AI/ML, web development, mobile apps, and digital transformation for US and global businesses.";
-export const HOME_OG_TITLE = "Top Tech Agency & AI Agency | AllOfTech - Technology Solutions";
+  "AllOfTech is a tech and AI agency in Dhaka building AI/ML systems, websites, mobile apps and brands for businesses in the US and worldwide.";
+export const HOME_OG_TITLE = "AllOfTech - AI, Web and Mobile App Development";
 export const HOME_OG_DESCRIPTION =
-  "Leading tech agency and AI agency providing cutting-edge technology solutions. Specializing in AI/ML, web development, mobile apps, and digital transformation. 27 projects delivered.";
+  "One team for AI/ML, websites, mobile apps, UX/UI design, branding and animation. 27 projects delivered for businesses in the US and worldwide.";
 export const HOME_KEYWORDS = [
   "tech agency",
   "technology agency",

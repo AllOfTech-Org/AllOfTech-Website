@@ -3,7 +3,7 @@ import HtmlClone from "@/components/HtmlClone";
 import JsonLd from "@/components/JsonLd";
 import { getBlogPost } from "@/lib/blog";
 import { blogPostMetadata, blogPostSchemas } from "@/lib/page-metadata";
-import { NEXUS_SCRIPTS } from "@/lib/scripts";
+import { PAGE_SCRIPTS } from "@/lib/scripts";
 import markup from "./markup.html";
 
 const post = getBlogPost("ai-agency-services-guide");
@@ -14,7 +14,7 @@ export default function AiAgencyServicesGuidePage() {
   return (
     <>
       <JsonLd data={blogPostSchemas(post)} />
-      <HtmlClone html={markup} scripts={NEXUS_SCRIPTS} />
+      <HtmlClone html={markup} scripts={PAGE_SCRIPTS} />
     </>
   );
 }
