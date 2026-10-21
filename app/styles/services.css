@@ -784,6 +784,11 @@
   padding: 0;
 }
 
+.aot-home-services__blog .aot-service-grid a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .aot-home-services__blog .container {
   max-width: 1180px;
   padding-left: 0;

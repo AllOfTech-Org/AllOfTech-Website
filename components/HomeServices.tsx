@@ -72,7 +72,7 @@ export default function HomeServices() {
         renderArticleLink={({ href, children }) => (
           <Link
             href={href}
-            className="focus-visible:ring-ring block h-full min-w-0 rounded-2xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="focus-visible:ring-ring block h-full min-w-0 rounded-2xl no-underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             {children}
           </Link>
