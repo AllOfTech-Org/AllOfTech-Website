@@ -4,6 +4,7 @@ import { Merriweather } from "next/font/google";
 import AotCursor from "@/components/AotCursor";
 import ContinuousNav from "@/components/ContinuousNav";
 import JsonLd from "@/components/JsonLd";
+import MicrosoftClarity from "@/components/MicrosoftClarity";
 import SiteChrome from "@/components/SiteChrome";
 import SiteFooter from "@/components/SiteFooter";
 import SiteIntro from "@/components/SiteIntro";
@@ -110,6 +111,8 @@ export const viewport: Viewport = {
   ],
 };
 
+const clarityProjectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID?.trim() ?? "";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -124,6 +127,7 @@ export default function RootLayout({
       </head>
       <body id="top" className="aot-float-header">
         <SiteIntro />
+        {clarityProjectId ? <MicrosoftClarity projectId={clarityProjectId} /> : null}
         <Script
           src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
           strategy="afterInteractive"
