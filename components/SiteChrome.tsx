@@ -17,15 +17,9 @@ import {
 import { FIRST_ENTER_MS, clearFirstEnter } from "@/lib/first-enter";
 import { BOOK_A_CALL_URL, CONTACT_EMAIL, SITE_NAME, SOCIAL_PROFILES } from "@/lib/site";
 import { Mail } from "lucide-react";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
+import { FaLinkedinIn } from "react-icons/fa6";
 
 const NAV_SOCIALS = [
-  {
-    href: SOCIAL_PROFILES.facebook,
-    label: "AllOfTech on Facebook",
-    Icon: FaFacebookF,
-    external: true,
-  },
   {
     href: SOCIAL_PROFILES.linkedin,
     label: "AllOfTech on LinkedIn",

@@ -5,7 +5,9 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaThreads,
   FaXTwitter,
+  FaYoutube,
 } from "react-icons/fa6";
 
 export interface FooterLink {
@@ -21,7 +23,7 @@ export interface FooterColumn {
 export interface FooterSocial {
   label: string;
   href: string;
-  icon: "facebook" | "twitter" | "instagram" | "linkedin";
+  icon: "facebook" | "twitter" | "x" | "instagram" | "threads" | "youtube" | "linkedin";
 }
 
 export interface FooterProps {
@@ -85,6 +87,26 @@ const defaultSocials: FooterSocial[] = [
     icon: "facebook",
   },
   {
+    label: "Instagram",
+    href: "https://www.instagram.com/alloftech.official/",
+    icon: "instagram",
+  },
+  {
+    label: "Threads",
+    href: "https://www.threads.com/@alloftech.official",
+    icon: "threads",
+  },
+  {
+    label: "X",
+    href: "https://x.com/alloftech_site",
+    icon: "x",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@AllOfTechOfficial",
+    icon: "youtube",
+  },
+  {
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/alloftech/",
     icon: "linkedin",
@@ -143,7 +165,10 @@ const linkVariants: Variants = {
 const socialIcons = {
   facebook: FaFacebookF,
   twitter: FaXTwitter,
+  x: FaXTwitter,
   instagram: FaInstagram,
+  threads: FaThreads,
+  youtube: FaYoutube,
   linkedin: FaLinkedinIn,
 };
 

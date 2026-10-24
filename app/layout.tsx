@@ -8,7 +8,7 @@ import MicrosoftClarity from "@/components/MicrosoftClarity";
 import SiteChrome from "@/components/SiteChrome";
 import SiteFooter from "@/components/SiteFooter";
 import SiteIntro from "@/components/SiteIntro";
-import { FIRST_ENTER_BOOT_SCRIPT, FIRST_ENTER_CRITICAL_CSS } from "@/lib/first-enter";
+import { FIRST_ENTER_BOOT_SCRIPT } from "@/lib/first-enter";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/home";
 import { siteGraph } from "@/lib/seo";
 import {
@@ -122,10 +122,9 @@ export default function RootLayout({
     <html lang="en" className={`${merriweather.variable} ${merriweather.className}`} suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/images/new-Logo_tab.png" fetchPriority="high" />
-        <style dangerouslySetInnerHTML={{ __html: FIRST_ENTER_CRITICAL_CSS }} />
         <script dangerouslySetInnerHTML={{ __html: FIRST_ENTER_BOOT_SCRIPT }} />
       </head>
-      <body id="top" className="aot-float-header">
+      <body id="top" className="aot-float-header" suppressHydrationWarning>
         <SiteIntro />
         {clarityProjectId ? <MicrosoftClarity projectId={clarityProjectId} /> : null}
         <Script

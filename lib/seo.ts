@@ -397,28 +397,28 @@ export const CASE_STUDY_WORKS = [
     image: absoluteAsset("/images/case-studie/After.webp"),
   },
   {
+    name: "Studio reel — motion with a job",
+    description: "3D product visualization and environment motion reel.",
+    url: `${SITE_URL}/case-studies#case-study-2`,
+    image: absoluteAsset("/images/Service/Animation%20Banner%20.webp"),
+  },
+  {
     name: "Your Brand — Built for Growth",
     description: "Growth website and brand presence built by AllOfTech.",
-    url: `${SITE_URL}/case-studies#case-study-2`,
+    url: `${SITE_URL}/case-studies#case-study-3`,
     image: absoluteAsset("/images/case-studie/cs2-After.webp"),
   },
   {
     name: "Mashover — AI customer service",
     description: "AI-powered customer service chatbot for Mashover.",
-    url: `${SITE_URL}/case-studies#case-study-3`,
+    url: `${SITE_URL}/case-studies#case-study-4`,
     image: absoluteAsset("/images/case-studie/cs3.webp"),
   },
   {
     name: "Brand identity — graphic design",
     description: "Graphic design and brand identity work from AllOfTech.",
-    url: `${SITE_URL}/case-studies#case-study-4`,
-    image: absoluteAsset("/images/case-studie/34.webp"),
-  },
-  {
-    name: "Studio reel — motion with a job",
-    description: "3D product visualization and environment motion reel.",
     url: `${SITE_URL}/case-studies#case-study-5`,
-    image: absoluteAsset("/images/Service/Animation%20Banner%20.webp"),
+    image: absoluteAsset("/images/case-studie/34.webp"),
   },
 ] as const;
 

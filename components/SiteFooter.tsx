@@ -59,6 +59,26 @@ export default function SiteFooter() {
           icon: "facebook",
         },
         {
+          label: "Instagram",
+          href: SOCIAL_PROFILES.instagram,
+          icon: "instagram",
+        },
+        {
+          label: "Threads",
+          href: SOCIAL_PROFILES.threads,
+          icon: "threads",
+        },
+        {
+          label: "X",
+          href: SOCIAL_PROFILES.x,
+          icon: "x",
+        },
+        {
+          label: "YouTube",
+          href: SOCIAL_PROFILES.youtube,
+          icon: "youtube",
+        },
+        {
           label: "LinkedIn",
           href: SOCIAL_PROFILES.linkedin,
           icon: "linkedin",

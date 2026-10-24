@@ -30,12 +30,20 @@ export const DEFAULT_OG_IMAGE_ALT = "AllOfTech logo";
 
 export const SOCIAL_PROFILES = {
   facebook: "https://www.facebook.com/AllOfTech.official",
+  instagram: "https://www.instagram.com/alloftech.official/",
+  threads: "https://www.threads.com/@alloftech.official",
+  x: "https://x.com/alloftech_site",
+  youtube: "https://www.youtube.com/@AllOfTechOfficial",
   linkedin: "https://www.linkedin.com/company/alloftech/",
   reddit: "https://www.reddit.com/user/Rare-Philosophy387/",
 } as const;
 
 export const SAME_AS = [
   SOCIAL_PROFILES.facebook,
+  SOCIAL_PROFILES.instagram,
+  SOCIAL_PROFILES.threads,
+  SOCIAL_PROFILES.x,
+  SOCIAL_PROFILES.youtube,
   SOCIAL_PROFILES.linkedin,
   SOCIAL_PROFILES.reddit,
 ] as const;
