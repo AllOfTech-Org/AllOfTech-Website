@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,7 @@ type ServiceLoopVideoProps = {
 
 export default function ServiceLoopVideo({ src, label, className }: ServiceLoopVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [activeSrc, setActiveSrc] = useState<string>();
 
   useEffect(() => {
     const el = ref.current;
@@ -39,6 +40,7 @@ export default function ServiceLoopVideo({ src, label, className }: ServiceLoopV
         : new IntersectionObserver(
             (entries) => {
               visible = entries.some((entry) => entry.isIntersecting);
+              if (visible) setActiveSrc(src);
               sync();
             },
             { rootMargin: "80px 0px", threshold: 0.01 },
@@ -47,6 +49,7 @@ export default function ServiceLoopVideo({ src, label, className }: ServiceLoopV
     if (io) io.observe(el);
     else {
       visible = true;
+      setActiveSrc(src);
       sync();
     }
 
@@ -67,12 +70,12 @@ export default function ServiceLoopVideo({ src, label, className }: ServiceLoopV
     <video
       ref={ref}
       className={cn("aot-services-still__video", className)}
-      src={src}
+      src={activeSrc}
       autoPlay
       loop
       muted
       playsInline
-      preload="metadata"
+      preload="none"
       disablePictureInPicture
       disableRemotePlayback
       controls={false}

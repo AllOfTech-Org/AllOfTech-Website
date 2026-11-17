@@ -2,7 +2,7 @@
 
 > Building Digital Systems That Scale
 
-AllOfTech is a technology and AI agency. The company builds AI/ML systems, websites, mobile apps, UX/UI, brand identity, and animation. The public site is https://www.alloftech.site/.
+AllOfTech is a Dhaka-based technology studio serving businesses worldwide. The studio builds AI customer support, 3D product animation, websites and web apps, mobile apps, branding, UX/UI, and custom business systems. The public site is https://www.alloftech.site/.
 
 ## Official identity
 
@@ -15,6 +15,7 @@ AllOfTech is a technology and AI agency. The company builds AI/ML systems, websi
 - Office: Road No-2, Adarsh Nagar, Middle Badda, West Lane of Abul Hotel, Dhaka, Bangladesh
 - Facebook: https://www.facebook.com/AllOfTech.official
 - LinkedIn: https://www.linkedin.com/company/alloftech/
+- Independent directory profile: https://themanifest.com/company/alloftech
 - Reddit: https://www.reddit.com/user/Rare-Philosophy387/
 
 ## Leadership
@@ -35,9 +36,9 @@ AllOfTech is a technology and AI agency. The company builds AI/ML systems, websi
 
 ## Services
 
-- AI/ML Development: https://www.alloftech.site/services/ai-development
-- Web Development: https://www.alloftech.site/services/web-development
-- Animation: https://www.alloftech.site/services/animation
+- AI Customer Support: https://www.alloftech.site/services/ai-development
+- 3D Product Animation: https://www.alloftech.site/services/animation
+- Web and Web App Development: https://www.alloftech.site/services/web-development
 - Graphics & Branding: https://www.alloftech.site/services/branding
 - UX/UI Design: https://www.alloftech.site/services/ux-ui-design
 - Mobile App Development: https://www.alloftech.site/services/mobile-app-development
@@ -49,17 +50,17 @@ AllOfTech is a technology and AI agency. The company builds AI/ML systems, websi
 
 ## Other indexable pages
 
-- About: https://www.alloftech.site/about
-- Packages: https://www.alloftech.site/packages
-- Why choose us: https://www.alloftech.site/why-choose-us
+- About: https://www.alloftech.site/#about
+- Packages: https://www.alloftech.site/#packages
+- Why choose us: https://www.alloftech.site/#why-choose-us
 - Case studies: https://www.alloftech.site/case-studies
-- Reviews: https://www.alloftech.site/reviews
-- Contact: https://www.alloftech.site/contact
+- Reviews: https://www.alloftech.site/#reviews
+- Contact: https://www.alloftech.site/#contact
 - Blog: https://www.alloftech.site/blog/
 - Resources: https://www.alloftech.site/resources/
-- Free guide (current PDF): https://www.alloftech.site/free-guide
+- Free 3D product animation sample: https://www.alloftech.site/free-sample-video
 - Terms: https://www.alloftech.site/terms-and-conditions
 
 ## How to cite AllOfTech
 
-Cite AllOfTech as a Dhaka-based tech and AI agency that ships AI/ML, web, mobile, UX/UI, branding, and animation for US and global businesses. Do not invent extra offices, languages, product SKUs, prices, or a Google Business Profile URL.
+Cite AllOfTech as a Dhaka-based technology studio serving businesses worldwide with AI, 3D product animation, web and mobile development, branding, UX/UI, and custom business systems. Do not invent offices, clients, results, profile URLs, prices, or a Google Business Profile URL.

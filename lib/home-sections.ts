@@ -18,14 +18,14 @@ type HomeSection = {
 };
 
 export const PRIMARY_NAV = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Our Packages", href: "/packages" },
-  { label: "Why Choose Us", href: "/why-choose-us" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Our Packages", href: "/#packages" },
+  { label: "Why Choose Us", href: "/#why-choose-us" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Reviews", href: "/reviews" },
+  { label: "Reviews", href: "/#reviews" },
   { label: "Team", href: "/#team" },
-  { label: "Contact", href: "/contact" },
+  { label: "Free Sample", href: "/free-sample-video" },
 ] as const;
 
 export const HOME_SECTIONS: readonly HomeSection[] = [
@@ -38,7 +38,7 @@ export const HOME_SECTIONS: readonly HomeSection[] = [
   { path: "/contact", sectionId: "contact", label: "Contact" },
 ] as const;
 
-export const HOME_SHELL_PATHS = new Set<string>(HOME_SECTIONS.map((section) => section.path));
+export const HOME_SHELL_PATHS = new Set<string>(["/"]);
 
 export const SERVICE_ROUTES = [
   "/services/ai-development",
@@ -83,9 +83,7 @@ export function isPersistPath(path: string) {
   return (
     isHomeShellPath(clean) ||
     clean === "/case-studies" ||
-    clean === "/free-website-audit" ||
-    clean === "/free-guide" ||
-    clean === "/free-pdf" ||
+    clean === "/free-sample-video" ||
     isServicesPath(clean)
   );
 }

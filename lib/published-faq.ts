@@ -7,7 +7,7 @@ export const PUBLISHED_FAQS: PublishedFaq[] = [
   {
     question: "What is AllOfTech and what services does this tech agency offer?",
     answer:
-      "AllOfTech is a technology and AI agency based in Dhaka. We build AI/ML systems, websites, mobile apps, UX/UI design, graphics & branding, and animation, with one team handling the work from first sketch to launch.",
+      "AllOfTech is a Dhaka-based technology studio serving businesses worldwide. We build AI customer support, 3D product animation, websites and web apps, mobile apps, branding, UX/UI, and custom business systems.",
   },
   {
     question: "Why should I choose AllOfTech as my technology agency?",
@@ -17,7 +17,7 @@ export const PUBLISHED_FAQS: PublishedFaq[] = [
   {
     question: "What kind of AI work does AllOfTech do?",
     answer:
-      "As an AI agency, AllOfTech specializes in machine learning, natural language processing, computer vision, predictive analytics, and AI-powered automation. We've helped businesses achieve 30%+ efficiency boosts through intelligent AI solutions and automated workflows.",
+      "AllOfTech builds AI customer-support systems around approved product, order, and policy information, with analytics and human handoff for questions the assistant should not answer. One e-commerce client reported a 66% better response rate and a 23% sales increase; results vary by store and implementation.",
   },
   {
     question: "How much does it cost to work with a tech agency like AllOfTech?",

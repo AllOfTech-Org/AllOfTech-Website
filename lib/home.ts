@@ -1,23 +1,14 @@
-export const HOME_TITLE = "AllOfTech - AI, Web and Mobile App Development Agency";
+export const HOME_TITLE = "AI, 3D Animation, Web & App Development | AllOfTech";
 export const HOME_DESCRIPTION =
-  "AllOfTech is a tech and AI agency in Dhaka building AI/ML systems, websites, mobile apps and brands for businesses in the US and worldwide.";
-export const HOME_OG_TITLE = "AllOfTech - AI, Web and Mobile App Development";
+  "Dhaka-based AllOfTech builds AI customer support, 3D product animation, web and mobile apps, branding, and custom business systems for clients worldwide.";
+export const HOME_OG_TITLE = "Technology Built Around Your Business | AllOfTech";
 export const HOME_OG_DESCRIPTION =
-  "One team for AI/ML, websites, mobile apps, UX/UI design, branding and animation. 27 projects delivered for businesses in the US and worldwide.";
+  "AI, 3D product animation, web and mobile apps, branding, UX/UI, and custom business systems from one connected studio.";
 export const HOME_KEYWORDS = [
-  "tech agency",
-  "technology agency",
-  "AI agency",
-  "tech agency services",
-  "web development agency",
-  "mobile app agency",
-  "digital agency",
-  "software development agency",
-  "technology solutions agency",
-  "AI development agency",
-  "machine learning agency",
-  "custom software agency",
-  "digital transformation agency",
-  "IT agency",
-  "tech consulting agency",
+  "AI customer support development",
+  "3D product animation studio",
+  "web and web app development",
+  "mobile app development",
+  "branding and UX UI design",
+  "custom business systems",
 ];

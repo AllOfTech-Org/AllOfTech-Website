@@ -132,7 +132,7 @@ export function homeSchemas() {
       path: "/",
       name: "AllOfTech home",
       description:
-        "AllOfTech is a tech and AI agency delivering AI/ML, web development, mobile apps, UX/UI, branding, and animation.",
+        "AllOfTech is a Dhaka-based technology studio building AI customer support, 3D product animation, web and mobile apps, branding, and custom business systems for clients worldwide.",
     }),
     faqPageNode(`${SITE_URL}/`),
     breadcrumbList([{ name: "Home", path: "/" }]),

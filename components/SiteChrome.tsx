@@ -4,14 +4,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import {
-  HASH_TO_PATH,
   HOME_SHELL_PATHS,
   PRIMARY_NAV,
   SERVICE_ROUTES,
   isHomeShellPath,
   isPersistPath,
   normalizePath,
-  pathForHash,
   sectionIdForPath,
 } from "@/lib/home-sections";
 import { FIRST_ENTER_MS, clearFirstEnter } from "@/lib/first-enter";
@@ -71,19 +69,6 @@ function instantScroll(id: string) {
   el?.scrollIntoView({ block: "start" });
 }
 
-function rewriteSectionUrl(url: URL) {
-  const mapped = pathForHash(url.hash);
-  if (!mapped) return url;
-  const next = new URL(mapped, url.origin);
-  next.search = url.search;
-  return next;
-}
-
-function stripHash() {
-  if (!window.location.hash) return;
-  history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
-}
-
 export default function SiteChrome() {
   const pathname = usePathname();
   const router = useRouter();
@@ -107,7 +92,7 @@ export default function SiteChrome() {
   useEffect(() => {
     const run = () => {
       router.prefetch("/case-studies");
-      router.prefetch("/services");
+      router.prefetch("/free-sample-video");
       for (const route of HOME_SHELL_PATHS) router.prefetch(route);
       for (const route of SERVICE_ROUTES) router.prefetch(route);
     };
@@ -120,17 +105,6 @@ export default function SiteChrome() {
   }, [router]);
 
   useLayoutEffect(() => {
-    const mapped = pathForHash(window.location.hash);
-    if (!mapped) return;
-    instantScroll(window.location.hash);
-    if (normalizePath(window.location.pathname) !== mapped) {
-      router.replace(mapped);
-      return;
-    }
-    stripHash();
-  }, [pathname, router]);
-
-  useLayoutEffect(() => {
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -141,7 +115,7 @@ export default function SiteChrome() {
 
       let url: URL;
       try {
-        url = rewriteSectionUrl(new URL(href, window.location.href));
+        url = new URL(href, window.location.href);
       } catch {
         return;
       }
@@ -168,7 +142,7 @@ export default function SiteChrome() {
       const continuous = persist && isPersistPath(nextPath);
       try {
         const leftoverHash = url.hash.replace(/^#/, "");
-        if (leftoverHash && !HASH_TO_PATH[leftoverHash]) {
+        if (leftoverHash && nextPath !== "/") {
           sessionStorage.setItem("aotHash", url.hash);
         } else {
           sessionStorage.removeItem("aotHash");
@@ -203,10 +177,6 @@ export default function SiteChrome() {
     firstPaint.current = false;
 
     if (homeShell) {
-      const mapped = pathForHash(window.location.hash);
-      if (mapped && mapped !== path) {
-        return () => window.clearTimeout(settle);
-      }
       let hashId = window.location.hash.replace(/^#/, "");
       try {
         const stored = sessionStorage.getItem("aotHash");
@@ -217,7 +187,6 @@ export default function SiteChrome() {
       } catch {
         // Ignore storage failures.
       }
-      if (hashId !== "team") stripHash();
       if (hashId && document.getElementById(hashId)) {
         instantScroll(hashId);
       } else {

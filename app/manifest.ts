@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "browser",
     background_color: "#050510",
     theme_color: "#050510",
-    lang: "en",
+    lang: "en-US",
     categories: ["business", "productivity"],
     icons: [
       {
@@ -29,8 +29,8 @@ export default function manifest(): MetadataRoute.Manifest {
       },
     ],
     shortcuts: [
-      { name: "Services", short_name: "Services", url: "/services", description: SITE_TAGLINE },
-      { name: "Contact", short_name: "Contact", url: "/contact" },
+      { name: "Services", short_name: "Services", url: "/#services", description: SITE_TAGLINE },
+      { name: "Free sample video", short_name: "Free sample", url: "/free-sample-video" },
     ],
   };
 }

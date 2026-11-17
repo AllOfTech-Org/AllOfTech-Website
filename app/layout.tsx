@@ -44,9 +44,11 @@ export const metadata: Metadata = {
   keywords: [
     "AllOfTech",
     "tech agency",
-    "AI agency",
-    "web development agency",
-    "mobile app agency",
+    "AI customer support development",
+    "3D product animation studio",
+    "web and mobile app development",
+    "branding and UX UI design",
+    "custom business systems",
   ],
   alternates: {
     canonical: "/",
@@ -119,7 +121,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${merriweather.variable} ${merriweather.className}`} suppressHydrationWarning>
+    <html lang="en-US" className={`${merriweather.variable} ${merriweather.className}`} suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/images/new-Logo_tab.png" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: FIRST_ENTER_BOOT_SCRIPT }} />

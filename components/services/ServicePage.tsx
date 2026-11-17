@@ -7,6 +7,7 @@ import ServiceMediaCard from "@/components/services/ServiceMediaCard";
 import ServiceStillRow from "@/components/services/ServiceStillRow";
 import { servicesItem, servicesRise } from "@/components/services/motion";
 import { IMAGE_SIZES } from "@/lib/image";
+import { FREE_SAMPLE_VIDEO_PATH } from "@/lib/free-sample-video";
 import { getRelatedServices, type ServicePageContent } from "@/lib/services";
 import { BOOK_A_CALL_URL } from "@/lib/site";
 
@@ -189,10 +190,14 @@ export default function ServicePage({ service }: { service: ServicePageContent }
         >
           <h2>{service.ctaHeading}</h2>
           <p>{service.ctaBody}</p>
+          <p>US projects are quoted in USD. US-friendly call window: 9–11 AM Eastern / 8–10 PM Dhaka.</p>
           <div className="hero-buttons">
+            <a href={FREE_SAMPLE_VIDEO_PATH} className="btn-primary">
+              Get a free sample video
+            </a>
             <a
               href={BOOK_A_CALL_URL}
-              className="btn-primary"
+              className="btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
             >

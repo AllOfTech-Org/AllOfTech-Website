@@ -43,14 +43,14 @@ const defaultColumns: FooterColumn[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Services", href: "/services" },
-      { label: "Our Packages", href: "/packages" },
-      { label: "Why Choose Us", href: "/why-choose-us" },
+      { label: "About", href: "/#about" },
+      { label: "Services", href: "/#services" },
+      { label: "Our Packages", href: "/#packages" },
+      { label: "Why Choose Us", href: "/#why-choose-us" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Reviews", href: "/reviews" },
+      { label: "Reviews", href: "/#reviews" },
       { label: "Team", href: "/#team" },
-      { label: "Contact", href: "/contact" },
+      { label: "Contact", href: "/#contact" },
     ],
   },
   {
@@ -71,7 +71,7 @@ const defaultColumns: FooterColumn[] = [
       { label: "Book a call", href: "https://calendar.app.google/39A1uSVFK96rUrUg9" },
       { label: "Blog", href: "/blog" },
       { label: "Resources", href: "/resources" },
-      { label: "Free guide", href: "/free-guide" },
+      { label: "Free sample video", href: "/free-sample-video" },
     ],
   },
 ];

@@ -58,8 +58,11 @@ interface ContactFormProps {
   onSubmit?: (data: ContactFormValues) => void;
 }
 
+const US_SERVICE_SLUGS = ["ai-development", "animation", "web-development"];
 const defaultServiceOptions: ServiceOption[] = [
-  ...SERVICES.map((service) => ({
+  ...US_SERVICE_SLUGS.map((slug) => SERVICES.find((service) => service.slug === slug))
+    .filter((service): service is (typeof SERVICES)[number] => Boolean(service))
+    .map((service) => ({
     value: service.slug,
     label: service.shortName,
   })),
@@ -68,21 +71,21 @@ const defaultServiceOptions: ServiceOption[] = [
 
 const defaultContactInfo: ContactInfo = {
   email: CONTACT_EMAIL,
-  phone: "Book a call",
+  phone: "9–11 AM Eastern",
   emailHref: `mailto:${CONTACT_EMAIL}`,
   phoneHref: BOOK_A_CALL_URL,
   emailLabel: "Email",
-  phoneLabel: "Call",
+  phoneLabel: "US-friendly calls",
 };
 
 const defaultProps = {
   id: "contact",
   headingId: "contact-heading",
   badge: "Contact",
-  headline: "Ready to Transform",
-  headlineAccent: "Your Business",
+  headline: "Ready to Make the Product",
+  headlineAccent: "Easier to Buy",
   subheadline:
-    "Get in touch for a free consultation and we will map the first useful step — not a science project. We reply within 24 hours.",
+    "Tell us where the sale gets stuck. We reply within 24 hours, quote US projects in USD, and offer booking slots from 9–11 AM Eastern (8–10 PM Dhaka).",
   contactInfo: defaultContactInfo,
   serviceOptions: defaultServiceOptions,
   ctaLabel: "Send Message",

@@ -50,11 +50,11 @@ export default function HomeServices() {
 
   const data: ServiceCardsData = {
     badge: "SERVICES",
-    heading: "Complete technology\nsolutions",
+    heading: "Built around\nyour business",
     headingId: "services-heading",
     description:
-      "Six things we do well: AI & Machine Learning Development, Web Development, Animation Services, Graphics & Branding, UX/UI Design, and Mobile App Development. Open a card for the full brief.",
-    aside: "Pictures, the complete write-up, and a path to start - one service at a time.",
+      "Explore all six capabilities: AI, web development, 3D product animation, branding, UX/UI, and mobile apps.",
+    aside: "Strategy, design, engineering, and animation from one connected team.",
     viewAllLabel: "All services",
     viewAllHref: "/services",
     showViewAll: false,

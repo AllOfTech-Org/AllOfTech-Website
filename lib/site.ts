@@ -3,7 +3,7 @@ export const SITE_NAME = "AllOfTech";
 export const SITE_LEGAL_NAME = "AllOfTech";
 export const SITE_TAGLINE = "Building Digital Systems That Scale";
 export const SITE_LOCALE = "en_US";
-export const SITE_LANGUAGE = "en";
+export const SITE_LANGUAGE = "en-US";
 
 export const CONTACT_EMAIL = "contact@alloftech.site";
 export const BOOK_A_CALL_URL = "https://calendar.app.google/39A1uSVFK96rUrUg9";
@@ -35,8 +35,11 @@ export const SOCIAL_PROFILES = {
   x: "https://x.com/alloftech_site",
   youtube: "https://www.youtube.com/@AllOfTechOfficial",
   linkedin: "https://www.linkedin.com/company/alloftech/",
+  theManifest: "https://themanifest.com/company/alloftech",
   reddit: "https://www.reddit.com/user/Rare-Philosophy387/",
 } as const;
+
+export const CLUTCH_URL = process.env.NEXT_PUBLIC_CLUTCH_URL?.trim() ?? "";
 
 export const SAME_AS = [
   SOCIAL_PROFILES.facebook,
@@ -45,7 +48,9 @@ export const SAME_AS = [
   SOCIAL_PROFILES.x,
   SOCIAL_PROFILES.youtube,
   SOCIAL_PROFILES.linkedin,
+  SOCIAL_PROFILES.theManifest,
   SOCIAL_PROFILES.reddit,
+  ...(CLUTCH_URL ? [CLUTCH_URL] : []),
 ] as const;
 
 export const PUBLISHED_STATS = {

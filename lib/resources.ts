@@ -1,7 +1,7 @@
 export const RESOURCES_META = {
   title: "Free Technology Resources & Guides | AllOfTech Resources",
   description:
-    "Free technology resources, guides, templates, and tools from AllOfTech. Download free resources for AI development, web development, mobile apps, and digital transformation.",
+    "Practical AllOfTech guides, examples, and proof covering AI, 3D product animation, web development, apps, branding, and digital systems.",
   keywords: [
     "tech agency resources",
     "technology guides",

@@ -56,11 +56,54 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    // Do not redirect apex ↔ www here. Both hostnames hit the same
-    // Cloudflare Worker, and OpenNext does not apply `has: host` reliably,
-    // which causes ERR_TOO_MANY_REDIRECTS. Canonicalize at the zone with a
-    // Cloudflare Redirect Rule (hostname equals alloftech.site → www).
+    // Host and protocol canonicalization lives in middleware.ts. Keep this
+    // list limited to path-level redirects so OpenNext cannot create a loop.
     return [
+      {
+        source: "/about",
+        destination: "/#about",
+        permanent: true,
+      },
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: true,
+      },
+      {
+        source: "/packages",
+        destination: "/#packages",
+        permanent: true,
+      },
+      {
+        source: "/reviews",
+        destination: "/#reviews",
+        permanent: true,
+      },
+      {
+        source: "/why-choose-us",
+        destination: "/#why-choose-us",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/#contact",
+        permanent: true,
+      },
+      {
+        source: "/free-guide",
+        destination: "/free-sample-video",
+        permanent: true,
+      },
+      {
+        source: "/free-pdf",
+        destination: "/free-sample-video",
+        permanent: true,
+      },
+      {
+        source: "/free-website-audit",
+        destination: "/free-sample-video",
+        permanent: true,
+      },
       {
         source: "/index.html",
         destination: "/",
@@ -68,12 +111,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/audit",
-        destination: "/free-website-audit",
+        destination: "/free-sample-video",
         permanent: true,
       },
       {
         source: "/website-audit",
-        destination: "/free-website-audit",
+        destination: "/free-sample-video",
         permanent: true,
       },
       {
