@@ -31,7 +31,10 @@
 .hero--split .hero-eyebrow {
     display: inline-flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.6rem;
+    width: fit-content;
+    max-width: 100%;
     margin: 0 0 clamp(1.1rem, 2.2vw, 1.6rem);
     padding: 0.45rem 1rem;
     border: 1px solid var(--border-color);
