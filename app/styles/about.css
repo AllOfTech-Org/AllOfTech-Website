@@ -191,10 +191,10 @@
 #about .about-future-heading {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: clamp(3rem, 6.4vw, 5.6rem);
-    line-height: 0.92;
+    font-size: clamp(2.6rem, 4.2vw, 4.4rem);
+    line-height: 1.04;
     letter-spacing: var(--tracking-heading);
-    text-transform: uppercase;
+    text-transform: none;
     color: var(--primary-cyan);
     text-align: left;
     margin: 0;
@@ -283,7 +283,17 @@
 }
 
 #about .about-future-description {
-    margin: 0 0 1.75rem;
+    margin: 0 0 1.05rem;
+}
+
+#about .about-future-proof {
+    margin: 0 0 1.65rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--primary-cyan);
+    color: #e3eff7;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 /* Metric tiles */

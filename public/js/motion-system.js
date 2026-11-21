@@ -209,15 +209,8 @@
     }
 
     function startScrollField() {
-        if (reduced() || lite()) {
-            paintScroll('0px');
-            return;
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-        targetY = window.scrollY;
-        smoothY = window.scrollY;
-        requestTick();
+        // Keep background layers stationary so native scrolling remains responsive.
+        paintScroll('0px');
     }
 
     function stopScrollField() {
@@ -293,7 +286,7 @@
 
         if (!pending.length) return;
 
-        if (reduced()) {
+        if (reduced() || lite()) {
             pending.forEach(show);
             return;
         }

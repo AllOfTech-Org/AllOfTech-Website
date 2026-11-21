@@ -1,4 +1,3 @@
-@import "./styles/first-enter.css";
 @import "./styles/base.css";
 @import "./styles/about.css";
 @import "./styles/why-choose.css";
@@ -10,6 +9,8 @@
 @import "./styles/motion-system.css";
 @import "./styles/floating-nav.css";
 @import "./styles/hero-split.css";
+@import "./styles/pain-points.css";
+@import "./styles/service-globe.css";
 @import "./styles/aot-cursor.css";
 @import "./styles/tailwind-utilities.css";
 @import "./styles/footer.css";
@@ -18,6 +19,7 @@
 @import "./styles/contact.css";
 @import "./styles/website-audit.css";
 @import "./styles/case-studies.css";
+@import "./styles/site-polish.css";
 
 #sitePreloader,
 .site-preloader {

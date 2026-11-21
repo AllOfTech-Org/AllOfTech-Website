@@ -1,0 +1,22 @@
+.pain-points { padding: clamp(3.5rem, 5vw, 5rem) var(--space-container-x); background: #090d18; }
+.pain-points__inner { max-width: 1240px; margin-inline: auto; }
+.pain-points__eyebrow { margin: 0 0 .65rem; color: #83bfd0; font: 700 .72rem/1.3 var(--font-body); letter-spacing: .13em; text-transform: uppercase; }
+.pain-points h2 { max-width: 18ch; margin: 0; color: #f1f5fb; font: 700 clamp(2.2rem, 3.5vw, 3.35rem)/1.1 var(--font-heading); letter-spacing: -.035em; }
+.pain-points__intro { max-width: 44rem; margin: .7rem 0 1.75rem; color: #aebaca; font: 400 .98rem/1.55 var(--font-body); }
+.pain-points__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
+.pain-points__card { position: relative; display: flex; flex-direction: column; min-height: 12rem; padding: clamp(1.25rem, 2vw, 1.65rem); border: 1px solid #293348; border-radius: 16px; background: linear-gradient(145deg, #151d2e, #101728); color: #f3f6fb; text-decoration: none; transition: border-color 240ms ease, background-color 240ms ease, transform 240ms cubic-bezier(.22,1,.36,1); }
+.pain-points__card--featured { grid-column: span 2; background: linear-gradient(125deg, #15283a, #141a2c 70%); }
+.pain-points__card:is(:hover,:focus-within) { border-color: #5a8eaa; transform: translateY(-2px); }
+.pain-points__card:focus-visible, .pain-points__service--two a:focus-visible { outline: 2px solid #8bd4e3; outline-offset: 3px; }
+.pain-points__number { color: #8dbdce; font: 700 .7rem/1.3 var(--font-body); letter-spacing: .09em; text-transform: uppercase; }
+.pain-points__question { max-width: 34ch; margin: 1rem 0 1.4rem; font: 600 clamp(1.23rem, 1.75vw, 1.65rem)/1.27 var(--font-heading); letter-spacing: -.02em; }
+.pain-points__card--featured .pain-points__question { max-width: 26ch; font-size: clamp(1.55rem, 2.25vw, 2.15rem); }
+.pain-points__service { margin-top: auto; color: #91dce8; font: 600 .83rem/1.4 var(--font-body); }
+.pain-points__service span { display: inline-block; margin-left: .25rem; transition: transform 240ms ease; }
+.pain-points__card:hover .pain-points__service span, .pain-points__service--two a:hover span { transform: translate(2px, -2px); }
+.pain-points__service--two { display: flex; gap: .5rem 1.1rem; flex-wrap: wrap; }
+.pain-points__service--two a { color: inherit; text-decoration: none; }
+.pain-points__service--two a:hover { text-decoration: underline; text-underline-offset: .25em; }
+@media (max-width: 880px) { .pain-points__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pain-points__list { grid-template-columns: 1fr; } .pain-points__card--featured { grid-column: auto; } .pain-points__card { min-height: 10.5rem; } }
+@media (prefers-reduced-motion: reduce) { .pain-points__card, .pain-points__service span { transition: none; } }

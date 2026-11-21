@@ -57,16 +57,16 @@ function BrandLockup({
   );
 }
 
-function instantScroll(id: string) {
+function instantScroll(id: string, behavior: ScrollBehavior = "instant") {
   const section = id.replace(/^#/, "");
   if (!section || section === "top") {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior });
     return;
   }
   const el =
     document.getElementById(section) ||
     (section === "team" ? document.getElementById("aot-team-root") : null);
-  el?.scrollIntoView({ block: "start" });
+  el?.scrollIntoView({ block: "start", behavior });
 }
 
 export default function SiteChrome() {
@@ -131,7 +131,7 @@ export default function SiteChrome() {
 
       if (nextPath === currentPath || stayOnHome) {
         event.preventDefault();
-        instantScroll(scrollId);
+        instantScroll(scrollId, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth");
         if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== nextHref) {
           window.history.pushState(null, "", nextHref);
         }

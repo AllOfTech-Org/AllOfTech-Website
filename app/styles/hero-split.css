@@ -103,6 +103,80 @@
     justify-content: flex-start;
 }
 
+/* Home copy rotator and its fixed supporting lines. */
+.hero--split .hero-rotator-title {
+    position: relative;
+    font-size: clamp(2.5rem, 3.55vw, 3.35rem);
+    line-height: 1.08;
+    min-height: 2.16em;
+    margin-bottom: 1rem;
+    text-wrap: balance;
+}
+
+.hero--split .hero-rotator-layer {
+    position: absolute;
+    inset: 0;
+    display: block;
+    opacity: 1;
+    transition: opacity 210ms ease-in-out;
+    pointer-events: none;
+}
+
+.hero--split .hero-rotator-layer.is-fading {
+    opacity: 0;
+}
+
+.hero--split .hero-rotator-lead,
+.hero--split .hero-rotator-accent { display: block; }
+
+.hero--split .hero-rotator-accent {
+    background: linear-gradient(100deg, #f400e7, #9546f4 82%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero--split .hero-rotator-subline,
+.hero--split .hero-static-line {
+    max-width: 36rem;
+    color: var(--text-secondary);
+    font-size: clamp(.99rem, .4vw + .91rem, 1.13rem);
+    line-height: 1.55;
+}
+
+.hero--split .hero-rotator-subline {
+    position: relative;
+    min-height: 3.1em;
+    margin: 0 0 .8rem;
+}
+
+.hero--split .hero-rotator-subline p { margin: 0; color: inherit; font: inherit; }
+
+.hero--split .hero-static-line { margin: 0 0 1.5rem; }
+
+.hero--split .hero-proof {
+    max-width: 35rem;
+    margin: 1.2rem 0 0;
+    padding-left: .85rem;
+    border-left: 2px solid var(--primary-cyan);
+    color: #c8d5e1;
+    font-size: .86rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+    .hero--split .hero-rotator-title { min-height: 0; }
+}
+
+@media (max-width: 480px) {
+    .hero--split .hero-rotator-title { font-size: clamp(1.95rem, 8.7vw, 2.25rem); min-height: 3.24em; }
+    .hero--split .hero-rotator-subline { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero--split .hero-rotator-layer { transition: none; }
+}
+
 /* ------------------------------------------------------ object slot */
 
 .hero-object {

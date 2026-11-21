@@ -7,8 +7,6 @@ import JsonLd from "@/components/JsonLd";
 import MicrosoftClarity from "@/components/MicrosoftClarity";
 import SiteChrome from "@/components/SiteChrome";
 import SiteFooter from "@/components/SiteFooter";
-import SiteIntro from "@/components/SiteIntro";
-import { FIRST_ENTER_BOOT_SCRIPT } from "@/lib/first-enter";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/home";
 import { siteGraph } from "@/lib/seo";
 import {
@@ -124,10 +122,8 @@ export default function RootLayout({
     <html lang="en-US" className={`${merriweather.variable} ${merriweather.className}`} suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/images/new-Logo_tab.png" fetchPriority="high" />
-        <script dangerouslySetInnerHTML={{ __html: FIRST_ENTER_BOOT_SCRIPT }} />
       </head>
       <body id="top" className="aot-float-header" suppressHydrationWarning>
-        <SiteIntro />
         {clarityProjectId ? <MicrosoftClarity projectId={clarityProjectId} /> : null}
         <Script
           src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"

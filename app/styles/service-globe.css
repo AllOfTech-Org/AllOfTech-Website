@@ -1,0 +1,52 @@
+service-globe.hero-object {
+    display: block;
+    position: relative;
+    color: #c8dbea;
+    text-align: center;
+    pointer-events: auto;
+    width: min(100%, var(--earth-fit, 34rem));
+    max-width: 100%;
+}
+@media (max-width: 980px) {
+    service-globe.hero-object { width: min(100%, 28rem, var(--earth-fit, 100%)); }
+}
+.earth-stage {
+    position: relative;
+    aspect-ratio: 1;
+    isolation: isolate;
+    background: radial-gradient(closest-side, #12365448 59%, transparent 92%);
+    touch-action: pan-y pinch-zoom;
+    user-select: none;
+}
+service-globe[data-ready] .earth-stage { cursor: grab; }
+service-globe[data-grabbing] .earth-stage { cursor: grabbing; }
+.earth-stage > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.earth-stage canvas, .earth-orbits, .earth-craft { pointer-events: none; }
+.earth-stage canvas { opacity: 0; }
+service-globe[data-ready] canvas { opacity: 1; }
+service-globe[data-ready] .earth-poster { visibility: hidden; }
+.earth-orbits path {
+    fill: none;
+    stroke-width: .8;
+    vector-effect: non-scaling-stroke;
+}
+.earth-stage .satellite {
+    position: absolute;
+    left: 50%; top: 50%;
+    display: grid;
+    place-items: center;
+    border: 0; padding: 0;
+    background: transparent;
+    width: 44px; height: 44px;
+    pointer-events: auto;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.satellite svg { width: clamp(15px, 1.35vw, 22px); height: auto; overflow: visible; }
+.satellite:is(:hover,:focus-visible,[aria-pressed="true"]) svg { filter: drop-shadow(0 0 3px #83e6ff); }
+.earth-stage .satellite[hidden] { display: none; }
+.earth-caption { min-height: 2.2rem; padding-top: .5rem; color: #b6c5d5; font: 13px/1.5 system-ui, sans-serif; }
+.earth-caption a { color: #94ebfb; text-underline-offset: 3px; }
+service-globe :focus-visible { outline: 2px solid #79edff; outline-offset: 1px; }
+.hero--split .hero-eyebrow { display: inline-block; text-align: center; text-wrap: balance; }
+.hero--split .hero-eyebrow__dot { margin-inline: .28em; }

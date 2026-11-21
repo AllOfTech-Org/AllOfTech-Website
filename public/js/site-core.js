@@ -357,7 +357,7 @@
                 if (!href || href.charAt(0) !== '#' || href.length <= 1) return;
                 if (href === '#top') {
                     e.preventDefault();
-                    window.scrollTo(0, 0);
+                    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'instant' : 'smooth' });
                     return;
                 }
                 let section = null;
@@ -368,7 +368,7 @@
                 }
                 if (!section) return;
                 e.preventDefault();
-                section.scrollIntoView({ block: 'start' });
+                section.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'instant' : 'smooth' });
             },
             true
         );

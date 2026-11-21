@@ -1,0 +1,44 @@
+/* Shared finish: calmer surfaces, consistent spacing, and inexpensive motion. */
+:root { --space-section-y: clamp(3.75rem, 5vw, 5.5rem); }
+
+.cyber-bg { background: #070b15; }
+.cyber-gradient { animation: none; }
+.cyber-gradient::before { filter: blur(28px); opacity: .43; }
+.matrix-rain { opacity: .07; }
+.particles, .orb, .scanlines, .aot-atmosphere { display: none !important; }
+.grid-lines, .grid-glow { animation: none !important; }
+.grid-lines { opacity: .33; }
+.grid-glow { opacity: .16; }
+.hero-tickers { background: #0c1220; }
+.hero-ticker__group { color: #c7d5e2; text-shadow: none; }
+.hero-ticker__track { backface-visibility: hidden; }
+
+html.aot-motion [data-aot-reveal] { --aot-reveal-duration: 480ms; }
+html.aot-motion [data-aot-reveal].is-revealing { will-change: auto; }
+
+.hero--split { min-height: min(780px, 88svh); padding-top: clamp(7rem, 9vw, 8.5rem); padding-bottom: clamp(3.5rem, 5vw, 4.5rem); }
+.hero--split .hero-proof { color: #b8c7d4; }
+
+#about, #why-choose-us, #packages, #reviews { padding-block: var(--space-section-y); }
+#about .stats-container { max-width: 1300px; margin-inline: auto; }
+#about .about-future-heading { font-size: clamp(2.8rem, 3.9vw, 4rem); }
+#about .about-future-stat, #about .about-future-mission { backdrop-filter: none; -webkit-backdrop-filter: none; }
+#about .about-future-stat { background: #10172a; border-color: rgba(171, 213, 231, .18); }
+#about .about-future-mission { background: #121729; border-color: rgba(171, 213, 231, .18); }
+
+.packages-showcase .pricing-card, #why-choose-us .choose-unique-card,
+.aot-services-card[data-slot="card"] { box-shadow: 0 12px 32px rgba(0, 0, 0, .16); }
+.packages-showcase .pricing-card:hover, #why-choose-us .choose-unique-card:hover,
+.aot-services-card-link:hover .aot-services-card { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0, 0, 0, .22); }
+.aot-services-card[data-slot="card"] { transition-duration: 220ms; }
+
+@media (max-width: 768px) {
+    .hero--split { min-height: auto; }
+    #about, #why-choose-us, #packages, #reviews { padding-block: clamp(3.75rem, 9vw, 5rem); }
+    .chatbot-callout { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    .hero-ticker__track { animation: none !important; }
+}
