@@ -130,8 +130,17 @@
                             <canvas aria-hidden="true"></canvas>
                             <svg class="earth-orbits" viewBox="-1 -1 2 2" aria-hidden="true"></svg>
                             <div class="earth-craft"></div>
+                            <div class="earth-hud" hidden>
+                                <svg class="earth-hud__line" aria-hidden="true"><path class="earth-hud__leader"></path><circle class="earth-hud__reticle" r="17"></circle><circle class="earth-hud__reticle-core" r="4"></circle></svg>
+                                <div class="earth-hud__card" role="group" aria-label="Selected service details" aria-live="polite">
+                                    <div class="earth-hud__top"><span class="earth-hud__code"></span><button class="earth-hud__close" type="button" aria-label="Close service details">×</button></div>
+                                    <strong class="earth-hud__title"></strong>
+                                    <p class="earth-hud__summary"></p>
+                                    <div class="earth-hud__specs"></div>
+                                    <a class="earth-hud__link" href="#services">View service</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="earth-caption" aria-live="polite"><a href="/#services">Explore our services</a></div>
                     </service-globe>
                 </div>
             </div>

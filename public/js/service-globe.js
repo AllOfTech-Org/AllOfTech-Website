@@ -11,6 +11,14 @@
     ["UX/UI design","ux-ui-design","#b4ffdc","sensor"],
     ["Mobile app development","mobile-app-development","#c1baff","antenna"]
   ];
+  const telemetry = [
+    ["SYS.01 / AI SUPPORT", "AI customer support", "Routine questions answered quickly, with complex cases handed to your team.", "Approved answers", "Human handoff"],
+    ["SYS.02 / WEB", "Web development", "Sites and web apps designed around the way your business works.", "Responsive build", "Connected workflows"],
+    ["SYS.03 / 3D", "3D product animation", "Show the materials, movement, and details that still photos miss.", "Product detail", "Motion & materials"],
+    ["SYS.04 / BRAND", "Branding", "A consistent identity across the places customers meet your business.", "Visual identity", "Brand systems"],
+    ["SYS.05 / UX", "UX/UI design", "Clearer paths through the tasks your customers need to complete.", "User flows", "Interface design"],
+    ["SYS.06 / MOBILE", "Mobile app development", "Useful mobile experiences for buying, booking, and returning.", "iOS & Android", "Customer journeys"]
+  ];
   const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
   const axis = (x,y,z,a) => [x*Math.sin(a/2),y*Math.sin(a/2),z*Math.sin(a/2),Math.cos(a/2)];
   function multiply([x,y,z,w],[a,b,c,d]) {
@@ -98,39 +106,86 @@
   class ServiceGlobe extends HTMLElement {
     connectedCallback() {
       if(this.cleanup) return;
+      const host=this;
       const controller=new AbortController(), signal=controller.signal;
       const on=(el,type,fn,opts={})=>el.addEventListener(type,fn,{...opts,signal});
       const stage=this.querySelector(".earth-stage"), canvas=this.querySelector("canvas");
-      const caption=this.querySelector(".earth-caption"), copy=this.closest(".hero-split")?.querySelector(".hero-copy");
+      const copy=this.closest(".hero-split")?.querySelector(".hero-copy");
+      const hud=this.querySelector(".earth-hud"), card=hud.querySelector(".earth-hud__card");
+      const leader=hud.querySelector(".earth-hud__leader");
+      const reticles=hud.querySelectorAll(".earth-hud__reticle, .earth-hud__reticle-core");
       const reduced=matchMedia("(prefers-reduced-motion: reduce)");
       let q=orientation([82,22]), clock=0, speed=0, spin=[0,1,0];
       let size=0, scene=null, visible=false, frame=0, last=0, dirty=true, pinned=-1, drag=null;
+      let focusedAngle=0, cardWidth=0, cardHeight=0;
+      const phases=[.2,1.5,2.9,3.5,4.5,5.7];
+      const rate=i=>.069-(i%3)*.009;
       const paths=Array.from({length:3},(_,i)=>{
         const path=document.createElementNS("http://www.w3.org/2000/svg","path");
         path.setAttribute("stroke",["#64cadd","#9b9be1","#b994eb"][i]);
         path.setAttribute("opacity",".36"); this.querySelector(".earth-orbits").append(path); return path;
       });
-      const help=()=>{caption.replaceChildren();};
-      const show=i=>{
-        if(i<0){help(); return;}
-        const [name,slug]=services[i], link=document.createElement("a");
-        link.href="/services/"+slug; link.textContent=name+" →"; caption.replaceChildren(link);
-      };
       const buttons=services.map(([name,slug,color,kind],i)=>{
         const b=document.createElement("button"); b.type="button"; b.className="satellite"; b.hidden=true;
-        b.setAttribute("aria-label",name); b.setAttribute("aria-pressed","false"); b.innerHTML=spacecraft(color,kind);
+        b.setAttribute("aria-label",name); b.setAttribute("data-name",name); b.setAttribute("aria-pressed","false"); b.innerHTML=spacecraft(color,kind);
         this.querySelector(".earth-craft").append(b);
-        const preview=()=>{if(pinned<0)show(i);};
-        on(b,"pointerenter",e=>{if(e.pointerType==="mouse")preview();}); on(b,"focus",preview);
-        on(b,"click",()=>{pinned=pinned===i?-1:i; buttons.forEach((b,j)=>b.setAttribute("aria-pressed",String(j===pinned))); show(pinned); wake();});
+        on(b,"click",()=>select(pinned===i?-1:i));
         return b;
       });
+      function select(i){
+        if(pinned>=0)phases[pinned]=focusedAngle-clock*rate(pinned);
+        pinned=i;
+        buttons.forEach((b,j)=>b.setAttribute("aria-pressed",String(j===i)));
+        if(i<0){hud.hidden=true;delete host.dataset.selected;host.style.paddingBottom="";wake();return;}
+        focusedAngle=clock*rate(i)+phases[i];
+        const [code,title,summary,specA,specB]=telemetry[i];
+        hud.querySelector(".earth-hud__code").textContent=code;
+        hud.querySelector(".earth-hud__title").textContent=title;
+        hud.querySelector(".earth-hud__summary").textContent=summary;
+        hud.querySelector(".earth-hud__specs").replaceChildren(...[specA,specB].map(value=>{const span=document.createElement("span");span.textContent=value;return span;}));
+        const link=hud.querySelector(".earth-hud__link");
+        link.href="/services/"+services[i][1];
+        link.setAttribute("aria-label","View "+title+" service");
+        card.setAttribute("aria-label",title+" details");
+        hud.hidden=false;host.dataset.selected="";
+        cardWidth=card.offsetWidth;cardHeight=card.offsetHeight;
+        wake();
+      }
+      on(hud.querySelector(".earth-hud__close"),"click",()=>{const old=pinned;select(-1);if(old>=0)buttons[old].focus();});
+      function positionHud(x,y){
+        if(pinned<0)return;
+        const sx=size/2+x*earthRadius*size/2, sy=size/2-y*earthRadius*size/2;
+        const compact=size<390;
+        let left,top,endX,endY,path;
+        if(compact){
+          left=Math.round((size-cardWidth)/2);top=size+15;
+          endX=size/2;endY=top;
+          path=`M${sx.toFixed(1)} ${sy.toFixed(1)} L${sx.toFixed(1)} ${(size+4).toFixed(1)} L${endX.toFixed(1)} ${(size+4).toFixed(1)} L${endX.toFixed(1)} ${endY.toFixed(1)}`;
+          const padding=cardHeight+22+"px";
+          if(host.style.paddingBottom!==padding)host.style.paddingBottom=padding;
+        }else{
+          const right=sx<size/2;
+          left=right?size-cardWidth-8:8;
+          top=clamp(sy-cardHeight/2,8,size-cardHeight-8);
+          endX=right?left:left+cardWidth;
+          endY=clamp(sy,top+15,top+cardHeight-15);
+          const startX=sx+(right?18:-18),elbow=startX+(right?16:-16);
+          path=`M${startX.toFixed(1)} ${sy.toFixed(1)} L${elbow.toFixed(1)} ${sy.toFixed(1)} L${elbow.toFixed(1)} ${endY.toFixed(1)} L${endX.toFixed(1)} ${endY.toFixed(1)}`;
+          if(host.style.paddingBottom)host.style.paddingBottom="";
+        }
+        card.style.left=Math.round(left)+"px";card.style.top=Math.round(top)+"px";
+        const svg=hud.querySelector(".earth-hud__line");
+        svg.setAttribute("viewBox",`0 0 ${size} ${size}`);
+        leader.setAttribute("d",path);
+        reticles.forEach(circle=>{circle.setAttribute("cx",sx.toFixed(1));circle.setAttribute("cy",sy.toFixed(1));});
+      }
       const tracks=paths.map((_,i)=>Array.from({length:161},(_,j)=>orbit(i,tau*j/160)));
       function fit(){
         if(copy)stage.parentElement.style.setProperty("--earth-fit",Math.round(copy.getBoundingClientRect().height / earthRadius)+"px");
         size=stage.clientWidth;
         const pixels=Math.min(768,Math.round(size*Math.min(1.5,devicePixelRatio)));
         if(canvas.width!==pixels){canvas.width=canvas.height=pixels;}
+        if(pinned>=0){cardWidth=card.offsetWidth;cardHeight=card.offsetHeight;}
         dirty=true; wake();
       }
       function wake(){if(!frame && scene && visible && !document.hidden)frame=requestAnimationFrame(tick);}
@@ -162,12 +217,13 @@
           }); dirty=false;
         }
         buttons.forEach((b,i)=>{
-          const track=i%3, angle=clock*(.069-track*.009)+[.2,1.5,2.9,3.5,4.5,5.7][i];
+          const track=i%3, angle=pinned===i?focusedAngle:clock*rate(i)+phases[i];
           const [x,y,z]=transform(m,orbit(track,angle));
           b.hidden=z<0 && x*x+y*y<1;
           b.style.transform="translate(-50%, -50%) translate("+(x*r*size/2).toFixed(2)+"px,"+(-y*r*size/2).toFixed(2)+"px)";
           b.firstChild.style.transform="rotate("+([22,-32,45][track]+x*17)+"deg)";
           b.style.zIndex=String(Math.round((z+2)*10));
+          if(pinned===i)positionHud(x,y);
         });
         if(moving)wake();
       }
@@ -179,7 +235,8 @@
       }
       const point=e=>({v:surface(e),t:e.timeStamp,id:e.pointerId});
       on(stage,"pointerdown",e=>{
-        if(!scene || drag || !e.isPrimary || e.target.closest("button") || e.button!==0)return;
+        if(!scene || drag || !e.isPrimary || e.target.closest("button, .earth-hud__card") || e.button!==0)return;
+        if(pinned>=0)select(-1);
         speed=0; drag=point(e); this.dataset.grabbing=""; stage.setPointerCapture(e.pointerId);
       });
       on(stage,"pointermove",e=>{
@@ -198,7 +255,7 @@
       };
       on(stage,"pointerup",release); on(stage,"pointercancel",release); on(stage,"lostpointercapture",release);
       on(this,"keydown",e=>{
-        if(e.key==="Escape"){pinned=-1; buttons.forEach(b=>b.setAttribute("aria-pressed","false")); help();}
+        if(e.key==="Escape" && pinned>=0){const old=pinned;select(-1);buttons[old].focus();}
       });
       on(reduced,"change",()=>{dirty=true;wake();});
       on(document,"visibilitychange",()=>{last=0;wake();});
@@ -208,19 +265,18 @@
       const setup=()=>{
         if(signal.aborted || !img.complete || !lights.complete || !img.naturalWidth || !lights.naturalWidth)return;
         try{scene=renderer(canvas,img,lights);}catch{scene=null;}
-        if(scene){fit();scene.draw(matrix(q),earthRadius);this.dataset.ready="";help();wake();}
+        if(scene){fit();scene.draw(matrix(q),earthRadius);this.dataset.ready="";wake();}
       };
       on(canvas,"webglcontextlost",e=>{
         e.preventDefault(); scene=null; drag=null; delete this.dataset.ready;delete this.dataset.grabbing;
-        pinned=-1; buttons.forEach(b=>{b.hidden=true;b.setAttribute("aria-pressed","false");});
+        select(-1);buttons.forEach(b=>{b.hidden=true;b.setAttribute("aria-pressed","false");});
         paths.forEach(p=>p.removeAttribute("d"));
-        caption.innerHTML='<a href="/#services">Explore our services</a>';
       });
       on(canvas,"webglcontextrestored",setup);
       on(img,"load",setup);on(lights,"load",setup);
       img.src="/images/orbital-map.png";lights.src="/images/orbital-lights.png";
       this.cleanup=()=>{controller.abort();cancelAnimationFrame(frame);ro.disconnect();io.disconnect();scene?.destroy();
-        buttons.forEach(b=>b.remove());paths.forEach(p=>p.remove());delete this.dataset.ready; delete this.dataset.grabbing;};
+        buttons.forEach(b=>b.remove());paths.forEach(p=>p.remove());delete this.dataset.ready; delete this.dataset.grabbing;delete this.dataset.selected;this.style.paddingBottom="";};
     }
     disconnectedCallback(){this.cleanup?.();this.cleanup=null;}
   }
