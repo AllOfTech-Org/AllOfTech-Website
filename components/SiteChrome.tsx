@@ -142,7 +142,7 @@ export default function SiteChrome() {
       const continuous = persist && isPersistPath(nextPath);
       try {
         const leftoverHash = url.hash.replace(/^#/, "");
-        if (leftoverHash && nextPath !== "/") {
+        if (leftoverHash) {
           sessionStorage.setItem("aotHash", url.hash);
         } else {
           sessionStorage.removeItem("aotHash");
@@ -181,7 +181,9 @@ export default function SiteChrome() {
       try {
         const stored = sessionStorage.getItem("aotHash");
         if (stored) {
-          sessionStorage.removeItem("aotHash");
+          // Team is mounted through a portal after the home shell renders.
+          // Keep its target until TeamMount can scroll to the real section.
+          if (stored !== "#team") sessionStorage.removeItem("aotHash");
           hashId = stored.replace(/^#/, "");
         }
       } catch {
@@ -189,7 +191,7 @@ export default function SiteChrome() {
       }
       if (hashId && document.getElementById(hashId)) {
         instantScroll(hashId);
-      } else {
+      } else if (hashId !== "team") {
         instantScroll(sectionIdForPath(path));
       }
       if (!stayOnHome) window.dispatchEvent(new Event("aot:content-mounted"));

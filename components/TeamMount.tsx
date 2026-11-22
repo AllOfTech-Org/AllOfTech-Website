@@ -13,6 +13,16 @@ export default function TeamMount() {
 
   useLayoutEffect(() => {
     if (!target) return;
+    let pendingTeam = false;
+    try {
+      pendingTeam = sessionStorage.getItem("aotHash") === "#team";
+      if (pendingTeam) sessionStorage.removeItem("aotHash");
+    } catch {
+      // Hash navigation still works when session storage is unavailable.
+    }
+    if (pendingTeam || window.location.hash === "#team") {
+      target.querySelector("#team")?.scrollIntoView({ block: "start", behavior: "instant" });
+    }
     window.dispatchEvent(new Event("aot:content-mounted"));
   }, [target]);
 

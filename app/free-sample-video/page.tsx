@@ -23,7 +23,7 @@ export default function FreeSampleVideoRoute() {
     <>
       <JsonLd data={freeSampleVideoSchemas()} />
       <FreeSampleVideoPage />
-      <PageScripts scripts={["/js/user-tracking.js"]} />
+      <PageScripts scripts={["/js/site-core.js", "/js/user-tracking.js"]} />
     </>
   );
 }

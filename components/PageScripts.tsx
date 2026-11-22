@@ -26,8 +26,8 @@ function loadScript(src: string) {
 
 function restoreSectionTarget() {
   const hashId = window.location.hash.replace(/^#/, "");
-  if (hashId && (document.getElementById(hashId) || (hashId === "team" && document.getElementById("aot-team-root")))) {
-    (document.getElementById(hashId) || document.getElementById("aot-team-root"))?.scrollIntoView({
+  if (hashId && document.getElementById(hashId)) {
+    document.getElementById(hashId)?.scrollIntoView({
       block: "start",
     });
     return;
